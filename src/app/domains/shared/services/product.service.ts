@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable, inject} from '@angular/core';
 import {Product} from "../models/product.model";
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,6 @@ export class ProductService {
   }
 
   getProducts() {
-    return this.http.get<Product[]>('https://four-parks-render.onrender.com/api/parqueaderos');
+    return this.http.get<Product[]>(environment.apiUrl + '/parkings');
   }
 }
