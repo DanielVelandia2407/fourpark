@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-  @Input() id_parqueadero: number = 0;
-  @Input() nombre: string = '';
-  @Input() direccion: string = '';
+  @Input() id_parking: number = 0;
+  @Input() name: string = '';
+  @Input() address: string = '';
   @Input() image_path: string = '';
 
   @Output() addToCart = new EventEmitter();

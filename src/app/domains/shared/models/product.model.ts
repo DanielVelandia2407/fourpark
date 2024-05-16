@@ -1,6 +1,6 @@
 export interface Product{
-  id_parqueadero: number;
-  nombre: string;
-  direccion: string;
+  id_parking: number;
+  name: string;
+  address: string;
   image_path: string;
 }
