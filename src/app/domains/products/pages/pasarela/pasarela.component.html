@@ -4,7 +4,7 @@
         <p class="card__logo" src="" alt="">
         <p class="card__number">5340 4040 2010 0123</p>
         <div class="card__details">
-          <p class="card__details-name">Jane Appleseed</p>
+          <p class="card__details-name">Juan J Sipriano</p>
           <p><span class="card__month" >03</span>/<span class="card__year">50</span></p>
         </div>
       </div>
@@ -15,13 +15,15 @@
     </section>
 
     <section class="main-container__form-section">
-      <form class="form" action="">
+
+      <form [formGroup]="pasarelaForm" (ngSubmit)="onPasarela(pasarelaForm.value)" class="form" >
+
         <label class="form__label" for="cardholder">Cardholder Name</label>
-        <input class="form__input" type="text" name="cardholder" id="cardholder" placeholder="ejem Jane Appleseed">
+        <input class="form__input" type="text" id="cardholder" placeholder="ejem Juan Vergara" formControlName="nombreTitular" >
         <div class="form__cardholder--error error"></div>
 
         <label class="form__label" for="cardNumber">Card Number</label>
-        <input class="form__input" type="text" name="cardNumber" id="cardNumber" maxlength="19" placeholder="ejem 1234 5678 9123 0000">
+        <input class="form__input" type="text" id="cardNumber" maxlength="19" placeholder="ejem. 1234 5678 9123 0000" formControlName="numeroTarjeta">
         <div class="form__inputnumber--error error"></div>
 
         <div class="form__date-cvc"><!-- grid -->
@@ -31,11 +33,11 @@
           <label class="form__label" for="cardCvc">CVC</label>
           <!-- 3 -->
           <div class="form__date">
-            <input class="form__input" type="text" maxlength="2" name="cardMonth" id="cardMonth" placeholder="MM">
-            <input class="form__input" type="text" maxlength="2" name="cardYear" id="cardYear" placeholder="YY">
+            <input class="form__input" type="text" maxlength="2" id="cardMonth" placeholder="MM" formControlName="fechaMes">
+            <input class="form__input" type="text" maxlength="2" id="cardYear" placeholder="YY" formControlName="fechaAnio">
           </div>
           <!-- 4 -->
-          <input class="form__input" type="text" maxlength="3" name="cardCvc" id="cardCvc" placeholder="e.g. 123">
+          <input class="form__input" type="text" maxlength="3" id="cardCvc" placeholder="ejem. 123" formControlName="cvc">
           <!-- 5 -->
           <div class="form__errors-container">
             <div class="form__input-mm--error error"></div>
