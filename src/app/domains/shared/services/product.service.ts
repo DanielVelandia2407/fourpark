@@ -10,9 +10,6 @@ export class ProductService {
 
   private http = inject(HttpClient);
 
-  constructor() {
-  }
-
   getProducts() {
     return this.http.get<Product[]>(environment.apiUrl + '/parkings');
   }
