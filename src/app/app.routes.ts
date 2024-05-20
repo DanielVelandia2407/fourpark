@@ -7,6 +7,7 @@ import {NotFoundComponent} from "./domains/info/pages/not-found/not-found.compon
 import {LoginComponent} from "@products/pages/login/login.component";
 import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
+import { AdminPageComponent } from './domains/admin/admin-page.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'admin',
+    component: AdminPageComponent
+  },
+  {
     path: 'register',
     component: RegisterComponent
   },
@@ -38,5 +43,6 @@ export const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent
-  }
+  },
+
 ];
