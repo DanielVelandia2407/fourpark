@@ -7,7 +7,14 @@ import {NotFoundComponent} from "./domains/info/pages/not-found/not-found.compon
 import {LoginComponent} from "@products/pages/login/login.component";
 import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
-import { AdminPageComponent } from './domains/admin/admin-page.component';
+
+
+
+// Admin
+import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
+import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.component';
+import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
+import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +37,24 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminPageComponent
+    component: MainAdminPageComponent,
+    children: [
+      {
+        path: 'users',
+        component: AdminUsersComponent
+      },
+      {
+        path: 'parkings',
+        component : AdminParkingsComponent,
+        children : [
+          {
+            path : 'create',
+            component : AdminPageComponent
+          }
+        ]
+      }
+
+    ]
   },
   {
     path: 'register',

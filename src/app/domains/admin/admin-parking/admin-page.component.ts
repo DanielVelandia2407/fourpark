@@ -1,16 +1,17 @@
 import { Component, NgZone  } from '@angular/core';
-import { City, Schedule, DataService, User } from '../../services/admin/data.service';
+import { City, Schedule, DataService, User } from '../../../services/admin/data.service';
 import { NgFor } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps'
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { FormsModule }   from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [NgFor, GoogleMapsModule, FormsModule],
+  imports: [NgFor, GoogleMapsModule, FormsModule, RouterModule],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })
@@ -26,11 +27,6 @@ export class AdminPageComponent {
   markerPositions: google.maps.LatLngLiteral[] = [];
 
   formData: any = {};
-
-  click(event: google.maps.MapMouseEvent) {
-    console.log(event.latLng);
-  }
-
 
   addMarker(event: google.maps.MapMouseEvent) {
     
@@ -128,8 +124,7 @@ export class AdminPageComponent {
     private _ngzone: NgZone, 
     private http: HttpClient,
     private formBuilder: FormBuilder
-  ) {
-   }
+  ) {}
   
   ngOnInit(): void {
    

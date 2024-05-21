@@ -1,0 +1,25 @@
+
+<div class="table_user_container">
+    <button>Crear Usuario</button>
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of users">
+            <td>{{ item.id_user }}</td>
+            <td>{{ item.first_name }}</td>
+            <td>{{ item.last_name }}</td>
+            <td class="actions">
+                <fa-icon (click)="Edit()" [icon]="faEdit"> </fa-icon>
+                <fa-icon (click)="Delete()" [icon]="faTrash"> </fa-icon>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
