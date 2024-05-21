@@ -18,23 +18,22 @@
 
       <form [formGroup]="pasarelaForm" (ngSubmit)="onPasarela(pasarelaForm.value)" class="form" >
 
-        <label class="form__label" for="cardholder">Cardholder Name</label>
+        <label class="form__label" for="cardholder">Tarjetahabiente</label>
         <input class="form__input" type="text" id="cardholder" placeholder="ejem Juan Vergara" formControlName="nombreTitular" >
         <div class="form__cardholder--error error"></div>
 
-        <label class="form__label" for="cardNumber">Card Number</label>
-        <input class="form__input" type="text" id="cardNumber" maxlength="19" placeholder="ejem. 1234 5678 9123 0000" formControlName="numeroTarjeta">
+        <label class="form__label" for="cardNumber">Numero Tarjeta</label>
+        <input class="form__input" type="text" id="cardNumber" maxlength="16" placeholder="ejem. 1234567891230000" formControlName="number">
         <div class="form__inputnumber--error error"></div>
 
         <div class="form__date-cvc"><!-- grid -->
           <!-- 1 -->
-          <label class="form__label" for="cardMonth">Exp. Date (MM/YY)</label>
+          <label class="form__label" for="cardMonth">Fecha Expiración (YY/MM)</label>
           <!-- 2 -->
           <label class="form__label" for="cardCvc">CVC</label>
           <!-- 3 -->
           <div class="form__date">
-            <input class="form__input" type="text" maxlength="2" id="cardMonth" placeholder="MM" formControlName="fechaMes">
-            <input class="form__input" type="text" maxlength="2" id="cardYear" placeholder="YY" formControlName="fechaAnio">
+            <input class="form__input" type="text" maxlength="5" id="cardMonth" placeholder="YY/MM" formControlName="expiration_date">
           </div>
           <!-- 4 -->
           <input class="form__input" type="text" maxlength="3" id="cardCvc" placeholder="ejem. 123" formControlName="cvc">
