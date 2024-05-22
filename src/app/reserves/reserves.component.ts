@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService, Parking } from '../services/admin/data.service';
+import { DataService, Parking, ParkingController } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps'
 
@@ -16,6 +16,8 @@ import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps'
 export class ReservesComponent implements OnInit {
 
   parking: Parking | null = null;
+  vehicles: ParkingController[] = [];
+
   center: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
   zoom = 4;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
@@ -31,6 +33,16 @@ export class ReservesComponent implements OnInit {
           (parking: Parking) => {
             this.parking = parking;
             this.center = this.position = { lng: parking.longitude, lat: parking.latitude };
+            // Obtener tipos de vehículos
+            this.dataService.getVehiclesByParkingId(parkingId).subscribe(
+              (vehicles: ParkingController[]) => {
+                this.vehicles = vehicles;
+                console.log('Vehículos obtenidos:', this.vehicles); // Añadir esta línea
+              },
+              (error) => {
+                console.error('Error al obtener los tipos de vehículos', error);
+              }
+            );
           },
           (error) => {
             console.error('Error al obtener el parqueadero', error);

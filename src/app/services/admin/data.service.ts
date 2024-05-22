@@ -28,12 +28,18 @@ export interface Schedule {
     name: String
 }
 
-interface ParkingController {
-  id_parking_controller: number;
-  id_parking_fk: number;
+export interface Vehicle {
+  id_vehicle: number;
+  name: string;
 }
-
-
+export interface ParkingController {
+  id_parking_controller: number;
+  capacity: number;
+  fee: number;
+  id_vehicle_fk: number;
+  id_parking_fk: number;
+  vehicles: Vehicle;
+}
 export interface Parking {
   id_parking: number;
   name: string;
@@ -102,5 +108,9 @@ export class DataService {
 
   getParkingById(id: number): Observable<Parking> {
     return this.http.get<Parking>(`${environment.apiUrl}/parkings/${id}`);
+  }
+
+  getVehiclesByParkingId(id: number): Observable<ParkingController[]> {
+    return this.http.get<ParkingController[]>(`${environment.apiUrl}/parkings/${id}/vehicles`);
   }
 }
