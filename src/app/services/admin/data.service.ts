@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
+import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
 
 export interface User {
     id_user : number
@@ -20,6 +20,16 @@ export interface City {
 export interface Schedule {
     id_schedule: number,
     name: String
+}
+
+export interface Card{
+
+  id_card: number;
+  number: string;
+  cvc: string;
+  expiration_date: string;
+  id_user_fk: number;
+
 }
 
 
@@ -43,6 +53,11 @@ export class DataService {
 
   getOptionsSchedules(): Observable< Schedule[]> {
     return this.http.get< Schedule[]>(environment.apiUrl + '/schedules');
+  }
+
+  getOptionsCards(): Observable<Card> {
+
+    return this.http.get<Card>(environment.apiUrl +'/card');
   }
 
 }

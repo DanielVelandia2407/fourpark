@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-
+import { Card } from '../../../../services/admin/data.service';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { DataService } from '../../../../services/admin/data.service'
+//import { pasarelaI } from '@shared/models/pasarela.interface';
 
 @Component({
   selector: 'app-pasarela',
@@ -9,6 +11,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule  } from '@angul
   templateUrl: './pasarela.component.html',
   styleUrl: './pasarela.component.css'
 })
+
 export class PasarelaComponent {
 
   pasarelaForm = new FormGroup({
@@ -18,13 +21,33 @@ export class PasarelaComponent {
     cvc : new FormControl('', Validators.required)
   })
 
-  constructor() { }
+  constructor(private api:DataService) {}
 
-  ngOnInit(): void {
+  card:  Card  
+
+  ngOnInit(form:any): void {
+    this.api.getOptionsCards().subscribe((card: Card) => {
+      this.card = card;
+      console.log(this.card);
+
+    });
   }
+
+  
   
   onPasarela(form:any): void{
-    console.log(form)
+
+    if(form.cvc === this.card.cvc &&
+      form.number === this.card.number &&
+      form.expiration_date === this.card.expiration_date
+    ){
+      console.log("ok");
+    }else{
+      console.log("No")
+    }
+
   }
+    
+  
 
 }
