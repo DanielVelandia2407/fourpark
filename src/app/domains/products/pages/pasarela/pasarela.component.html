@@ -36,7 +36,7 @@
             <input class="form__input" type="text" maxlength="5" id="cardMonth" placeholder="YY/MM" formControlName="expiration_date">
           </div>
           <!-- 4 -->
-          <input class="form__input" type="text" maxlength="3" id="cardCvc" placeholder="ejem. 123" formControlName="cvc">
+          <input class="form__input" type="text" maxlength="3" id="cardCvc" placeholder="ejem. 123" formControlName="cvc" type="password">
           <!-- 5 -->
           <div class="form__errors-container">
             <div class="form__input-mm--error error"></div>
@@ -47,15 +47,6 @@
         </div>
         <input class="form__submit" type="submit" value="Confirm">
       </form>
-
-      <!-- Completed state start -->
-
-      <section class="thanks-section">
-        <img class="thanks-section__img" src="./images/icon-complete.svg" alt="complete icon">
-        <h1 class="thanks-section__title">Thank you!</h1>
-        <p class="thanks-section__text">We've added your card details</p>
-        <button class="thanks-section__button">Continue</button>
-      </section>
 
     </section>
   </main>
