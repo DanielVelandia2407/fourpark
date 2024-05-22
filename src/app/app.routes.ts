@@ -17,6 +17,7 @@ import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-par
 import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
 import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
 import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
+import { ReservesComponent } from './reserves/reserves.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
       }
 
     ]
+  },
+  {
+    path: 'reserves',
+    component: ReservesComponent
   },
   {
     path: 'register',
