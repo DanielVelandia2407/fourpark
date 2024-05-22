@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DataService, Parking } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps'
+
+
 
 @Component({
   selector: 'app-reserves',
@@ -18,19 +21,25 @@ export class ReservesComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   position: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
 
-  constructor(private dataService: DataService) { }
+  constructor(private route: ActivatedRoute, private dataService: DataService) { }
 
   ngOnInit(): void {
-    const parkingId = 29; // Reemplazar esto con el ID del parqueadero que debe pasar de la pagina anterior
-    this.dataService.getParkingById(parkingId).subscribe(
-      (parking: Parking) => {
-        this.parking = parking;
-        this.center = this.position = {lng: parking.longitude, lat : parking.latitude};
-      },
-      (error) => {
-        console.error('Error al obtener el parqueadero', error);
+    this.route.paramMap.subscribe(params => {
+      const parkingId = Number(params.get('id'));
+      if (parkingId) {
+        this.dataService.getParkingById(parkingId).subscribe(
+          (parking: Parking) => {
+            this.parking = parking;
+            this.center = this.position = { lng: parking.longitude, lat: parking.latitude };
+          },
+          (error) => {
+            console.error('Error al obtener el parqueadero', error);
+          }
+        );
       }
-    );
+    });
+
+    this.setupTimeInputs();
   }
 
   setupTimeInputs() {

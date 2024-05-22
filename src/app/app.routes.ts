@@ -60,7 +60,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'reserves',
+    path: 'reserves/:id',
     component: ReservesComponent
   },
   {
