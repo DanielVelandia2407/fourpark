@@ -65,6 +65,8 @@ export const routes: Routes = [
   {
     path: 'tyc',
     component: TycComponent
+  },
+  {
     path:'pasarela',
     component: PasarelaComponent
   },

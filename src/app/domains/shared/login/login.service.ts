@@ -4,23 +4,19 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {inject} from "@angular/core";
 
-export interface RegisterResponse {
-  message: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 
-export class RegisterService {
+export class LoginService {
 
   private http = inject(HttpClient);
 
   constructor() { }
 
-    postRegister(formValue: any){
+    postLogin(formValue: any){
     return firstValueFrom(
-      this.http.post<any>(environment.apiUrl + '/register', formValue)
+      this.http.post<any>(environment.apiUrl + '/login', formValue)
     )
   }
 }
