@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-
 import {ListComponent} from "./domains/products/pages/list/list.component";
 import {LayoutComponent} from "@shared/components/layout/layout.component";
 import {AboutComponent} from "./domains/info/pages/about/about.component";
@@ -15,6 +14,9 @@ import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.com
 import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.component';
 import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
 import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-parkings.component';
+import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
+import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
+import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +65,16 @@ export const routes: Routes = [
   {
     path: 'tyc',
     component: TycComponent
+    path:'pasarela',
+    component: PasarelaComponent
+  },
+  {
+    path:'procesoc',
+    component: CompletadoComponent
+  },
+  {
+    path:'procesor',
+    component: RechazadoComponent
   },
   {
     path: '**',

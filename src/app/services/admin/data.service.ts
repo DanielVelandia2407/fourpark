@@ -8,6 +8,7 @@ interface TypeParking {
   type: string;
   // Otros campos de la tabla `types_parking`
 }
+import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
 
 export interface User {
     id_user : number
@@ -56,6 +57,17 @@ export interface Parking {
   parking_controllers: ParkingController[];
 }
 
+export interface Card{
+
+  id_card: number;
+  number: string;
+  cvc: string;
+  expiration_date: string;
+  id_user_fk: number;
+
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -81,6 +93,12 @@ export class DataService {
 
   getParkings(): Observable< Parking[]>{
     return this.http.get< Parking[]>(environment.apiUrl + '/parkings');
+  }
+
+  
+  getOptionsCards(): Observable<Card> {
+
+    return this.http.get<Card>(environment.apiUrl +'/card');
   }
 
 }

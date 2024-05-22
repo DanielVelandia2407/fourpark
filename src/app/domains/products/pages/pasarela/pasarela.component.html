@@ -1,0 +1,52 @@
+<main class="main-container">
+    <section class="main-container__background-section">
+      <div class="card">
+        <p class="card__logo" src="" alt="">
+        <p class="card__number">5340 4040 2010 0123</p>
+        <div class="card__details">
+          <p class="card__details-name">Juan J Sipriano</p>
+          <p><span class="card__month" >03</span>/<span class="card__year">50</span></p>
+        </div>
+      </div>
+
+      <div class="card-back">
+        <p class="card-back__cvc">123</p>
+      </div>
+    </section>
+
+    <section class="main-container__form-section">
+
+      <form [formGroup]="pasarelaForm" (ngSubmit)="onPasarela(pasarelaForm.value)" class="form" >
+
+        <label class="form__label" for="cardholder">Tarjetahabiente</label>
+        <input class="form__input" type="text" id="cardholder" placeholder="ejem Juan Vergara" formControlName="nombreTitular" >
+        <div class="form__cardholder--error error"></div>
+
+        <label class="form__label" for="cardNumber">Numero Tarjeta</label>
+        <input class="form__input" type="text" id="cardNumber" maxlength="16" placeholder="ejem. 1234567891230000" formControlName="number">
+        <div class="form__inputnumber--error error"></div>
+
+        <div class="form__date-cvc"><!-- grid -->
+          <!-- 1 -->
+          <label class="form__label" for="cardMonth">Fecha Expiración (YY/MM)</label>
+          <!-- 2 -->
+          <label class="form__label" for="cardCvc">CVC</label>
+          <!-- 3 -->
+          <div class="form__date">
+            <input class="form__input" type="text" maxlength="5" id="cardMonth" placeholder="YY/MM" formControlName="expiration_date">
+          </div>
+          <!-- 4 -->
+          <input class="form__input" type="text" maxlength="3" id="cardCvc" placeholder="ejem. 123" formControlName="cvc" type="password">
+          <!-- 5 -->
+          <div class="form__errors-container">
+            <div class="form__input-mm--error error"></div>
+            <div class="form__input-yy--error error"></div>
+          </div>
+          <!-- 6 -->
+          <div class="form__input-cvc--error error"></div>
+        </div>
+        <input class="form__submit" type="submit" value="Confirm">
+      </form>
+
+    </section>
+  </main>
