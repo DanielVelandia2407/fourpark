@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500;700&display=swap');
+
+/* Estilos para el modal */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Centrar verticalmente */
+    padding: 40px;
+    border-radius: 0;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.5s ease-in-out;
+    border: 2px solid #ccc; /* Borde más grueso */
+}
+
+/* Agregar estilo de encabezado de factura */
+.modal-content h1 {
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: bold; /* Título en negrita */
+}
+
+/* Agregar estilo de detalles de factura */
+.modal-content p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.invoice-details {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ccc; /* Separador para los detalles de la factura */
+}
+
+.invoice-details p {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.invoice-details span {
+    font-weight: normal;
+}
+
+.invoice-details p:last-child {
+    font-size: 20px; /* Aumentar el tamaño del total a pagar */
+    font-weight: bold;
+    color: #333; /* Cambiar el color del total a pagar */
+}
+
+/* Animación de entrada del modal */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo para el botón de cierre */
+.close {
+    color: #888;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilo base del botón */
+button {
+    padding: 8px 16px;
+    background-color: #beb31b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    margin-left: 55px;
+}
+
+/* Estilo del botón al pasar el mouse sobre él */
+button:hover {
+    background-color: #8e8216;
+}
+
+/* Estilo del botón cuando está deshabilitado */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container-title {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title-text {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+  
+  .title-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .title-content label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .title-content select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  .title-content button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .title-content button:hover {
+    background-color: #45a049;
+}
+
+.container-related-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-list-products {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 25px;
+    margin: 20px;
+}
+
+.card {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-img {
+    background: transparent;
+    margin-bottom: 15px;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.info-card {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-product {
+    color: #252525;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.text-product h3 {
+    color: inherit;
+    font-weight: inherit;
+    font-size: 15px;
+}
+
+.text-product h3:hover {
+    color: #1bbeb4;
+}
+
+.text-product p {
+    color: #666;
+    font-size: 13px;
+}
+
+.text-product p:hover {
+    color: #1bbeb4;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .card-list-products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .card-list-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .card-list-products {
+        grid-template-columns: 1fr;
+    }
+
+    .container-title {
+        padding: 20px;
+    }
+
+    .info-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .text-product h3 {
+        font-size: 14px;
+    }
+
+    .text-product p {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+}

@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule,RouterOutlet],
-  template: '<router-outlet/>'
+  template: '<router-outlet/>',
 })
 export class AppComponent implements OnInit {
   title = 'parqueadero';

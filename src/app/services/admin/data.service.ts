@@ -67,6 +67,42 @@ export interface Card{
 
 }
 
+export interface Reservations {
+  id_reservation: number;
+  reservation_date: string;
+  entry_reservation_date: string;
+  departure_reservation_date: string;
+  check_in: string | null;
+  check_out: string | null;
+  vehicle_code: string;
+  state: string;
+  id_vehicle_fk: number;
+  id_user_fk: number;
+  id_parking_fk: number;
+  users: {
+    user_name: string;
+  };
+  parkings: {
+    name: string;
+    has_loyalty_service: boolean;
+  };
+  vehicles: {
+    name: string;
+  };
+  invoices: {
+    id_invoice: number;
+    reserve_amount: number;
+    service_amount: number;
+    extra_time_amount: number;
+    refund_amount: number;
+    total_amount: number;
+    time: number;
+    payment_token: string;
+    id_payment_method_fk: number;
+    id_reservation_fk: number;
+  };
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +135,10 @@ export class DataService {
   getOptionsCards(): Observable<Card> {
 
     return this.http.get<Card>(environment.apiUrl +'/card');
+  }
+
+  getOptionsReservation(): Observable<Reservations[]>{
+    return this.http.get<Reservations[]>(environment.apiUrl + '/reservations');
   }
 
 }
