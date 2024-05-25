@@ -10,7 +10,7 @@
         <option value="Todos">Todos</option>
         <option value="Finalizado">Finalizado</option>
         <option value="Cancelado">Cancelado</option>
-        <option value="Activo">Activo</option>
+        <option value="Activa">Activa</option>
       </select>
       <button (click)="applyFilter()">Aplicar Filtro</button>
     </div>
@@ -35,6 +35,7 @@
             </div>
             <!-- Pasa el evento y la reserva al método showDetails() -->
             <button *ngIf="reservation.state === 'Finalizado'" (click)="showDetails($event, reservation)">Ver factura</button>
+            <button *ngIf="reservation.state === 'Activa'" (click)="showDetails($event, reservation)">Cancelar</button>
         </div>
     </div>
 </section>
