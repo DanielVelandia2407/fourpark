@@ -85,6 +85,7 @@ export interface Reservations {
   parkings: {
     name: string;
     has_loyalty_service: boolean;
+    image_path: string;
   };
   vehicles: {
     name: string;

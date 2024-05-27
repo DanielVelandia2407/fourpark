@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '@shared/components/header/header.component';
 import { DataService } from '../../../../services/admin/data.service';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Import FormsModule para usar ngModel
+import { FormsModule } from '@angular/forms';
+import { TokenService } from '@shared/token/token.service';
 
 @Component({
   selector: 'app-visualizar-reserva',
@@ -17,16 +18,34 @@ export class VisualizarReservaComponent implements OnInit {
   private apiUrl = 'https://fourparkscolombia.onrender.com/api/invoice-mail';
   reservations: any[] = [];
   filteredReservations: any[] = [];
-  selectedState: string = 'Todos'; // Variable para almacenar el estado seleccionado
-  selectedReservation: any; // Variable para almacenar la reserva seleccionada
+  selectedState: string = 'Todos'; 
+  selectedReservation: any;
+  // variables del token 
+  idUsuario: number;
+  rol: string;
+  iat: number;
+  exp: number;
 
-  constructor(private api: DataService, private http: HttpClient) {}
+  constructor(private api: DataService, private http: HttpClient, private jwtService: TokenService) {}
 
   ngOnInit(): void {
+
     const datePipe = new DatePipe('en-US');
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const decodedToken = this.jwtService.getDecodedToken(token);
+      this.idUsuario = decodedToken.id_user;
+      this.rol = decodedToken.role;
+      this.iat = decodedToken.iat;
+      this.exp = decodedToken.exp;
+    } else {
+      console.log('No token found in local storage');
+    }
 
     this.api.getOptionsReservation().subscribe((data: any[]) => {
-      // Mapea los datos recibidos de la API y selecciona solo los campos que quieres mostrar
+      
+
       this.reservations = data.map((reservation: any) => ({
         id: reservation.id_reservation,
         reservationDate: datePipe.transform(reservation.reservation_date, 'dd/MM/yyyy HH:mm'),
@@ -42,9 +61,9 @@ export class VisualizarReservaComponent implements OnInit {
         refundAmount: reservation.invoices?.refund_amount,
         timeExtra: reservation.invoices?.extra_time_amount,
         totalAmount: reservation.invoices?.total_amount,
-        idReservation: reservation.invoices?.id_invoice
+        idReservation: reservation.invoices?.id_invoice,
+        image_path: reservation.parkings?.image_path
       }));
-      // Inicialmente, mostrar todas las reservas
       this.filteredReservations = this.reservations;
     });
   }
@@ -79,4 +98,6 @@ export class VisualizarReservaComponent implements OnInit {
   closeDetailsModal() {
     this.selectedReservation = null;
   }
+
+  
 }
