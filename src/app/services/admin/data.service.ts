@@ -105,10 +105,6 @@ export class DataService {
     return this.http.get<Card>(environment.apiUrl +'/card');
   }
 
-  getVehicleTypes(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(`${environment.apiUrl}/vehicle-types`);
-  }
-
   getParkingById(id: number): Observable<Parking> {
     return this.http.get<Parking>(`${environment.apiUrl}/parkings/${id}`);
   }
