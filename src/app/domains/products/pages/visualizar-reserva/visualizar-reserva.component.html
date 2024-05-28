@@ -1,6 +1,7 @@
 <header>
     <app-header></app-header>
   </header>
+  
   <div class="container-title">
     <div class="title-text">Mis Reservas</div>
     <div class="title-content">
@@ -14,6 +15,7 @@
       <button (click)="applyFilter()">Aplicar Filtro</button>
     </div>
   </div>
+  
   <section class="container-related-products">
     <div class="card-list-products">
       <div class="card" *ngFor="let reservation of filteredReservations">
@@ -23,6 +25,8 @@
         <div class="info-card">
           <div class="text-product">
             <h1>{{ reservation.parkingName }}</h1>
+            <p>Id: {{ reservation.id }}</p>
+            <p *ngIf="rol === 'Administrador'">Usuario: {{reservation.user_name}}</p>
             <p>Fecha de reserva: {{ reservation.reservationDate }}</p>
             <p>Placa: {{ reservation.vehicleCode }}</p>
             <p>Vehículo: {{ reservation.vehicle }}</p>
@@ -31,16 +35,45 @@
         </div>
         <div class="card-buttons">
           <button *ngIf="reservation.state === 'Finalizado'" (click)="showDetails($event, reservation)">Ver factura</button>
-          <button *ngIf="reservation.state === 'Activa' && rol !== 'Administrador'" class="btn-cancel">Cancelar</button>
+          <button *ngIf="reservation.state === 'Activa' && rol !== 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
           <div class="admin-buttons" *ngIf="reservation.state === 'Activa' && rol === 'Administrador'">
-            <button *ngIf="reservation.state === 'Activa' && rol === 'Administrador'" class="btn-cancel">Cancelar</button>
-            <button class="btn-admin check-in">Check In</button>
-            <button class="btn-admin check-out">Check Out</button>
+            <button *ngIf="reservation.state === 'Activa' && rol === 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
+            <button class="btn-admin check-in" (click)="abrirModalCheckIn(reservation)">Check In</button>
+            <button class="btn-admin check-out" (click)="abrirModalCheckOut(reservation)">Check Out</button>
           </div>
         </div>
       </div>
     </div>
   </section>
+  
+  <!-- Modal para confirmar la cancelación de la reserva -->
+  <div *ngIf="showCancelConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas cancelar la reserva {{ reservaSeleccionada?.parkingName }} - {{ reservaSeleccionada?.id }}?</p>
+      <button (click)="confirmarCancelacion(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCancelConfirmationModal()">No</button>
+    </div>
+  </div>
+
+  <!-- Modal para confirmar el check in de la reserva -->
+  <div *ngIf="showCheckInConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas realizar check in la reserva {{ reservaSeleccionada?.id }} del usuario {{ reservaSeleccionada?.user_name }}?</p>
+      <button (click)="confirmarCheckIn(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCheckInConfirmationModal()">No</button>
+    </div>
+  </div>
+
+   <!-- Modal para confirmar el check out de la reserva -->
+   <div *ngIf="showCheckOutConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas realizar check out la reserva {{ reservaSeleccionada?.id }} del usuario {{ reservaSeleccionada?.user_name }}?</p>
+      <button (click)="confirmarCheckOut(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCheckOutConfirmationModal()">No</button>
+    </div>
+  </div>
+
+
   
   <!-- Aquí definimos el modal -->
   <div *ngIf="selectedReservation" class="modal">
