@@ -67,12 +67,12 @@
                 </div>
 
                 <div class="mb-4">
-                  <label for="vehicleType" class="block text-sm font-medium text-gray-700">Tipo de Vehículo</label>
-                  <select id="vehicleType" class="mt-1 p-2 block w-full rounded-md border-gray-300">
-                      <option value="" disabled selected hidden>Seleccione el tipo de vehículo</option>
-                      <option *ngFor="let vehicle of vehicles" [value]="vehicle.vehicles.id_vehicle">{{ vehicle.vehicles.name }}</option>
-                  </select>
-              </div>
+                    <label for="vehicleType" class="block text-sm font-medium text-gray-700">Tipo de Vehículo</label>
+                    <select id="vehicleType" class="mt-1 p-2 block w-full rounded-md border-gray-300">
+                        <option value="" disabled selected hidden>Seleccione el tipo de vehículo</option>
+                        <option *ngFor="let type of availableVehicleTypes" [value]="type.id_vehicle">{{ type.name }}</option>
+                    </select>
+                </div>
 
                 <div class="mb-4">
                     <label for="resPayMethod" class="block text-sm font-medium text-gray-700">Método de Pago</label>
