@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importar HttpClient
-import { DataService, Parking, ParkingController } from '../services/admin/data.service';
+import { DataService, Parking, ParkingController, Schedule } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps';
 
@@ -159,13 +159,26 @@ export class ReservesComponent implements OnInit {
       vehicle_code: vehicleCode
     };
 
-    if (idPaymentMethodFk === 3) {
+    if (idPaymentMethodFk === 2) {
       this.http.post('https://fourparkscolombia.onrender.com/api/reservations', reservationData)
         .subscribe(
-          (response: any) => { // Asegurarse de que la respuesta sea tipada como any para acceder a la URL
+          (response: any) => {
+            console.log('Reserva exitosa', response);
+            // Añadir aquí la redirección a la pestaña de pago realizado
+            // window.location.href = '<URL de la pestaña de pago realizado>';
+          },
+          error => {
+            console.error('Error al realizar la reserva', error);
+            alert('Error al realizar la reserva');
+          }
+        );
+    } else if (idPaymentMethodFk === 3) {
+      this.http.post('https://fourparkscolombia.onrender.com/api/reservations', reservationData)
+        .subscribe(
+          (response: any) => {
             console.log('Reserva exitosa', response);
             if (response.url) {
-              window.location.href = response.url; // Redirigir a la URL
+              window.location.href = response.url;
             } else {
               alert('Reserva exitosa, pero no se recibió URL de redirección.');
             }
