@@ -10,6 +10,7 @@ import { VisualizarReservaComponent } from '@products/pages/visualizar-reserva/v
 import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
 import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
 import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
+import { ActualizarTarjetaComponent } from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
 
 // Admin
 import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
@@ -78,6 +79,10 @@ export const routes: Routes = [
   {
     path:'procesor',
     component: RechazadoComponent
+  },
+  {
+    path:'actualizartc',
+    component: ActualizarTarjetaComponent
   },
   {
     path: 'vreservas',

@@ -9,6 +9,7 @@ import { ReservaService } from '@shared/reserva/reserva.service';
 import { CheckinService } from '@shared/reserva/checkin/checkin.service';
 import { CheckoutService } from '@shared/reserva/checkout/checkout.service';
 
+// Definición del componente y metadatos asociados
 @Component({
   selector: 'app-visualizar-reserva',
   standalone: true,
@@ -17,39 +18,50 @@ import { CheckoutService } from '@shared/reserva/checkout/checkout.service';
   styleUrls: ['./visualizar-reserva.component.css']
 })
 export class VisualizarReservaComponent implements OnInit {
-  
+
+  // URL de la API para enviar correos de facturas
   private apiUrl = 'https://fourparkscolombia.onrender.com/api/invoice-mail';
+  
+  // Listas para almacenar reservas
   reservations: any[] = [];
   filteredReservations: any[] = [];
-  selectedState: string = 'Todos'; 
+  
+  // Estado de filtro seleccionado
+  selectedState: string = 'Todos';
   selectedReservation: any;
   reservaSeleccionada: any;
 
-  // variables del token 
+  // Variables para almacenar información del token
   idUsuario: number;
   rol: string;
   iat: number;
   exp: number;
 
-  // Cancelar reserva - check in - check-out
+  // Estado de las modales de confirmación
   showCancelConfirmationModal: boolean = false;
   showCheckInConfirmationModal: boolean = false;
   showCheckOutConfirmationModal: boolean = false;
 
-
-  constructor(private api: DataService, 
+  // Inyección de dependencias necesarias
+  constructor(
+    private api: DataService, 
     private http: HttpClient, 
     private jwtService: TokenService, 
     private reservaService: ReservaService,
     private checkinService: CheckinService,
-    private checkoutService: CheckoutService) {}
+    private checkoutService: CheckoutService
+  ) {}
 
+  // Método de inicialización del componente
   ngOnInit(): void {
-
+    // Creación de instancia de DatePipe para formatear fechas
     const datePipe = new DatePipe('en-US');
+    
+    // Recuperación del token del localStorage
     const token = localStorage.getItem('token');
 
     if (token) {
+      // Decodificación del token si existe
       const decodedToken = this.jwtService.getDecodedToken(token);
       this.idUsuario = decodedToken.id_user;
       this.rol = decodedToken.role;
@@ -59,6 +71,7 @@ export class VisualizarReservaComponent implements OnInit {
       console.log('No token found in local storage');
     }
 
+    // Obtención de las reservas a través del servicio de datos
     this.api.getOptionsReservation().subscribe((data: any[]) => {
       this.reservations = data.map((reservation: any) => ({
         id: reservation.id_reservation,
@@ -83,6 +96,7 @@ export class VisualizarReservaComponent implements OnInit {
     });
   }
 
+  // Método para aplicar el filtro de estado a las reservas
   applyFilter(): void {
     if (this.selectedState === 'Todos') {
       this.filteredReservations = this.reservations;
@@ -91,6 +105,7 @@ export class VisualizarReservaComponent implements OnInit {
     }
   }
 
+  // Método para enviar la factura por correo electrónico
   sendInvoiceEmail(invoiceId: number): void {
     const url = `${this.apiUrl}/${invoiceId}`;
     this.http.get(url, { responseType: 'text' }).subscribe(
@@ -105,6 +120,7 @@ export class VisualizarReservaComponent implements OnInit {
     );
   }
 
+  // Método para mostrar los detalles de una reserva
   showDetails(event: MouseEvent | undefined, reservation: any) {
     if (event) {
       event.stopPropagation();
@@ -112,22 +128,21 @@ export class VisualizarReservaComponent implements OnInit {
     this.selectedReservation = reservation;
   }
 
+  // Método para cerrar el modal de detalles
   closeDetailsModal() {
     this.selectedReservation = null;
   }
 
-  // Método para mostrar la pantalla emergente de confirmación de cancelación
+  // Métodos para manejar la confirmación de cancelación de reserva
   abrirModalCancelacion(reserva: any): void {
     this.reservaSeleccionada = reserva;
     this.showCancelConfirmationModal = true;
   }
 
-  // Método para cerrar la pantalla emergente de confirmación de cancelación
   closeCancelConfirmationModal(): void {
     this.showCancelConfirmationModal = false;
   }
 
-  // Método para cancelar la reserva (se ejecutará cuando se haga clic en el botón "Sí" en la pantalla emergente)
   confirmarCancelacion(reservationId: number) {
     this.reservaService.cancelReservation(reservationId)
       .subscribe(
@@ -142,18 +157,16 @@ export class VisualizarReservaComponent implements OnInit {
       );
   }
 
-  // Método para mostrar la pantalla emergente de confirmación de check in
+  // Métodos para manejar la confirmación de check-in
   abrirModalCheckIn(reserva: any): void {
     this.reservaSeleccionada = reserva;
     this.showCheckInConfirmationModal = true;
   }
 
-  // Método para cerrar la pantalla emergente de confirmación de check in
   closeCheckInConfirmationModal(): void {
     this.showCheckInConfirmationModal = false;
   }
 
-  // Método para check in a la reserva (se ejecutará cuando se haga clic en el botón "Sí" en la pantalla emergente)
   confirmarCheckIn(reservationId: number) {
     this.checkinService.checkinReservation(reservationId)
       .subscribe(
@@ -169,18 +182,16 @@ export class VisualizarReservaComponent implements OnInit {
       );
   }
 
-  // Método para mostrar la pantalla emergente de confirmación de check in
+  // Métodos para manejar la confirmación de check-out
   abrirModalCheckOut(reserva: any): void {
     this.reservaSeleccionada = reserva;
     this.showCheckOutConfirmationModal = true;
   }
 
-  // Método para cerrar la pantalla emergente de confirmación de check in
   closeCheckOutConfirmationModal(): void {
     this.showCheckOutConfirmationModal = false;
   }
 
-  // Método para check out a la reserva (se ejecutará cuando se haga clic en el botón "Sí" en la pantalla emergente)
   confirmarCheckOut(reservationId: number) {
     this.checkoutService.checkOutReservation(reservationId)
       .subscribe(
