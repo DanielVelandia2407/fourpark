@@ -10,12 +10,18 @@ interface TypeParking {
 }
 import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
 
+export interface UserControler {
+  is_account_blocked: Boolean
+}
+
 export interface User {
     id_user : number
     first_name: string;
     last_name: string;
     user_name: string;
     mail: string;
+    user_controllers : UserControler;
+    id_role_fk: number;
   }
 
 export interface City {

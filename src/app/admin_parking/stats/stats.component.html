@@ -1,0 +1,26 @@
+<div class="filters_container">
+    <div class="filter_control">
+        <label for="fecha_inicio">Desde:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio">
+    </div>
+    <div class="filter_control">
+        <label for="fecha_final">Hasta:</label>
+        <input type="date" id="fecha_final" name="fecha_final">
+    </div>
+    <button (click) ="fetchData()" >Buscar</button>
+</div>
+
+<div class="charts_containers">
+    <div class="chart-line-container">
+        <h4>Ganancias por dia</h4>
+        <canvas  id="MyChart" >{{ chart }}</canvas>
+    </div>
+    <div class="chart-pie-container">
+        <h4>Estadisticas generales</h4>
+        <canvas  id="PieChart" >{{ PieChart }}</canvas>
+    </div>
+    <div class="chart-line-container">
+        <h4>Reservas por Hora</h4>
+        <canvas  id="LineChart" >{{ LineChart }}</canvas>
+    </div>
+</div>

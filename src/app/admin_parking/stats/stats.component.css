@@ -1,0 +1,55 @@
+.chart-line-container{
+    width: 47%;
+    min-width: 40%;
+    /* border: 1px solid black; */
+    padding: 16px;
+    margin: 8px;
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+}
+
+.chart-pie-container{
+    width: 47%;
+    min-width: 40%;
+    /* border: 1px solid black; */
+    padding: 16px;
+    margin: 8px;
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+}
+
+.charts_containers{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: auto;
+
+}
+
+.filters_container{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.filter_control{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.filters_container button{
+    background-color: #5cb85c;
+    padding: 8px 16px 8px 16px;
+    color: white;
+    border-radius: 16px;
+    align-self: flex-end;
+}

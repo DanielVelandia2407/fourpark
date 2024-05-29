@@ -18,7 +18,13 @@ import {AdminParkingsComponent} from './domains/admin/admin-parkings/admin-parki
 import {PasarelaComponent} from '@products/pages/pasarela/pasarela.component';
 import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component';
 import {RechazadoComponent} from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
+//Super Admin
 import { ReservesComponent } from './reserves/reserves.component';
+import { AdministratorsOfParkingsComponent } from './domains/admin/administrators-of-parkings/administrators-of-parkings.component';
+import { StatsSuperAdminComponent } from './domains/admin/stats-super-admin/stats-super-admin.component';
+
+//Admin parking 
+import { StatsComponent } from './admin_parking/stats/stats.component';
 
 export const routes: Routes = [
   {
@@ -45,7 +51,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'users',
-        component: AdminUsersComponent
+        component: AdminUsersComponent,
+        children : [
+          {
+            path : 'edit/:id',
+            component : EditUserAdminComponent
+          }
+        ]
       },
       {
         path: 'parkings',
@@ -56,6 +68,20 @@ export const routes: Routes = [
             component: AdminPageComponent
           }
         ]
+      },
+      {
+        path : 'admins',
+        component :  AdministratorsOfParkingsComponent,
+        children : [
+          {
+            path : 'edit/:id',
+            component : EditUserAdminComponent
+          }
+        ]
+      },
+      {
+        path :  'stats',
+        component : StatsSuperAdminComponent  
       }
 
     ]
@@ -93,8 +119,14 @@ export const routes: Routes = [
     component: RechazadoComponent
   },
   {
+    path : 'adminParkings',
+    component :  StatsComponent
+  },
+  {
     path: '**',
     component: NotFoundComponent
   },
+
+  
 
 ];

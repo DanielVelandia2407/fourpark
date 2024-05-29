@@ -1,0 +1,37 @@
+
+button{
+    background-color: #5cb85c;
+    padding: 8px 16px 8px 16px;
+    color: white;
+    border-radius: 16px;
+    align-self: flex-end;
+    margin: 16px;
+}
+
+.filters_container{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.filter_control{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.filters_container button{
+    background-color: #5cb85c;
+    padding: 8px 16px 8px 16px;
+    color: white;
+    border-radius: 16px;
+    align-self: flex-end;
+}
+
+.pdf_view{
+    display: flex;
+    justify-content: center;
+}
