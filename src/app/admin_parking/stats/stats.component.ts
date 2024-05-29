@@ -2,11 +2,12 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { HeaderComponent } from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports : [],
+  imports : [HeaderComponent],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })

@@ -4,6 +4,7 @@ import { NgFor, CommonModule, NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEdit, faTrash, faLock, faUnlock  } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule ,Router, ActivatedRoute} from '@angular/router';
+import { HeaderComponent } from '@shared/components/header/header.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
@@ -23,7 +24,7 @@ export interface UserEdit {
 @Component({
   selector: 'app-administrators-of-parkings',
   standalone: true,
-  imports: [RouterModule ,NgFor, FontAwesomeModule,NgIf],
+  imports: [HeaderComponent,RouterModule ,NgFor, FontAwesomeModule,NgIf],
   templateUrl: './administrators-of-parkings.component.html',
   styleUrl: './administrators-of-parkings.component.css'
 })

@@ -6,8 +6,10 @@ import { faEdit, faTrash, faLock, faUnlock  } from '@fortawesome/free-solid-svg-
 import { RouterModule ,Router, ActivatedRoute} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { HeaderComponent } from '@shared/components/header/header.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 
 export interface UserEdit {
   first_name: string;
@@ -22,7 +24,7 @@ export interface UserEdit {
 @Component({
   selector: 'edit-user-admin',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './edit-user-admin.component.html',
   styleUrl: './edit-user-admin.component.css'
 })
