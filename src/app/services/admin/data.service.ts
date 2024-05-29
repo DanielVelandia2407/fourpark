@@ -162,4 +162,7 @@ export class DataService {
     return this.http.get<Reservations[]>(environment.apiUrl + '/reservations');
   }
 
+  createReservation(reservationData: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/reservations`, reservationData);
+  }
 }
