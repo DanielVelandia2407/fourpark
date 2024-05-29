@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
 
 interface TypeParking {
   id_type_parking: number;
   name: string;
   // Otros campos de la tabla `types_parking`
 }
-import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
 
 export interface UserControler {
   is_account_blocked: Boolean
@@ -79,7 +79,6 @@ export interface Card{
 
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -114,9 +113,5 @@ export class DataService {
 
   getParkingById(id: number): Observable<Parking> {
     return this.http.get<Parking>(`${environment.apiUrl}/parkings/${id}`);
-  }
-
-  getVehiclesByParkingId(id: number): Observable<ParkingController[]> {
-    return this.http.get<ParkingController[]>(`${environment.apiUrl}/parkings/${id}/vehicles`);
   }
 }
