@@ -1,135 +1,289 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserva de Parqueadero</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 1280px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 1rem;
-      min-height: 80vh;
-    }
-    .grid-item {
-      overflow: hidden;
-    }
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 24px; /* Aumentamos el gap entre los elementos */
-    }
-    .flex-container > div {
-      flex: 1 1 48%;
-      min-width: 280px;
-      box-sizing: border-box;
-    }
-    @media (max-width: 768px) {
-      .flex-container > div {
-        flex: 1 1 100%;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserva de Parqueadero</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
       }
-    }
-    h2 {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100%;
-      display: block;
-    }
-    .form-item {
-      margin-bottom: 16px;
-    }
-  </style>
-</head>
-<body class="bg-gray-100">
-  <div class="container bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Reserva de Parqueadero</h2>
-    <div class="flex-container">
-      <div class="grid-item">
-        <div class="form-item">
-          <label for="namePark" class="block text-sm font-medium text-gray-700">Nombre del Parqueadero</label>
-          <input type="text" id="namePark" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Nombre del Parqueadero" [value]="parking?.name" disabled>
+      .container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 1rem;
+        min-height: 80vh;
+      }
+      .grid-item {
+        overflow: hidden;
+      }
+      .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 24px; /* Aumentamos el gap entre los elementos */
+      }
+      .flex-container > div {
+        flex: 1 1 48%;
+        min-width: 280px;
+        box-sizing: border-box;
+      }
+      @media (max-width: 768px) {
+        .flex-container > div {
+          flex: 1 1 100%;
+        }
+      }
+      h2 {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        display: block;
+      }
+      .form-item {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-6 text-center">
+        Reserva de Parqueadero
+      </h2>
+      <div class="flex-container">
+        <div class="grid-item">
+          <div class="form-item">
+            <label
+              for="namePark"
+              class="block text-sm font-medium text-gray-700"
+              >Nombre del Parqueadero</label
+            >
+            <input
+              type="text"
+              id="namePark"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Nombre del Parqueadero"
+              [value]="parking?.name"
+              disabled
+            />
+          </div>
+          <div class="form-item">
+            <img
+              [src]="parking?.image_path"
+              alt="Foto del Parqueadero"
+              class="w-full h-auto rounded-md"
+            />
+          </div>
+          <google-map [center]="center" height="300px" width="100%">
+            <map-marker
+              [position]="position"
+              [options]="markerOptions"
+            ></map-marker>
+          </google-map>
         </div>
-        <div class="form-item">
-          <img [src]="parking?.image_path" alt="Foto del Parqueadero" class="w-full h-auto rounded-md">
-        </div>
-        <google-map
-          [center]="center"
-          height="300px"
-          width="100%">
-          <map-marker [position]="position" [options]="markerOptions"></map-marker>
-        </google-map>
-      </div>
-      <div class="grid-item">
-        <div class="form-item">
-          <label for="schedule" class="block text-sm font-medium text-gray-700">Horarios</label>
-          <textarea id="schedule" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Horario del Parqueadero" disabled>{{ parking?.schedules?.name_formatted }}</textarea>
-        </div>
-        <div class="form-item">
-          <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
-          <textarea id="description" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Descripción del Parqueadero" disabled>{{ parking?.description }}</textarea>
-        </div>
-        <div class="form-item">
-          <label for="address" class="block text-sm font-medium text-gray-700">Dirección</label>
-          <input type="text" id="address" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Dirección del Parqueadero" [value]="parking?.address" disabled>
-        </div>
-        <div class="form-item">
-          <label for="city" class="block text-sm font-medium text-gray-700">Ciudad</label>
-          <input type="text" id="city" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Ciudad" [value]="parking?.cities?.name" disabled>
-        </div>
-        <div class="form-item">
-          <label for="type" class="block text-sm font-medium text-gray-700">Tipo de Parqueadero</label>
-          <input type="text" id="type" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="Tipo de Parqueadero" [value]="parking?.types_parking?.name" disabled>
-        </div>
-        <div class="form-item">
-          <label for="resDate" class="block text-sm font-medium text-gray-700">Fecha de la Reserva</label>
-          <div class="flex gap-2">
-            <input type="number" id="resYear" class="mt-1 p-1 block w-1/3 rounded-md border-gray-300" placeholder="YYYY" maxlength="4">
-            <input type="number" id="resMonth" class="mt-1 p-1 block w-1/3 rounded-md border-gray-300" placeholder="MM" maxlength="2">
-            <input type="number" id="resDay" class="mt-1 p-1 block w-1/3 rounded-md border-gray-300" placeholder="DD" maxlength="2">
+        <div class="grid-item">
+          <div class="form-item">
+            <label
+              for="schedule"
+              class="block text-sm font-medium text-gray-700"
+              >Horarios</label
+            >
+            <textarea
+              id="schedule"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Horario del Parqueadero"
+              disabled
+              >{{ parking?.schedules?.name_formatted }}</textarea
+            >
+          </div>
+          <div class="form-item">
+            <label
+              for="description"
+              class="block text-sm font-medium text-gray-700"
+              >Descripción</label
+            >
+            <textarea
+              id="description"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Descripción del Parqueadero"
+              disabled
+              >{{ parking?.description }}</textarea
+            >
+          </div>
+          <div class="form-item">
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Dirección</label
+            >
+            <input
+              type="text"
+              id="address"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Dirección del Parqueadero"
+              [value]="parking?.address"
+              disabled
+            />
+          </div>
+          <div class="form-item">
+            <label for="city" class="block text-sm font-medium text-gray-700"
+              >Ciudad</label
+            >
+            <input
+              type="text"
+              id="city"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Ciudad"
+              [value]="parking?.cities?.name"
+              disabled
+            />
+          </div>
+          <div class="form-item">
+            <label for="type" class="block text-sm font-medium text-gray-700"
+              >Tipo de Parqueadero</label
+            >
+            <input
+              type="text"
+              id="type"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="Tipo de Parqueadero"
+              [value]="parking?.types_parking?.name"
+              disabled
+            />
+          </div>
+          <div class="form-item">
+            <label for="resDate" class="block text-sm font-medium text-gray-700"
+              >Fecha de la Reserva</label
+            >
+            <div class="flex gap-2">
+              <input
+                type="number"
+                id="resYear"
+                class="mt-1 p-1 block w-1/3 rounded-md border-gray-300"
+                placeholder="YYYY"
+                maxlength="4"
+              />
+              <input
+                type="number"
+                id="resMonth"
+                class="mt-1 p-1 block w-1/3 rounded-md border-gray-300"
+                placeholder="MM"
+                maxlength="2"
+              />
+              <input
+                type="number"
+                id="resDay"
+                class="mt-1 p-1 block w-1/3 rounded-md border-gray-300"
+                placeholder="DD"
+                maxlength="2"
+              />
+            </div>
+          </div>
+          <div class="form-item">
+            <label
+              for="resStart"
+              class="block text-sm font-medium text-gray-700"
+              >Hora de Inicio</label
+            >
+            <input
+              type="number"
+              id="resStart"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              min="1"
+              max="24"
+              placeholder="HH"
+              maxlength="2"
+            />
+          </div>
+          <div class="form-item">
+            <label for="resEnd" class="block text-sm font-medium text-gray-700"
+              >Hora de Fin</label
+            >
+            <input
+              type="number"
+              id="resEnd"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              min="1"
+              max="24"
+              placeholder="HH"
+              maxlength="2"
+            />
+          </div>
+          <div class="form-item">
+            <label
+              for="vehicleType"
+              class="block text-sm font-medium text-gray-700"
+              >Tipo de Vehículo</label
+            >
+            <select
+              id="vehicleType"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+            >
+              <option value="" disabled selected hidden>
+                Seleccione el tipo de vehículo
+              </option>
+              <option
+                *ngFor="let info of availableVehicleInfo"
+                [value]="info.id"
+              >
+                {{ info.name }} - Capacidad: {{ info.capacity }}, Tarifa:
+                {{ info.fee }}
+              </option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label
+              for="licensePlate"
+              class="block text-sm font-medium text-gray-700"
+              >Matrícula del Vehículo</label
+            >
+            <input
+              type="text"
+              id="licensePlate"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+              placeholder="ABC-123"
+              maxlength="10"
+            />
+          </div>
+          <div class="form-item">
+            <label
+              for="resPayMethod"
+              class="block text-sm font-medium text-gray-700"
+              >Método de Pago</label
+            >
+            <select
+              id="resPayMethod"
+              class="mt-1 p-2 block w-full rounded-md border-gray-300"
+            >
+              <option value="" disabled selected hidden>
+                Seleccione el método de pago
+              </option>
+              <option value="1">Mastercard</option>
+              <option value="2">Puntos</option>
+              <option value="3">Stripe</option>
+            </select>
           </div>
         </div>
-        <div class="form-item">
-          <label for="resStart" class="block text-sm font-medium text-gray-700">Hora de Inicio</label>
-          <input type="number" id="resStart" class="mt-1 p-2 block w-full rounded-md border-gray-300" min="1" max="24" placeholder="HH" maxlength="2">
-        </div>
-        <div class="form-item">
-          <label for="resEnd" class="block text-sm font-medium text-gray-700">Hora de Fin</label>
-          <input type="number" id="resEnd" class="mt-1 p-2 block w-full rounded-md border-gray-300" min="1" max="24" placeholder="HH" maxlength="2">
-        </div>
-        <div class="form-item">
-          <label for="vehicleType" class="block text-sm font-medium text-gray-700">Tipo de Vehículo</label>
-          <select id="vehicleType" class="mt-1 p-2 block w-full rounded-md border-gray-300">
-            <option value="" disabled selected hidden>Seleccione el tipo de vehículo</option>
-            <option *ngFor="let info of availableVehicleInfo" [value]="info.id">{{ info.name }} - Capacidad: {{ info.capacity }}, Tarifa: {{ info.fee }}</option>
-          </select>
-        </div>
-        <div class="form-item">
-          <label for="licensePlate" class="block text-sm font-medium text-gray-700">Matrícula del Vehículo</label>
-          <input type="text" id="licensePlate" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="ABC-123" maxlength="10">
-        </div>
-        <div class="form-item">
-          <label for="resPayMethod" class="block text-sm font-medium text-gray-700">Método de Pago</label>
-          <select id="resPayMethod" class="mt-1 p-2 block w-full rounded-md border-gray-300">
-            <option value="" disabled selected hidden>Seleccione el método de pago</option>
-            <option value="1">Mastercard</option>
-            <option value="2">Nequi</option>
-            <option value="3">Stripe</option>
-          </select>
-        </div>
+      </div>
+      <div class="flex justify-between items-center mt-6">
+        <button
+          id="btnCancel"
+          class="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800"
+        >
+          Cancelar Reserva
+        </button>
+        <button
+          id="btnAccept"
+          class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800"
+          (click)="processReservation()"
+        >
+          Realizar Reserva
+        </button>
       </div>
     </div>
-    <div class="flex justify-between items-center mt-6">
-      <button id="btnCancel" class="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800">Cancelar Reserva</button>
-      <button id="btnAccept" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800" (click)="processReservation()">Realizar Reserva</button>
-    </div>
-  </div>
-</body>
+  </body>
 </html>

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; // Importar HttpClient
-import { DataService, Parking, ParkingController, Schedule } from '../services/admin/data.service';
+import { HttpClient } from '@angular/common/http';
+import {
+  DataService,
+  Parking,
+  ParkingController,
+} from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
-import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps';
-
+import { GoogleMapsModule, MapMarker, GoogleMap } from '@angular/google-maps';
 
 interface VehicleInfo {
   id: number;
@@ -18,30 +21,37 @@ interface VehicleInfo {
   standalone: true,
   imports: [CommonModule, GoogleMapsModule],
   templateUrl: './reserves.component.html',
-  styleUrls: ['./reserves.component.css']
+  styleUrls: ['./reserves.component.css'],
 })
 export class ReservesComponent implements OnInit {
-
   currentDate: Date = new Date();
   parking: Parking | null = null;
   availableVehicleInfo: VehicleInfo[] = [];
   selectedVehicleInfo: VehicleInfo | null = null;
 
-  center: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   zoom = 4;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
-  position: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
+  markerOptions: google.maps.MarkerOptions = { draggable: false };
+  position: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private http: HttpClient, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const parkingId = Number(params.get('id'));
       if (parkingId) {
         this.dataService.getParkingById(parkingId).subscribe(
           (parking: Parking) => {
             this.parking = parking;
-            this.center = this.position = { lng: parking.longitude, lat: parking.latitude };
+            this.center = this.position = {
+              lng: parking.longitude,
+              lat: parking.latitude,
+            };
             // Obtener tipos de vehículos
             this.extractVehicleInfo(parking);
           },
@@ -56,28 +66,48 @@ export class ReservesComponent implements OnInit {
   }
 
   extractVehicleInfo(parking: Parking): void {
-    this.availableVehicleInfo = parking.parking_controllers.map((controller: ParkingController) => {
-      return {
-        id: controller.vehicles.id_vehicle,
-        name: controller.vehicles.name,
-        capacity: controller.capacity,
-        fee: controller.fee
-      };
-    });
+    this.availableVehicleInfo = parking.parking_controllers.map(
+      (controller: ParkingController) => {
+        return {
+          id: controller.vehicles.id_vehicle,
+          name: controller.vehicles.name,
+          capacity: controller.capacity,
+          fee: controller.fee,
+        };
+      }
+    );
   }
 
   setupTimeInputs() {
-    const yearInput: HTMLInputElement = document.getElementById('resYear') as HTMLInputElement;
-    const monthInput: HTMLInputElement = document.getElementById('resMonth') as HTMLInputElement;
-    const dayInput: HTMLInputElement = document.getElementById('resDay') as HTMLInputElement;
-    const startTimeInput: HTMLInputElement = document.getElementById('resStart') as HTMLInputElement;
-    const endTimeInput: HTMLInputElement = document.getElementById('resEnd') as HTMLInputElement;
+    const yearInput: HTMLInputElement = document.getElementById(
+      'resYear'
+    ) as HTMLInputElement;
+    const monthInput: HTMLInputElement = document.getElementById(
+      'resMonth'
+    ) as HTMLInputElement;
+    const dayInput: HTMLInputElement = document.getElementById(
+      'resDay'
+    ) as HTMLInputElement;
+    const startTimeInput: HTMLInputElement = document.getElementById(
+      'resStart'
+    ) as HTMLInputElement;
+    const endTimeInput: HTMLInputElement = document.getElementById(
+      'resEnd'
+    ) as HTMLInputElement;
 
     yearInput.addEventListener('input', () => this.validateYear(yearInput));
-    monthInput.addEventListener('input', () => this.validateMonth(monthInput, yearInput));
-    dayInput.addEventListener('input', () => this.validateDay(dayInput, monthInput, yearInput));
-    startTimeInput.addEventListener('input', () => this.validateHour(startTimeInput));
-    endTimeInput.addEventListener('input', () => this.validateHour(endTimeInput));
+    monthInput.addEventListener('input', () =>
+      this.validateMonth(monthInput, yearInput)
+    );
+    dayInput.addEventListener('input', () =>
+      this.validateDay(dayInput, monthInput, yearInput)
+    );
+    startTimeInput.addEventListener('input', () =>
+      this.validateHour(startTimeInput)
+    );
+    endTimeInput.addEventListener('input', () =>
+      this.validateHour(endTimeInput)
+    );
   }
 
   validateYear(input: HTMLInputElement) {
@@ -98,10 +128,18 @@ export class ReservesComponent implements OnInit {
       }
     }
 
-    this.validateDay(document.getElementById('resDay') as HTMLInputElement, input, yearInput);
+    this.validateDay(
+      document.getElementById('resDay') as HTMLInputElement,
+      input,
+      yearInput
+    );
   }
 
-  validateDay(dayInput: HTMLInputElement, monthInput: HTMLInputElement, yearInput: HTMLInputElement) {
+  validateDay(
+    dayInput: HTMLInputElement,
+    monthInput: HTMLInputElement,
+    yearInput: HTMLInputElement
+  ) {
     const month = parseInt(monthInput.value, 10);
     const year = parseInt(yearInput.value, 10);
     const day = parseInt(dayInput.value, 10);
@@ -132,16 +170,35 @@ export class ReservesComponent implements OnInit {
   }
 
   processReservation() {
-    const yearInput: HTMLInputElement = document.getElementById('resYear') as HTMLInputElement;
-    const monthInput: HTMLInputElement = document.getElementById('resMonth') as HTMLInputElement;
-    const dayInput: HTMLInputElement = document.getElementById('resDay') as HTMLInputElement;
-    const startTimeInput: HTMLInputElement = document.getElementById('resStart') as HTMLInputElement;
-    const endTimeInput: HTMLInputElement = document.getElementById('resEnd') as HTMLInputElement;
-    const vehicleTypeInput: HTMLSelectElement = document.getElementById('vehicleType') as HTMLSelectElement;
-    const licensePlateInput: HTMLInputElement = document.getElementById('licensePlate') as HTMLInputElement;
-    const paymentMethodInput: HTMLSelectElement = document.getElementById('resPayMethod') as HTMLSelectElement;
+    const yearInput: HTMLInputElement = document.getElementById(
+      'resYear'
+    ) as HTMLInputElement;
+    const monthInput: HTMLInputElement = document.getElementById(
+      'resMonth'
+    ) as HTMLInputElement;
+    const dayInput: HTMLInputElement = document.getElementById(
+      'resDay'
+    ) as HTMLInputElement;
+    const startTimeInput: HTMLInputElement = document.getElementById(
+      'resStart'
+    ) as HTMLInputElement;
+    const endTimeInput: HTMLInputElement = document.getElementById(
+      'resEnd'
+    ) as HTMLInputElement;
+    const vehicleTypeInput: HTMLSelectElement = document.getElementById(
+      'vehicleType'
+    ) as HTMLSelectElement;
+    const licensePlateInput: HTMLInputElement = document.getElementById(
+      'licensePlate'
+    ) as HTMLInputElement;
+    const paymentMethodInput: HTMLSelectElement = document.getElementById(
+      'resPayMethod'
+    ) as HTMLSelectElement;
 
-    const reservationDate = `${yearInput.value}-${monthInput.value.padStart(2, '0')}-${dayInput.value.padStart(2, '0')}`;
+    const reservationDate = `${yearInput.value}-${monthInput.value.padStart(
+      2,
+      '0'
+    )}-${dayInput.value.padStart(2, '0')}`;
     const entryReservationDate = parseInt(startTimeInput.value, 10);
     const departureReservationDate = parseInt(endTimeInput.value, 10);
     const idVehicleFk = parseInt(vehicleTypeInput.value, 10);
@@ -156,24 +213,34 @@ export class ReservesComponent implements OnInit {
       id_vehicle_fk: idVehicleFk,
       id_parking_fk: idParkingFk,
       id_payment_method_fk: idPaymentMethodFk,
-      vehicle_code: vehicleCode
+      vehicle_code: vehicleCode,
     };
 
-    if (idPaymentMethodFk === 2) {
-      this.http.post('https://fourparkscolombia.onrender.com/api/reservations', reservationData)
+    if (idPaymentMethodFk === 1) {
+      this.router.navigate(['/pasarela'], { state: { reservationData } });
+    } else if (idPaymentMethodFk === 2) {
+      this.http
+        .post(
+          'https://fourparkscolombia.onrender.com/api/reservations',
+          reservationData
+        )
         .subscribe(
           (response: any) => {
             console.log('Reserva exitosa', response);
             // Añadir aquí la redirección a la pestaña de pago realizado
             // window.location.href = '<URL de la pestaña de pago realizado>';
           },
-          error => {
+          (error) => {
             console.error('Error al realizar la reserva', error);
             alert('Error al realizar la reserva');
           }
         );
     } else if (idPaymentMethodFk === 3) {
-      this.http.post('https://fourparkscolombia.onrender.com/api/reservations', reservationData)
+      this.http
+        .post(
+          'https://fourparkscolombia.onrender.com/api/reservations',
+          reservationData
+        )
         .subscribe(
           (response: any) => {
             console.log('Reserva exitosa', response);
@@ -183,13 +250,13 @@ export class ReservesComponent implements OnInit {
               alert('Reserva exitosa, pero no se recibió URL de redirección.');
             }
           },
-          error => {
+          (error) => {
             console.error('Error al realizar la reserva', error);
             alert('Error al realizar la reserva');
           }
         );
     } else {
-      alert('Método de pago no soportado todavía.');
+      alert('Error en el pago.');
     }
   }
 }
