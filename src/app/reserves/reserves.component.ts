@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'; // Importar HttpClient
 import { DataService, Parking, ParkingController } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps';
@@ -25,14 +26,13 @@ export class ReservesComponent implements OnInit {
   parking: Parking | null = null;
   availableVehicleInfo: VehicleInfo[] = [];
   selectedVehicleInfo: VehicleInfo | null = null;
-  reservationData: any = {};
 
   center: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
   zoom = 4;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   position: google.maps.LatLngLiteral = { lat : 0 , lng : 0};
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute, private dataService: DataService, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -109,7 +109,7 @@ export class ReservesComponent implements OnInit {
     if (!isNaN(day)) {
       const daysInMonth = this.getDaysInMonth(month, year);
       if (day < 1) {
-        dayInput.value = '1';
+        dayInput.value = '0';
       } else if (day > daysInMonth) {
         dayInput.value = daysInMonth.toString();
       }
@@ -129,5 +129,54 @@ export class ReservesComponent implements OnInit {
 
   getDaysInMonth(month: number, year: number): number {
     return new Date(year, month, 0).getDate();
+  }
+
+  processReservation() {
+    const yearInput: HTMLInputElement = document.getElementById('resYear') as HTMLInputElement;
+    const monthInput: HTMLInputElement = document.getElementById('resMonth') as HTMLInputElement;
+    const dayInput: HTMLInputElement = document.getElementById('resDay') as HTMLInputElement;
+    const startTimeInput: HTMLInputElement = document.getElementById('resStart') as HTMLInputElement;
+    const endTimeInput: HTMLInputElement = document.getElementById('resEnd') as HTMLInputElement;
+    const vehicleTypeInput: HTMLSelectElement = document.getElementById('vehicleType') as HTMLSelectElement;
+    const licensePlateInput: HTMLInputElement = document.getElementById('licensePlate') as HTMLInputElement;
+    const paymentMethodInput: HTMLSelectElement = document.getElementById('resPayMethod') as HTMLSelectElement;
+
+    const reservationDate = `${yearInput.value}-${monthInput.value.padStart(2, '0')}-${dayInput.value.padStart(2, '0')}`;
+    const entryReservationDate = parseInt(startTimeInput.value, 10);
+    const departureReservationDate = parseInt(endTimeInput.value, 10);
+    const idVehicleFk = parseInt(vehicleTypeInput.value, 10);
+    const idParkingFk = this.parking ? this.parking.id_parking : 0;
+    const idPaymentMethodFk = parseInt(paymentMethodInput.value, 10);
+    const vehicleCode = licensePlateInput.value;
+
+    const reservationData = {
+      reservation_date: reservationDate,
+      entry_reservation_date: entryReservationDate,
+      departure_reservation_date: departureReservationDate,
+      id_vehicle_fk: idVehicleFk,
+      id_parking_fk: idParkingFk,
+      id_payment_method_fk: idPaymentMethodFk,
+      vehicle_code: vehicleCode
+    };
+
+    if (idPaymentMethodFk === 3) {
+      this.http.post('https://fourparkscolombia.onrender.com/api/reservations', reservationData)
+        .subscribe(
+          (response: any) => { // Asegurarse de que la respuesta sea tipada como any para acceder a la URL
+            console.log('Reserva exitosa', response);
+            if (response.url) {
+              window.location.href = response.url; // Redirigir a la URL
+            } else {
+              alert('Reserva exitosa, pero no se recibió URL de redirección.');
+            }
+          },
+          error => {
+            console.error('Error al realizar la reserva', error);
+            alert('Error al realizar la reserva');
+          }
+        );
+    } else {
+      alert('Método de pago no soportado todavía.');
+    }
   }
 }

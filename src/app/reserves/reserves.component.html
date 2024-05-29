@@ -79,20 +79,25 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="resPayMethod" class="block text-sm font-medium text-gray-700">Método de Pago</label>
-                    <select id="resPayMethod" class="mt-1 p-2 block w-full rounded-md border-gray-300">
-                        <option value="" disabled selected hidden>Seleccione el método de pago</option>
-                        <option value="Mastercard">Mastercard</option>
-                        <option value="Nequi">Puntos</option>
-                        <option value="Sripe">Stripe</option>
-                    </select>
+                  <label for="licensePlate" class="block text-sm font-medium text-gray-700">Matrícula del Vehículo</label>
+                  <input type="text" id="licensePlate" class="mt-1 p-2 block w-full rounded-md border-gray-300" placeholder="ABC-123" maxlength="10">
                 </div>
+
+                <div class="mb-4">
+                  <label for="resPayMethod" class="block text-sm font-medium text-gray-700">Método de Pago</label>
+                  <select id="resPayMethod" class="mt-1 p-2 block w-full rounded-md border-gray-300">
+                      <option value="" disabled selected hidden>Seleccione el método de pago</option>
+                      <option value="1">Mastercard</option>
+                      <option value="2">Nequi</option>
+                      <option value="3">Stripe</option>
+                  </select>
+              </div>
             </div>
         </div>
 
         <div class="flex justify-between items-center mt-6">
-            <button id="btnAccept" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800">Aceptar</button>
-            <button id="btnCancel" class="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800">Cancelar</button>
+          <button id="btnAccept" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800" (click)="processReservation()">Aceptar</button>
+          <button id="btnCancel" class="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800">Cancelar</button>
         </div>
     </div>
 </body>
