@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '@shared/token/token.service';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +9,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit{
+
+  constructor(private tokenService: TokenService) { }
+
+  ngOnInit(): void {
+    this.tokenService.handleLogoutOnInactivity();
+  }
+
   @Input() id_parking: number = 0;
   @Input() name: string = '';
   @Input() address: string = '';

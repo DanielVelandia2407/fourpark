@@ -6,6 +6,9 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class TokenService {
 
+  private logoutTimer: any;
+  private readonly inactivityDuration: number = 10 * 60 * 1000; // 10 minutos en milisegundos
+
   constructor() { }
 
   getDecodedToken(token: string): any {
@@ -43,5 +46,26 @@ export class TokenService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  handleLogoutOnInactivity(): void {
+    window.addEventListener('mousemove', this.resetLogoutTimer.bind(this));
+    window.addEventListener('keydown', this.resetLogoutTimer.bind(this));
+    this.startLogoutTimer();
+  }
+
+  private startLogoutTimer(): void {
+    this.logoutTimer = setTimeout(() => {
+      // Mostrar alerta al usuario
+      window.alert('Su sesión se cerrará debido a la inactividad.');
+      // Cerrar sesión
+      this.logout();
+    }, this.inactivityDuration);
+  }
+
+  private resetLogoutTimer(): void {
+    clearTimeout(this.logoutTimer);
+    this.startLogoutTimer();
+
   }
 }
