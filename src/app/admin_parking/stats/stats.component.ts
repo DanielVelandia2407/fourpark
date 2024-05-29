@@ -2,11 +2,12 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { HeaderComponent } from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports : [],
+  imports : [HeaderComponent],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
@@ -38,7 +39,7 @@ export class StatsComponent implements OnInit {
   }
 
   createChart(data:any){
-
+  
     //Bar Chart
     let days = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo']
 
@@ -52,7 +53,7 @@ export class StatsComponent implements OnInit {
       type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: days,
+        labels: days, 
 	       datasets: [
           {
             label: "Ganancias",
@@ -64,7 +65,7 @@ export class StatsComponent implements OnInit {
       options: {
         aspectRatio:2.5
       }
-
+      
     });
 
 
@@ -75,7 +76,7 @@ export class StatsComponent implements OnInit {
       type: 'doughnut', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: ["Ingresos totales" , "Horas totales" , "Reservas Terminadas" , "Reservas canceladas"],
+        labels: ["Ingresos totales" , "Horas totales" , "Reservas Terminadas" , "Reservas canceladas"], 
 	       datasets: [
           {
             label: "Estadisticas generales",
@@ -91,7 +92,7 @@ export class StatsComponent implements OnInit {
       options: {
         aspectRatio:2.5
       }
-
+      
     });
 
     //Line Chart
@@ -107,7 +108,7 @@ export class StatsComponent implements OnInit {
       type: 'line', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: hours,
+        labels: hours, 
 	       datasets: [
           {
             label: "Reservas por horas",
@@ -118,7 +119,7 @@ export class StatsComponent implements OnInit {
       options: {
         aspectRatio:2.5
       }
-
+      
     });
   }
 

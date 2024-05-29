@@ -1,10 +1,11 @@
 import { Component , Renderer2, ViewChild } from '@angular/core';
 import { RouterModule ,Router, ActivatedRoute} from '@angular/router';
+import { HeaderComponent } from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-main-admin-page',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, HeaderComponent],
   templateUrl: './main-admin-page.component.html',
   styleUrl: './main-admin-page.component.css'
 })

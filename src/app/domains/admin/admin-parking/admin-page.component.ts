@@ -7,11 +7,12 @@ import { FormBuilder } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { FormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [NgFor, GoogleMapsModule, FormsModule, RouterModule],
+  imports: [HeaderComponent,NgFor, GoogleMapsModule, FormsModule, RouterModule],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })

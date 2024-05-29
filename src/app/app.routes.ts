@@ -8,6 +8,8 @@ import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
 import {ForgotPasswordComponent} from "@products/pages/forgot-password/forgot-password.component";
 import {RestorePasswordComponent} from "@products/pages/restore-password/restore-password.component";
+import { AuthGuard } from './guards/auth/auth.guard';
+import { Auth2Guard } from './guards/auth2/auth2.guard';
 
 
 // Admin
@@ -35,7 +37,7 @@ import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutComponent, canActivate: [Auth2Guard],
     children: [
       {
         path: '',
@@ -53,7 +55,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: MainAdminPageComponent,
+    component: MainAdminPageComponent, canActivate: [AuthGuard], data: { role: 'Gerente' },
     children: [
       {
         path: 'users',
@@ -94,7 +96,7 @@ export const routes: Routes = [
   },
   {
     path: 'reserves/:id',
-    component: ReservesComponent
+    component: ReservesComponent, canActivate: [Auth2Guard]
   },
   {
     path: 'register',
@@ -114,26 +116,26 @@ export const routes: Routes = [
   },
   {
     path: 'pasarela',
-    component: PasarelaComponent
+    component: PasarelaComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path: 'procesoc',
-    component: CompletadoComponent
+    component: CompletadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path: 'procesor',
-    component: RechazadoComponent
+    component: RechazadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path : 'adminParkings',
-    component :  StatsComponent},
+    component :  StatsComponent, canActivate: [AuthGuard], data: { role: 'Administrador' }},
   {
     path:'actualizartc',
-    component: ActualizarTarjetaComponent
+    component: ActualizarTarjetaComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path: 'vreservas',
-    component: VisualizarReservaComponent
+    component: VisualizarReservaComponent, canActivate: [Auth2Guard]
   },
   {
     path: '**',

@@ -17,7 +17,11 @@
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
-            <a  *ngIf="rol === 'Gerente' || rol === 'Administrador'" routerLink="/estadisticas" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Estadisticas</a>
+            <a  *ngIf="rol === 'Gerente'" routerLink="/admin/stats" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Estadisticas</a>
+            <a  *ngIf="rol === 'Administrador'" routerLink="/adminParkings" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Estadisticas</a>
+          </li>
+          <li>
+            <a *ngIf="rol === 'Gerente'" routerLink="/admin/parkings" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Parqueaderos</a>
           </li>
           <li>
             <a *ngIf="rol === 'Cliente'" routerLink="/actualizartc" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Actualizar tarjeta</a>
@@ -26,7 +30,7 @@
             <a routerLink="/vreservas" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mis reservas</a>
           </li>
           <li>
-            <a routerLink="/logout" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar Sesión</a>
+            <a (click)="logout()" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar Sesión</a>
           </li>
         </ul>
       </div>

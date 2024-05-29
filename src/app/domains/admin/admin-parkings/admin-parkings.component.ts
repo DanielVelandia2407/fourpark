@@ -7,11 +7,12 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { RouterModule ,Router, ActivatedRoute} from '@angular/router';
+import { HeaderComponent } from '@shared/components/header/header.component';
 
 @Component({
   selector: 'app-admin-parkings',
   standalone: true,
-  imports: [NgFor, FontAwesomeModule,RouterModule],
+  imports: [HeaderComponent,NgFor, FontAwesomeModule,RouterModule],
   templateUrl: './admin-parkings.component.html',
   styleUrl: './admin-parkings.component.css'
 })

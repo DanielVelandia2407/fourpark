@@ -22,7 +22,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private jwtService: TokenService) { }
 
+  logout(): void {
+    this.jwtService.logout();
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit() {
+
+    this.jwtService.handleLogoutOnInactivity();
+
     initFlowbite();
 
         // Recuperación del token del localStorage
