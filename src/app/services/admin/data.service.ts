@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 
 interface TypeParking {
   id_type_parking: number;
-  type: string;
+  name: string;
   // Otros campos de la tabla `types_parking`
 }
 import {pasarelaI} from '../../../app/domains/shared/models/pasarela.interface'
@@ -28,12 +28,18 @@ export interface Schedule {
     name: String
 }
 
-interface ParkingController {
-  id_parking_controller: number;
-  id_parking_fk: number;
+export interface Vehicle {
+  id_vehicle: number;
+  name: string;
 }
-
-
+export interface ParkingController {
+  id_parking_controller: number;
+  capacity: number;
+  fee: number;
+  id_vehicle_fk: number;
+  id_parking_fk: number;
+  vehicles: Vehicle;
+}
 export interface Parking {
   id_parking: number;
   name: string;
@@ -95,10 +101,16 @@ export class DataService {
     return this.http.get< Parking[]>(environment.apiUrl + '/parkings');
   }
 
-  
-  getOptionsCards(): Observable<Card> {
 
+  getOptionsCards(): Observable<Card> {
     return this.http.get<Card>(environment.apiUrl +'/card');
   }
 
+  getParkingById(id: number): Observable<Parking> {
+    return this.http.get<Parking>(`${environment.apiUrl}/parkings/${id}`);
+  }
+
+  getVehiclesByParkingId(id: number): Observable<ParkingController[]> {
+    return this.http.get<ParkingController[]>(`${environment.apiUrl}/parkings/${id}/vehicles`);
+  }
 }

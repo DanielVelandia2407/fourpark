@@ -16,8 +16,9 @@
             <td>{{ item.first_name }}</td>
             <td>{{ item.last_name }}</td>
             <td class="actions">
-                <fa-icon (click)="Edit()" [icon]="faEdit"> </fa-icon>
                 <fa-icon (click)="Delete()" [icon]="faTrash"> </fa-icon>
+                <fa-icon (click)="Block()" [icon]="faLock"> </fa-icon>
+                <fa-icon (click)="Edit()" [icon]="faEdit"> </fa-icon>
             </td>
           </tr>
         </tbody>

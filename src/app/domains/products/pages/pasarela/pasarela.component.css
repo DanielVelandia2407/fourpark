@@ -264,3 +264,16 @@ body {
 .attribution a {
     color: hsl(228, 45%, 44%);
 }
+
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.25em;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+  

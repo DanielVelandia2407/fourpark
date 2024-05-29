@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DataService, User } from '../../../services/admin/data.service';
 import { NgFor } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEdit, faTrash  } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faLock  } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -18,14 +18,23 @@ export class AdminUsersComponent {
   users : User[] = []
 
   faTrash = faTrash;
-  faEdit = faEdit;
-
-  Edit(){
-    console.log("Editar")
-  }
+  faLock = faLock;
+  faEdit  = faEdit;
 
   Delete(){
-    console.log("Eliminar")
+    console.log("Eleminiar")
+  }
+
+  Block(){
+    console.log("Bloqueado")
+  }
+
+  Unlock(){
+    console.log("Desbloqueado")
+  }
+
+  Edit() {
+    console.log("Editar")
   }
 
   constructor(
