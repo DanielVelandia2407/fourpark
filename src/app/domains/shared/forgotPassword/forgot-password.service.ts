@@ -7,17 +7,15 @@ import {inject} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-
-export class LoginService {
+export class ForgotPasswordService {
 
   private http = inject(HttpClient);
 
-  constructor() {
-  }
+  constructor() { }
 
-  postLogin(formValue: any) {
+  postForgotPassword(formValue: any){
     return firstValueFrom(
-      this.http.post<any>(environment.apiUrl + '/login', formValue)
+      this.http.post<any>(environment.apiUrl + '/request-token', formValue)
     )
   }
 }

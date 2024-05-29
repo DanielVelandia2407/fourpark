@@ -6,17 +6,18 @@ import {NotFoundComponent} from "./domains/info/pages/not-found/not-found.compon
 import {LoginComponent} from "@products/pages/login/login.component";
 import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
-
+import {ForgotPasswordComponent} from "@products/pages/forgot-password/forgot-password.component";
+import {RestorePasswordComponent} from "@products/pages/restore-password/restore-password.component";
 
 
 // Admin
-import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
-import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.component';
-import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
-import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-parkings.component';
-import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
+import {AdminPageComponent} from './domains/admin/admin-parking/admin-page.component';
+import {AdminUsersComponent} from './domains/admin/admin-users/admin-users.component';
+import {MainAdminPageComponent} from './domains/admin/main-admin-page/main-admin-page.component';
+import {AdminParkingsComponent} from './domains/admin/admin-parkings/admin-parkings.component';
+import {PasarelaComponent} from '@products/pages/pasarela/pasarela.component';
 import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
-import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
+import {RechazadoComponent} from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
 
 export const routes: Routes = [
   {
@@ -47,11 +48,11 @@ export const routes: Routes = [
       },
       {
         path: 'parkings',
-        component : AdminParkingsComponent,
-        children : [
+        component: AdminParkingsComponent,
+        children: [
           {
-            path : 'create',
-            component : AdminPageComponent
+            path: 'create',
+            component: AdminPageComponent
           }
         ]
       }
@@ -67,15 +68,23 @@ export const routes: Routes = [
     component: TycComponent
   },
   {
-    path:'pasarela',
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'restore-password',
+    component: RestorePasswordComponent
+  },
+  {
+    path: 'pasarela',
     component: PasarelaComponent
   },
   {
-    path:'procesoc',
+    path: 'procesoc',
     component: CompletadoComponent
   },
   {
-    path:'procesor',
+    path: 'procesor',
     component: RechazadoComponent
   },
   {

@@ -7,17 +7,15 @@ import {inject} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-
-export class LoginService {
+export class ResetPasswordService {
 
   private http = inject(HttpClient);
 
-  constructor() {
-  }
+  constructor() { }
 
-  postLogin(formValue: any) {
+  postRecoverPassword(url: string, formValue: any){
     return firstValueFrom(
-      this.http.post<any>(environment.apiUrl + '/login', formValue)
+      this.http.post<any>(url, formValue)
     )
   }
 }
