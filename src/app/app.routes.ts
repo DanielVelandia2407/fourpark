@@ -16,13 +16,9 @@ import {AdminUsersComponent} from './domains/admin/admin-users/admin-users.compo
 import {MainAdminPageComponent} from './domains/admin/main-admin-page/main-admin-page.component';
 import {AdminParkingsComponent} from './domains/admin/admin-parkings/admin-parkings.component';
 import {PasarelaComponent} from '@products/pages/pasarela/pasarela.component';
-import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
-<<<<<<< HEAD
+import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component';
 import {RechazadoComponent} from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
-=======
-import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
 import { ReservesComponent } from './reserves/reserves.component';
->>>>>>> cd396b73497535e67db0afc69dd556c6c9c5b8a2
 
 export const routes: Routes = [
   {
