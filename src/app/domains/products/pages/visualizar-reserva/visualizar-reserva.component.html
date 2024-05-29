@@ -1,0 +1,103 @@
+<header>
+    <app-header></app-header>
+  </header>
+  
+  <div class="container-title">
+    <div class="title-text">Mis Reservas</div>
+    <div class="title-content">
+      <label for="stateFilter">Filtrar por estado:</label>
+      <select id="stateFilter" [(ngModel)]="selectedState">
+        <option value="Todos">Todos</option>
+        <option value="Finalizado">Finalizado</option>
+        <option value="Cancelado">Cancelado</option>
+        <option value="Activa">Activa</option>
+      </select>
+      <button (click)="applyFilter()">Aplicar Filtro</button>
+    </div>
+  </div>
+  
+  <section class="container-related-products">
+    <div class="card-list-products">
+      <div class="card" *ngFor="let reservation of filteredReservations">
+        <div class="card-img">
+          <img [src]="reservation.image_path" alt="reservation invoice" />
+        </div>
+        <div class="info-card">
+          <div class="text-product">
+            <h1>{{ reservation.parkingName }}</h1>
+            <p>Id: {{ reservation.id }}</p>
+            <p *ngIf="rol === 'Administrador'">Usuario: {{reservation.user_name}}</p>
+            <p>Fecha de reserva: {{ reservation.reservationDate }}</p>
+            <p>Placa: {{ reservation.vehicleCode }}</p>
+            <p>Vehículo: {{ reservation.vehicle }}</p>
+            <p>Estado: {{ reservation.state }}</p>
+          </div>
+        </div>
+        <div class="card-buttons">
+          <button *ngIf="reservation.state === 'Finalizado' || reservation.state === 'Cancelado'" (click)="showDetails($event, reservation)">Ver factura</button>
+          <button *ngIf="reservation.state === 'Activa' && rol !== 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
+          <div class="admin-buttons" *ngIf="reservation.state === 'Activa' && rol === 'Administrador'">
+            <button *ngIf="reservation.state === 'Activa' && rol === 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
+            <button class="btn-admin check-in" (click)="abrirModalCheckIn(reservation)">Check In</button>
+            <button class="btn-admin check-out" (click)="abrirModalCheckOut(reservation)">Check Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Modal para confirmar la cancelación de la reserva -->
+  <div *ngIf="showCancelConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas cancelar la reserva {{ reservaSeleccionada?.parkingName }} - {{ reservaSeleccionada?.id }}?</p>
+      <button (click)="confirmarCancelacion(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCancelConfirmationModal()">No</button>
+    </div>
+  </div>
+
+  <!-- Modal para confirmar el check in de la reserva -->
+  <div *ngIf="showCheckInConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas realizar check in la reserva {{ reservaSeleccionada?.id }} del usuario {{ reservaSeleccionada?.user_name }}?</p>
+      <button (click)="confirmarCheckIn(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCheckInConfirmationModal()">No</button>
+    </div>
+  </div>
+
+   <!-- Modal para confirmar el check out de la reserva -->
+   <div *ngIf="showCheckOutConfirmationModal" class="cancel-confirmation-modal">
+    <div class="modal-content">
+      <p>¿Estás seguro que deseas realizar check out la reserva {{ reservaSeleccionada?.id }} del usuario {{ reservaSeleccionada?.user_name }}?</p>
+      <button (click)="confirmarCheckOut(reservaSeleccionada.id)">Sí</button>
+      <button (click)="closeCheckOutConfirmationModal()">No</button>
+    </div>
+  </div>
+
+
+  
+  <!-- Aquí definimos el modal de ver reservas-->
+  <div *ngIf="selectedReservation" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeDetailsModal()">&times;</span>
+      <h1>FACTURA DE PARQUEO: {{ selectedReservation.idReservation }}</h1>
+      <h2>Nombre parqueadero: {{ selectedReservation.parkingName }}</h2>
+      <p>Fecha y hora de reserva: {{ selectedReservation.reservationDate }}</p>
+      <p>Placa: {{ selectedReservation.vehicleCode }}</p>
+      <p>Vehículo: {{ selectedReservation.vehicle }}</p>
+      <p>Estado: {{ selectedReservation.state }}</p>
+      <p>Fecha y hora de entrada: {{ selectedReservation.entryDate }}</p>
+      <p>Fecha y hora de salida: {{ selectedReservation.departureDate }}</p>
+      <hr />
+      <div class="invoice-details">
+        <p>Tiempo de estacionamiento: <span>{{ selectedReservation.time }}</span> Minutos</p>
+        <p>Valor de reserva: ${{ selectedReservation.valorReservation }}</p>
+        <p>Valor servicio: ${{ selectedReservation.valorService }}</p>
+        <p>Cobro por tiempo extra: ${{ selectedReservation.timeExtra }}</p>
+        <p>Reembolso: ${{ selectedReservation.refundAmount }}</p>
+        <p>Total a pagar: <span>${{ selectedReservation.totalAmount }}</span></p>
+        <button class="send-invoice-btn" (click)="sendInvoiceEmail(selectedReservation.idReservation)">
+          Enviar factura a email
+        </button>
+      </div>
+    </div>
+  </div>

@@ -3,12 +3,12 @@ import { Card } from '../../../../services/admin/data.service';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../../../../services/admin/data.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-pasarela',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule], // Agrega CommonModule a los imports
+  imports: [ReactiveFormsModule, CommonModule], 
   templateUrl: './pasarela.component.html',
   styleUrls: ['./pasarela.component.css']
 })
