@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto'
+import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
