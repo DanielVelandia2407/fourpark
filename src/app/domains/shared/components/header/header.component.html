@@ -20,7 +20,10 @@
             <a  *ngIf="rol === 'Gerente' || rol === 'Administrador'" routerLink="/estadisticas" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Estadisticas</a>
           </li>
           <li>
-            <a *ngIf="rol === 'Cliente'" (click)="redirectToEditCard()" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Actualizar tarjeta</a>
+            <a *ngIf="rol === 'Cliente'" routerLink="/actualizartc" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Actualizar tarjeta</a>
+          </li>
+          <li>
+            <a routerLink="/vreservas" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mis reservas</a>
           </li>
           <li>
             <a routerLink="/logout" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar Sesión</a>

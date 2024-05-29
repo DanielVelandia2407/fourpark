@@ -41,7 +41,4 @@ export class HeaderComponent implements OnInit {
         }
   }
 
-  redirectToEditCard(): void {
-    this.router.navigateByUrl('/actualizartc');
-  }
 }

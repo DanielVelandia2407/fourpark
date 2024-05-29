@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="card-buttons">
-          <button *ngIf="reservation.state === 'Finalizado'" (click)="showDetails($event, reservation)">Ver factura</button>
+          <button *ngIf="reservation.state === 'Finalizado' || reservation.state === 'Cancelado'" (click)="showDetails($event, reservation)">Ver factura</button>
           <button *ngIf="reservation.state === 'Activa' && rol !== 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
           <div class="admin-buttons" *ngIf="reservation.state === 'Activa' && rol === 'Administrador'">
             <button *ngIf="reservation.state === 'Activa' && rol === 'Administrador'" class="btn-cancel" (click)="abrirModalCancelacion(reservation)">Cancelar</button>
@@ -75,7 +75,7 @@
 
 
   
-  <!-- Aquí definimos el modal -->
+  <!-- Aquí definimos el modal de ver reservas-->
   <div *ngIf="selectedReservation" class="modal">
     <div class="modal-content">
       <span class="close" (click)="closeDetailsModal()">&times;</span>

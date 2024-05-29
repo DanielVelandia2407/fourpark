@@ -150,8 +150,6 @@ nav.dark .mobile-menu-button:hover {
 
 /* Navbar links */
 nav ul {
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
 }
 
