@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class TokenService {
   private logoutTimer: any;
   private readonly inactivityDuration: number = 10 * 60 * 1000; // 10 minutos en milisegundos
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   getDecodedToken(token: string): any {
     try {
@@ -46,6 +47,7 @@ export class TokenService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.router.navigate(['/login']); 
   }
 
   handleLogoutOnInactivity(): void {
@@ -57,7 +59,7 @@ export class TokenService {
   private startLogoutTimer(): void {
     this.logoutTimer = setTimeout(() => {
       // Mostrar alerta al usuario
-      window.alert('Su sesión se cerrará debido a la inactividad.');
+      window.alert('Su sesión se cerro debido a inactividad.');
       // Cerrar sesión
       this.logout();
     }, this.inactivityDuration);
