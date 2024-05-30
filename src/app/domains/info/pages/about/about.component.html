@@ -1,3 +1,6 @@
+    <app-header *ngIf="rol === 'Administrador' || rol === 'Cliente' || rol === 'Gerente'" ></app-header>
+    <app-vnologueo *ngIf="rol != 'Administrador' && rol != 'Cliente' && rol != 'Gerente'"></app-vnologueo>
+
     <main class="container mx-auto my-10 p-5 bg-white shadow-md rounded-lg">
         <h2 class="text-3xl font-bold mb-5">Conócenos</h2>
         <div class="space-y-5">

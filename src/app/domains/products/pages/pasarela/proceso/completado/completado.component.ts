@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pago-procesando',
@@ -10,6 +11,8 @@ export class CompletadoComponent implements OnInit {
   animacionClase = 'slide-in';
   completado = false;
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
     setTimeout(() => {
       this.animacionClase = 'shake';
@@ -17,6 +20,10 @@ export class CompletadoComponent implements OnInit {
         this.mensaje = 'Pago completado';
         this.completado = true;
         this.animacionClase = 'scale-in';
+        // Navegar a la ruta de inicio después de 2 segundos
+        setTimeout(() => {
+          this.router.navigate(['/']); // Cambia '/' con la ruta de inicio correcta
+        }, 2000);
       }, 1000);
     }, 5000);
   }

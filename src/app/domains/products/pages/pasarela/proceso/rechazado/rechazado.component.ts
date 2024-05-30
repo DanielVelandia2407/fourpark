@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pago-procesando',
@@ -9,13 +10,18 @@ export class RechazadoComponent implements OnInit {
   mensaje = 'Pago procesando';
   animacionClase = 'fade-in';
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
     setTimeout(() => {
       this.animacionClase = 'fade-out';
       setTimeout(() => {
         this.mensaje = 'Pago rechazado';
         this.animacionClase = 'fade-in';
-      }, 500);
+        setTimeout(() => {
+          this.router.navigate(['/']); // Cambia '/' con la ruta de inicio correcta
+        }, 2000);
+      }, 1000);
     }, 5000);
-  }
+  } 
 }

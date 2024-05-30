@@ -8,8 +8,10 @@ import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
 import {ForgotPasswordComponent} from "@products/pages/forgot-password/forgot-password.component";
 import {RestorePasswordComponent} from "@products/pages/restore-password/restore-password.component";
+import { VnologueoComponent } from '@shared/components/vnologueo/vnologueo.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { Auth2Guard } from './guards/auth2/auth2.guard';
+import { VistanlComponent } from '@shared/components/vnologueo/vista/vistanl/vistanl.component';
 
 
 // Admin
@@ -34,22 +36,27 @@ import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-adm
 import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
 import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
+import { MapsComponent } from './domains/info/pages/maps/maps.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent, canActivate: [Auth2Guard],
+    component: LayoutComponent,
     children: [
       {
         path: '',
-        component: ListComponent
-      },
-      {
-        path: 'about',
-        component: AboutComponent
-      },
+        component: ListComponent, canActivate: [Auth2Guard]
+      }
     ]
+  },
+  {
+    path: 'maps',
+    component: MapsComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'login',
@@ -150,6 +157,10 @@ export const routes: Routes = [
   {
     path: 'vreservas',
     component: VisualizarReservaComponent, canActivate: [Auth2Guard]
+  },
+  {
+    path: 'inicio-nologueado',
+    component: VistanlComponent,
   },
   {
     path: '**',
