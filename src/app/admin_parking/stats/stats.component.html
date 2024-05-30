@@ -11,6 +11,18 @@
         <label for="fecha_final">Hasta:</label>
         <input type="date" id="fecha_final" name="fecha_final">
     </div>
+
+    <select name="id_city" id="id_city" ngModel>
+        <option value="" disabled selected>Ciudad</option>
+        <option *ngFor="let city of cities" [value]="city.id_city">{{ city.name }}</option>
+    </select>
+
+    <select name="id_parking" id="id_parking" ngModel>
+        <option value="" disabled selected>Parking</option>
+        <option *ngFor="let parking of parkings" [value]="parking.id_parking">{{ parking.name }}</option>
+    </select>
+
+
     <button (click) ="fetchData()" >Buscar</button>
 </div>
 

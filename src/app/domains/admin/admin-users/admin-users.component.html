@@ -16,14 +16,11 @@
             <td>{{ item.first_name }}</td>
             <td>{{ item.last_name }}</td>
             <td class="actions">
-                <fa-icon (click)="Delete()" [icon]="faTrash"> </fa-icon>
-                <fa-icon *ngIf="item.user_controllers.is_account_blocked; else elseblock" [icon]="faUnlock"></fa-icon>
-                <ng-template #elseblock>
-                    <fa-icon (click)="Block()" [icon]="faLock"> </fa-icon>
-                </ng-template>
-
+                <fa-icon *ngIf="item.user_controllers.is_account_blocked;" (click)="Unlock(item.id_user)"  [icon]="faUnlock"></fa-icon>
                 <fa-icon (click)="Edit(item.id_user)" [icon]="faEdit"> </fa-icon>
-            </td>
+                <fa-icon *ngIf="item.is_active;" style="color: red;" (click)="DeActivate(item)"  [icon]="faTimes"></fa-icon>
+                <fa-icon *ngIf="!item.is_active;" style="color: green;" (click)="Activate(item)"  [icon]="faCheck"></fa-icon>
+            </td> 
           </tr>
         </tbody>
     </table>

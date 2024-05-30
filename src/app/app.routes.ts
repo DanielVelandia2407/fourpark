@@ -16,10 +16,11 @@ import { Auth2Guard } from './guards/auth2/auth2.guard';
 // Admin
 //Super Admin
 import { ReservesComponent } from './reserves/reserves.component';
+import { CancelReserveComponent } from './reserves/cancel-reserve/cancel-reserve.component';
 import { AdministratorsOfParkingsComponent } from './domains/admin/administrators-of-parkings/administrators-of-parkings.component';
 import { StatsSuperAdminComponent } from './domains/admin/stats-super-admin/stats-super-admin.component';
 
-//Admin parking 
+//Admin parking
 import { StatsComponent } from './admin_parking/stats/stats.component';
 import { VisualizarReservaComponent } from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
@@ -31,8 +32,10 @@ import { ActualizarTarjetaComponent } from '@products/pages/pasarela/actualizarT
 import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
 import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.component';
 import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
-import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-parkings.component';
+import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
+import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
+import { MapsComponent } from './domains/info/pages/maps/maps.component';
 
 
 export const routes: Routes = [
@@ -44,6 +47,10 @@ export const routes: Routes = [
         path: '',
         component: ListComponent, canActivate: [Auth2Guard]
       },
+      {
+        path: 'maps',
+        component: MapsComponent
+      }
     ]
   },
   {
@@ -75,6 +82,10 @@ export const routes: Routes = [
           {
             path: 'create',
             component: AdminPageComponent
+          },
+          {
+            path : 'edit/:id',
+            component :  AdminParkingsEditComponent
           }
         ]
       },
@@ -90,7 +101,7 @@ export const routes: Routes = [
       },
       {
         path :  'stats',
-        component : StatsSuperAdminComponent  
+        component : StatsSuperAdminComponent
       }
 
     ]
@@ -120,6 +131,14 @@ export const routes: Routes = [
     component: PasarelaComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
+    path: 'cancel-reserve',
+    component: CancelReserveComponent
+  },
+  {
+    path: 'points-reserve',
+    component: RMethodPointsComponent
+  },
+  {
     path: 'procesoc',
     component: CompletadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
@@ -147,6 +166,6 @@ export const routes: Routes = [
     component: NotFoundComponent
   }
 
-  
+
 
 ];

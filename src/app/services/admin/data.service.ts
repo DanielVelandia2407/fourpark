@@ -22,6 +22,8 @@ export interface User {
     mail: string;
     user_controllers : UserControler;
     id_role_fk: number;
+    is_active : boolean;
+    identification_card : string;
   }
 
 export interface City {
@@ -30,8 +32,13 @@ export interface City {
 }
 
 export interface Schedule {
-    id_schedule: number,
-    name: String
+  id_schedule: number;
+  name: string;
+  name_formatted?: string;
+  initial_day?: number;
+  final_day?: number;
+  opening_time?: number;
+  closing_time?: number;
 }
 
 export interface Vehicle {
@@ -65,6 +72,8 @@ export interface Parking {
   types_parking: TypeParking;
   schedules: Schedule;
   users?: User;
+  car_capacity : number;
+  car_fee : number;
 
   parking_controllers: ParkingController[];
 }
@@ -152,9 +161,12 @@ export class DataService {
   getParkingById(id: number): Observable<Parking> {
     return this.http.get<Parking>(`${environment.apiUrl}/parkings/${id}`);
   }
-  
+
   getOptionsReservation(): Observable<Reservations[]>{
     return this.http.get<Reservations[]>(environment.apiUrl + '/reservations');
   }
 
+  createReservation(reservationData: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/reservations`, reservationData);
+  }
 }
