@@ -1,5 +1,5 @@
 <div class="map-container">
-  <google-map height="600px" width="100%" [center]="center" [zoom]="zoom">
+  <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
     <map-marker *ngFor="let parking of parkings"
                 [position]="{ lat: parking.latitude, lng: parking.longitude }"
                 [options]="markerOptions"
@@ -9,9 +9,9 @@
   </google-map>
 
   <div *ngIf="selectedParking" class="info-window">
+    <button class="close-btn" (click)="closeInfoWindow()">×</button>
     <h2>{{ selectedParking.name }}</h2>
-    <p>{{ selectedParking.description }}</p>
     <p>{{ selectedParking.address }}</p>
-    <img [src]="selectedParking.image_path" alt="{{ selectedParking.name }}" height="100">
+    <img [src]="selectedParking.image_path" alt="{{ selectedParking.name }}" class="info-image">
   </div>
 </div>
