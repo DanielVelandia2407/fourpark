@@ -37,6 +37,7 @@ import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.com
 import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
 import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
+import {RMethodPointsComponent} from './reserves/acceptPayment/r-method-points.component';
 import { MapsComponent } from './domains/info/pages/maps/maps.component';
 import { LogsComponent } from './domains/admin/logs-component/logs.component';
 

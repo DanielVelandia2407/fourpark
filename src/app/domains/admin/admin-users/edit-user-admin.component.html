@@ -16,7 +16,7 @@
         
 
         <label for="loyalty_points">Puntos de fidelidad</label>
-        <input type="number" id="loyalty_points" [value]="user.loyalty_points">
+        <input type="number" id="loyalty_points" [value]="user.loyalties.loyalty_points">
         
 
         <button (click)='updateUser(user.id_user)'>Actualizar</button>
