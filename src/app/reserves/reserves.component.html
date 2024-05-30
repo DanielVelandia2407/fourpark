@@ -8,49 +8,6 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #f0f8ff; /* Color de fondo más claro */
-      }
-      .container {
-        max-width: 1280px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 1rem;
-        min-height: 80vh;
-      }
-      .grid-item {
-        overflow: hidden;
-      }
-      .flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 24px; /* Aumentamos el gap entre los elementos */
-      }
-      .flex-container > div {
-        flex: 1 1 48%;
-        min-width: 280px;
-        box-sizing: border-box;
-      }
-      @media (max-width: 768px) {
-        .flex-container > div {
-          flex: 1 1 100%;
-        }
-      }
-      h2 {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 100%;
-        display: block;
-      }
-      .form-item {
-        margin-bottom: 16px;
-      }
-    </style>
   </head>
   <body class="bg-gray-100">
     <div class="container bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">

@@ -34,6 +34,7 @@ import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-adm
 import { AdminParkingsComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
 import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
+import { MapsComponent } from './domains/info/pages/maps/maps.component';
 
 
 export const routes: Routes = [
@@ -49,6 +50,10 @@ export const routes: Routes = [
         path: 'about',
         component: AboutComponent
       },
+      {
+        path: 'maps',
+        component: MapsComponent
+      }
     ]
   },
   {
