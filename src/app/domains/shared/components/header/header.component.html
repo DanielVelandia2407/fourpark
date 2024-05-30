@@ -76,6 +76,33 @@
           </li>
           <li>
             <a
+              *ngIf="rol === 'Gerente'"
+              routerLink="/admin/users"
+              role="menuitem"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >Usuarios</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="rol === 'Gerente'"
+              routerLink="/admin/admins"
+              role="menuitem"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >Administradores</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="rol === 'Gerente'"
+              routerLink="/admin/logs"
+              role="menuitem"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >Registros</a
+            >
+          </li>
+          <li>
+            <a
               *ngIf="rol === 'Cliente'"
               routerLink="/actualizartc"
               role="menuitem"

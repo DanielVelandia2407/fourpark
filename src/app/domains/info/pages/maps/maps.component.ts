@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { DataService, Parking } from '../../../../services/admin/data.service';
+import { DataService, Parking, Schedule } from '../../../../services/admin/data.service';
 import { initFlowbite } from "flowbite";
 import { TokenService } from '@shared/token/token.service';
 import { HeaderComponent } from '@shared/components/header/header.component';
@@ -19,6 +19,7 @@ export class MapsComponent implements OnInit {
   zoom = 12;
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   parkings: Parking[] = [];
+  schedules: Schedule[] = [];
   selectedParking: Parking | null = null;
 
   // Variables para almacenar información del token
@@ -27,7 +28,7 @@ export class MapsComponent implements OnInit {
   constructor(private dataService: DataService, private jwtService: TokenService) { }
 
   ngOnInit(): void {
-    this.loadParkings();
+    this.loadData();
 
     this.jwtService.handleLogoutOnInactivity();
 
@@ -45,13 +46,21 @@ export class MapsComponent implements OnInit {
       }
   }
 
-  loadParkings(): void {
-    this.dataService.getParkings().subscribe((data: Parking[]) => {
-      this.parkings = data;
+  loadData(): void {
+    this.dataService.getParkings().subscribe((parkings: Parking[]) => {
+      this.dataService.getOptionsSchedules().subscribe((schedules: Schedule[]) => {
+        this.parkings = parkings.map(parking => {
+          return parking;
+        });
+      });
     });
   }
 
   openInfoWindow(parking: Parking): void {
     this.selectedParking = parking;
+  }
+
+  closeInfoWindow(): void {
+    this.selectedParking = null;
   }
 }

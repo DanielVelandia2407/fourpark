@@ -27,22 +27,17 @@ import {StatsSuperAdminComponent} from './domains/admin/stats-super-admin/stats-
 
 //Admin parking
 import {StatsComponent} from './admin_parking/stats/stats.component';
-import {VisualizarReservaComponent} from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 import {PasarelaComponent} from '@products/pages/pasarela/pasarela.component';
+import {ActualizarTarjetaComponent} from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
+import {VisualizarReservaComponent} from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
 import {RechazadoComponent} from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
-import {
-  ActualizarTarjetaComponent
-} from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
 
 // Admin
 import {AdminPageComponent} from './domains/admin/admin-parking/admin-page.component';
 import {AdminUsersComponent} from './domains/admin/admin-users/admin-users.component';
 import {MainAdminPageComponent} from './domains/admin/main-admin-page/main-admin-page.component';
-import {
-  AdminParkingsComponent,
-  AdminParkingsEditComponent
-} from './domains/admin/admin-parkings/admin-parkings.component';
+import {AdminParkingsComponent, AdminParkingsEditComponent} from './domains/admin/admin-parkings/admin-parkings.component';
 import {EditUserAdminComponent} from './domains/admin/admin-users/admin-users.component';
 import {RMethodPointsComponent} from './reserves/r-method-points/r-method-points.component';
 import {MapsComponent} from './domains/info/pages/maps/maps.component';
@@ -73,15 +68,15 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: MainAdminPageComponent, canActivate: [AuthGuard], data: {role: 'Gerente'},
+    component: MainAdminPageComponent, canActivate: [AuthGuard], data: { role: 'Gerente' },
     children: [
       {
         path: 'users',
         component: AdminUsersComponent,
-        children: [
+        children : [
           {
-            path: 'edit/:id',
-            component: EditUserAdminComponent
+            path : 'edit/:id',
+            component : EditUserAdminComponent
           }
         ]
       },
@@ -94,24 +89,24 @@ export const routes: Routes = [
             component: AdminPageComponent
           },
           {
-            path: 'edit/:id',
-            component: AdminParkingsEditComponent
+            path : 'edit/:id',
+            component :  AdminParkingsEditComponent
           }
         ]
       },
       {
-        path: 'admins',
-        component: AdministratorsOfParkingsComponent,
-        children: [
+        path : 'admins',
+        component :  AdministratorsOfParkingsComponent,
+        children : [
           {
-            path: 'edit/:id',
-            component: EditUserAdminComponent
+            path : 'edit/:id',
+            component : EditUserAdminComponent
           }
         ]
       },
       {
-        path: 'stats',
-        component: StatsSuperAdminComponent
+        path :  'stats',
+        component : StatsSuperAdminComponent
       }
 
     ]
@@ -159,10 +154,13 @@ export const routes: Routes = [
   {
     path: 'procesoc',
     component: CompletadoComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: CancelReserveComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path: 'procesor',
     component: RechazadoComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    path: 'accept-reserve',
+    component: RMethodPointsComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path: 'adminParkings',
@@ -184,6 +182,4 @@ export const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   }
-
-
 ];

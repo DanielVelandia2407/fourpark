@@ -8,6 +8,7 @@ import {
 } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap } from '@angular/google-maps';
+import Swal from 'sweetalert2';
 
 interface VehicleInfo {
   id: number;
@@ -235,7 +236,7 @@ export class ReservesComponent implements OnInit {
           },
           (error) => {
             console.error('Error al realizar la reserva', error);
-            alert('Error al realizar la reserva');
+            Swal.fire('Error al realizar la reserva');
           }
         );
     } else if (idPaymentMethodFk === 3) {
@@ -250,16 +251,16 @@ export class ReservesComponent implements OnInit {
             if (response.url) {
               window.location.href = response.url;
             } else {
-              alert('Reserva exitosa, pero no se recibió URL de redirección.');
+              Swal.fire('Reserva exitosa, pero no se recibió URL de redirección.');
             }
           },
           (error) => {
             console.error('Error al realizar la reserva', error);
-            alert('Error al realizar la reserva');
+            Swal.fire('Error al realizar la reserva');
           }
         );
     } else {
-      alert('Error en el pago.');
+      Swal.fire('Error en la reservación.');
     }
   }
 }
