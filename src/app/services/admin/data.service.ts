@@ -22,6 +22,8 @@ export interface User {
     mail: string;
     user_controllers : UserControler;
     id_role_fk: number;
+    is_active : boolean;
+    identification_card : string;
   }
 
 export interface City {
@@ -70,6 +72,8 @@ export interface Parking {
   types_parking: TypeParking;
   schedules: Schedule;
   users?: User;
+  car_capacity : number;
+  car_fee : number;
 
   parking_controllers: ParkingController[];
 }

@@ -1,0 +1,40 @@
+.body{
+    padding: 16px;
+    max-width: 90%;  
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: auto;
+    -webkit-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
+}
+
+.body button{
+    background-color: #5cb85c;
+    margin-top: 15px;
+    color: white;
+    width: 100%;
+    align-self: center;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px
+}
+
+select {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.ventana_modal{
+    position: absolute;
+    z-index: 999;
+    max-height: 70%;
+    display: none;
+}
+
+.view{ 
+    display: inline;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(124, 124, 124);
+}

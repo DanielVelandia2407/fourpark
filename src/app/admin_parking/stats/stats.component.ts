@@ -3,11 +3,13 @@ import Chart from 'chart.js/auto'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { HeaderComponent } from '@shared/components/header/header.component';
+import { City,Parking, DataService } from '../../services/admin/data.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports : [HeaderComponent],
+  imports : [HeaderComponent, NgFor],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
@@ -18,19 +20,34 @@ export class StatsComponent implements OnInit {
   public LineChart: any;
   public startDate: string;
   public endDate: string;
+  public parking_id :string;
+  public city_id :string;
   public stats: any;
+  public cities: City[];
+  public parkings: Parking[];
 
-  constructor (private http: HttpClient){}
+  constructor (private http: HttpClient, private dataservice: DataService){}
 
   fetchData() {
 
     const fecha_inicio = document.getElementById('fecha_inicio') as HTMLInputElement;
     const fecha_final = document.getElementById('fecha_final') as HTMLInputElement;
+    const city = document.getElementById('id_city') as HTMLInputElement;
+    const parking = document.getElementById('id_parking') as HTMLInputElement;
 
     this.startDate = fecha_inicio.value
     this.endDate = fecha_final.value
+    this.city_id = city.value
+    this.parking_id = parking.value
 
-    const body = { startDate: this.startDate, endDate: this.endDate };
+    const body = { 
+            startDate: this.startDate,
+            endDate: this.endDate,
+            id_parkig_fk : this.parking_id,
+            id_city_fk : this.city_id
+      };
+
+      
     this.http.post(environment.apiUrl + '/statistics-admin', body).subscribe((data: any) => {
       // Aquí puedes manejar la respuesta del endpoint
       this.stats = data
@@ -126,5 +143,20 @@ export class StatsComponent implements OnInit {
   ngOnInit(): void {
     this.startDate = '2024-04-01'; // Fecha de hace un mes
     this.endDate = '2024-05-01'; // Fecha actual
+
+    this.dataservice.getOptionsCities().subscribe(
+      (options) =>{
+        this.cities  = options
+      }
+    )
+
+
+    this.dataservice.getParkings().subscribe(
+      (options) => {
+        this.parkings = options
+      }
+    )
+
+
   }
 }
