@@ -37,6 +37,7 @@ import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/ad
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
 import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
 import { MapsComponent } from './domains/info/pages/maps/maps.component';
+import { LogsComponent } from './domains/admin/logs-component/logs.component';
 
 
 export const routes: Routes = [
@@ -103,6 +104,10 @@ export const routes: Routes = [
       {
         path :  'stats',
         component : StatsSuperAdminComponent
+      },
+      {
+        path :  'logs',
+        component : LogsComponent
       }
 
     ]

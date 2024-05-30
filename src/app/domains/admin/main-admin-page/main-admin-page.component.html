@@ -5,10 +5,14 @@
 <div>
     <nav>
         <ul>
-            <li (click)="clickRoute($event, 'users')">Usuarios</li>
-            <li (click)="clickRoute($event, 'parkings')">Parqueaderos</li>
-            <li (click)="clickRoute($event, 'admins')">Administradores</li>
-            <li (click)="clickRoute($event, 'stats')">Estadisticas</li>
+            <div class="container">
+                <li (click)="clickRoute($event, 'users')">Usuarios</li>
+                <li (click)="clickRoute($event, 'parkings')">Parqueaderos</li>
+                <li (click)="clickRoute($event, 'admins')">Administradores</li>
+                <li (click)="clickRoute($event, 'stats')">Estadisticas</li>
+                <li (click)="clickRoute($event, 'logs')">Trazabilidad</li>
+            </div>
+            
         </ul>
     </nav>
 

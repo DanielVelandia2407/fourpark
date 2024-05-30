@@ -10,6 +10,19 @@ interface TypeParking {
   // Otros campos de la tabla `types_parking`
 }
 
+
+export interface LogRecord {
+  id_record: number;
+  action: string;
+  date: string;
+  time: string;
+  ip_user: string;
+  id_user_fk: number;
+  users: {
+    user_name: string;
+  };
+}
+
 export interface UserControler {
   is_account_blocked: Boolean
 }
@@ -168,5 +181,10 @@ export class DataService {
 
   createReservation(reservationData: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/reservations`, reservationData);
+  }
+
+
+  getRecordsLogs(q :string, startDate: string, endDate: string): Observable<LogRecord []>{
+    return this.http.get<LogRecord[]>(environment.apiUrl + `/records?q=${q}&startDate=${startDate}&endDate=${endDate}`  );
   }
 }
