@@ -8,6 +8,7 @@ import { TokenService } from '@shared/token/token.service';
 import { ReservaService } from '@shared/reserva/reserva.service';
 import { CheckinService } from '@shared/reserva/checkin/checkin.service';
 import { CheckoutService } from '@shared/reserva/checkout/checkout.service';
+import Swal from 'sweetalert2';
 
 // Definición del componente y metadatos asociados
 @Component({
@@ -111,11 +112,11 @@ export class VisualizarReservaComponent implements OnInit {
     this.http.get(url, { responseType: 'text' }).subscribe(
       response => {
         console.log('Correo enviado correctamente:', response);
-        alert('¡La factura ha sido enviada exitosamente!');
+        Swal.fire('¡La factura ha sido enviada exitosamente!');
       },
       error => {
         console.error('Error enviando el correo:', error);
-        alert('Hubo un error al enviar la factura. Por favor, inténtalo de nuevo más tarde.');
+        Swal.fire('Hubo un error al enviar la factura. Por favor, inténtalo de nuevo más tarde.');
       }
     );
   }
@@ -147,12 +148,28 @@ export class VisualizarReservaComponent implements OnInit {
     this.reservaService.cancelReservation(reservationId)
       .subscribe(
         response => {
-          alert('Reserva cancelada correctamente:');
-          this.showCancelConfirmationModal = false;
-          window.location.reload();
+          Swal.fire({
+            title: 'Reserva cancelada correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCancelConfirmationModal = false;
+              window.location.reload();
+            }
+          });
         },
         error => {
-          alert('Error al cancelar la reserva:');
+          Swal.fire({
+            title: 'Error',
+            text: 'Ha ocurrido un error durante la cancelacion',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCancelConfirmationModal = false;
+            }
+          });
         }
       );
   }
@@ -171,13 +188,28 @@ export class VisualizarReservaComponent implements OnInit {
     this.checkinService.checkinReservation(reservationId)
       .subscribe(
         response => {
-          alert('Check in exitoso:');
-          this.showCheckInConfirmationModal = false;
-          window.location.reload();
+          Swal.fire({
+            title: 'Check in exitoso',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCheckInConfirmationModal = false;
+              window.location.reload();
+            }
+          });
         },
         error => {
-          alert('Error al realizar check in a la reserva:');
-          this.showCheckInConfirmationModal = false;
+          Swal.fire({
+            title: 'Error',
+            text: 'Ha ocurrido un error durante el check in.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCheckInConfirmationModal = false;
+            }
+          });
         }
       );
   }
@@ -196,13 +228,29 @@ export class VisualizarReservaComponent implements OnInit {
     this.checkoutService.checkOutReservation(reservationId)
       .subscribe(
         response => {
-          alert('Check out exitoso:');
-          this.showCheckOutConfirmationModal = false;
-          window.location.reload();
+          Swal.fire({
+            title: 'Check out exitoso',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCheckOutConfirmationModal = false;
+              window.location.reload();
+            }
+          });
         },
         error => {
-          alert('Error al realizar check out a la reserva:');
-          this.showCheckOutConfirmationModal = false;
+          console.log(error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ha ocurrido un error durante el check out.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCheckOutConfirmationModal = false;
+            }
+          });
         }
       );
   }

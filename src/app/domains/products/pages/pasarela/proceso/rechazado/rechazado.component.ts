@@ -19,7 +19,7 @@ export class RechazadoComponent implements OnInit {
         this.mensaje = 'Pago rechazado';
         this.animacionClase = 'fade-in';
         setTimeout(() => {
-          this.router.navigate(['/']); // Cambia '/' con la ruta de inicio correcta
+          this.router.navigate(['vreservas']); 
         }, 2000);
       }, 1000);
     }, 5000);

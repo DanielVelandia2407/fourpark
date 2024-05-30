@@ -69,7 +69,6 @@ export class PasarelaComponent implements OnInit {
       console.log('ok');
       this.api.createReservation(this.reservationData).subscribe(
         (response: any) => {
-          console.log('Reserva y pago exitosos', response);
           this.router.navigate(['/procesoc']);
         },
         (error) => {
