@@ -22,7 +22,7 @@ export class CompletadoComponent implements OnInit {
         this.animacionClase = 'scale-in';
         // Navegar a la ruta de inicio después de 2 segundos
         setTimeout(() => {
-          this.router.navigate(['/']); // Cambia '/' con la ruta de inicio correcta
+          this.router.navigate(['/vreservas']); 
         }, 2000);
       }, 1000);
     }, 5000);

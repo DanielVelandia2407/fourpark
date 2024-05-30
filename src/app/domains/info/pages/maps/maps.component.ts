@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
+<<<<<<< HEAD
 import { DataService, Parking, Schedule } from '../../../../services/admin/data.service';
+=======
+import { DataService, Parking } from '../../../../services/admin/data.service';
+import { initFlowbite } from "flowbite";
+import { TokenService } from '@shared/token/token.service';
+import { HeaderComponent } from '@shared/components/header/header.component';
+import { VnologueoComponent } from '@shared/components/vnologueo/vnologueo.component';
+>>>>>>> cf619edec9f24ba0e254dc84559a18a717afb6cd
 
 @Component({
   selector: 'app-maps',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, HeaderComponent, VnologueoComponent],
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.css']
 })
@@ -18,10 +26,32 @@ export class MapsComponent implements OnInit {
   schedules: Schedule[] = [];
   selectedParking: Parking | null = null;
 
-  constructor(private dataService: DataService) { }
+  // Variables para almacenar información del token
+  rol: string;
+
+  constructor(private dataService: DataService, private jwtService: TokenService) { }
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.loadData();
+=======
+    this.loadParkings();
+
+    this.jwtService.handleLogoutOnInactivity();
+
+    initFlowbite();
+
+      // Recuperación del token del localStorage
+      const token = localStorage.getItem('token');
+
+      if (token) {
+        // Decodificación del token si existe
+        const decodedToken = this.jwtService.getDecodedToken(token);
+        this.rol = decodedToken.role;
+      } else {
+        console.log('No token found in local storage');
+      }
+>>>>>>> cf619edec9f24ba0e254dc84559a18a717afb6cd
   }
 
   loadData(): void {

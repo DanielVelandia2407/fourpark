@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -90,9 +91,17 @@ export class TokenService {
   private startLogoutTimer(): void {
     this.logoutTimer = setTimeout(() => {
       // Mostrar alerta al usuario
-      window.alert('Su sesión se cerro debido a inactividad.');
-      // Cerrar sesión
-      this.logout();
+      Swal.fire({
+        title: 'Sesión cerrada',
+        text: 'Su sesión se cerró debido a inactividad.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.logout();
+        }
+      });
+      
     }, this.inactivityDuration);
   }
 

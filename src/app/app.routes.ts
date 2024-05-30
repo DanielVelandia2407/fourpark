@@ -47,12 +47,12 @@ export const routes: Routes = [
       {
         path: '',
         component: ListComponent, canActivate: [Auth2Guard]
-      },
-      {
-        path: 'maps',
-        component: MapsComponent
       }
     ]
+  },
+  {
+    path: 'maps',
+    component: MapsComponent
   },
   {
     path: 'about',
@@ -160,7 +160,7 @@ export const routes: Routes = [
   },
   {
     path: 'inicio-nologueado',
-    component: VistanlComponent
+    component: VistanlComponent,
   },
   {
     path: '**',
