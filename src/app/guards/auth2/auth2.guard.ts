@@ -15,7 +15,7 @@ export class Auth2Guard implements CanActivate {
     }
 
     // Redirigir a la página de inicio de sesión si no está autenticado
-    this.router.navigate(['/login']);
+    this.router.navigate(['/inicio-nologueado']);
     return false;
   }
 }
