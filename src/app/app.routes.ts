@@ -8,6 +8,7 @@ import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
 import {ForgotPasswordComponent} from "@products/pages/forgot-password/forgot-password.component";
 import {RestorePasswordComponent} from "@products/pages/restore-password/restore-password.component";
+import { VnologueoComponent } from '@shared/components/vnologueo/vnologueo.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { Auth2Guard } from './guards/auth2/auth2.guard';
 
@@ -37,17 +38,17 @@ import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent, canActivate: [Auth2Guard],
+    component: LayoutComponent,
     children: [
       {
         path: '',
-        component: ListComponent
-      },
-      {
-        path: 'about',
-        component: AboutComponent
+        component: ListComponent, canActivate: [Auth2Guard]
       },
     ]
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'login',
@@ -136,6 +137,10 @@ export const routes: Routes = [
   {
     path: 'vreservas',
     component: VisualizarReservaComponent, canActivate: [Auth2Guard]
+  },
+  {
+    path: 'inicio-nologueado',
+    component: VnologueoComponent
   },
   {
     path: '**',
