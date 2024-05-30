@@ -12,6 +12,7 @@
       body {
         margin: 0;
         padding: 0;
+        background-color: #f0f8ff; /* Color de fondo más claro */
       }
       .container {
         max-width: 1280px;
@@ -273,6 +274,7 @@
         <button
           id="btnCancel"
           class="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800"
+          (click)="cancelReservation()"
         >
           Cancelar Reserva
         </button>

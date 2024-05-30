@@ -169,6 +169,10 @@ export class ReservesComponent implements OnInit {
     return new Date(year, month, 0).getDate();
   }
 
+  cancelReservation() {
+    this.router.navigate(['/cancel-reserve']);
+  }
+
   processReservation() {
     const yearInput: HTMLInputElement = document.getElementById(
       'resYear'
@@ -227,8 +231,7 @@ export class ReservesComponent implements OnInit {
         .subscribe(
           (response: any) => {
             console.log('Reserva exitosa', response);
-            // Añadir aquí la redirección a la pestaña de pago realizado
-            // window.location.href = '<URL de la pestaña de pago realizado>';
+            this.router.navigate(['/points-reserve']);
           },
           (error) => {
             console.error('Error al realizar la reserva', error);
