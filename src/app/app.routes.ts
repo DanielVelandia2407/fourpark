@@ -11,6 +11,7 @@ import {RestorePasswordComponent} from "@products/pages/restore-password/restore
 import { VnologueoComponent } from '@shared/components/vnologueo/vnologueo.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { Auth2Guard } from './guards/auth2/auth2.guard';
+import { VistanlComponent } from '@shared/components/vnologueo/vista/vistanl/vistanl.component';
 
 
 // Admin
@@ -159,7 +160,7 @@ export const routes: Routes = [
   },
   {
     path: 'inicio-nologueado',
-    component: VnologueoComponent
+    component: VistanlComponent
   },
   {
     path: '**',

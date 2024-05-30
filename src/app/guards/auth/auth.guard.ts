@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/inicio-nologueado']);
+    this.router.navigate(['/login']);
     return false;
   }
 }
