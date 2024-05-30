@@ -25,8 +25,6 @@ import { StatsSuperAdminComponent } from './domains/admin/stats-super-admin/stat
 import { StatsComponent } from './admin_parking/stats/stats.component';
 import { VisualizarReservaComponent } from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
-import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
-import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
 import { ActualizarTarjetaComponent } from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
 
 // Admin
@@ -35,7 +33,7 @@ import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.com
 import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
 import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
-import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
+import { RMethodPointsComponent } from './reserves/acceptPayment/r-method-points.component';
 import { MapsComponent } from './domains/info/pages/maps/maps.component';
 
 
@@ -133,19 +131,11 @@ export const routes: Routes = [
   },
   {
     path: 'cancel-reserve',
-    component: CancelReserveComponent
+    component: CancelReserveComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
-    path: 'points-reserve',
-    component: RMethodPointsComponent
-  },
-  {
-    path: 'procesoc',
-    component: CompletadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
-  },
-  {
-    path: 'procesor',
-    component: RechazadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
+    path: 'accept-reserve',
+    component: RMethodPointsComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
   },
   {
     path : 'adminParkings',
