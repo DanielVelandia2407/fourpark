@@ -30,7 +30,7 @@ export class LogsComponent {
 
     console.log(search,startDate,endDate)
 
-    this.dataService.getRecordsLogs(search.value,startDate.value,endtDate.value).subscribe(
+    this.dataService.getRecordsLogs(search.value,startDate.value,endDate.value).subscribe(
       (data)=> {
         this.logs = data
       }

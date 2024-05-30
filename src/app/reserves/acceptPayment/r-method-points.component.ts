@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cancel-reserve',
-  standalone: true,
-  imports: [],
-  templateUrl: './cancel-reserve.component.html',
-  styleUrl: './cancel-reserve.component.css'
+  selector: 'app-r-method-points',
+  templateUrl: './r-method-points.component.html',
+  styleUrls: ['./r-method-points.component.css']
 })
-export class CancelReserveComponent {
+export class RMethodPointsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 

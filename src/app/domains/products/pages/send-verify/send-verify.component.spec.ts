@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompletadoComponent } from './completado.component';
+import { SendVerifyComponent } from './send-verify.component';
 
-describe('CompletadoComponent', () => {
-  let component: CompletadoComponent;
-  let fixture: ComponentFixture<CompletadoComponent>;
+describe('SendVerifyComponent', () => {
+  let component: SendVerifyComponent;
+  let fixture: ComponentFixture<SendVerifyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CompletadoComponent]
+      imports: [SendVerifyComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CompletadoComponent);
+    fixture = TestBed.createComponent(SendVerifyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

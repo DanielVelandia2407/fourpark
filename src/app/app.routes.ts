@@ -8,26 +8,28 @@ import {RegisterComponent} from "@products/pages/register/register.component";
 import {TycComponent} from "./domains/info/pages/tyc/tyc.component";
 import {ForgotPasswordComponent} from "@products/pages/forgot-password/forgot-password.component";
 import {RestorePasswordComponent} from "@products/pages/restore-password/restore-password.component";
-import { VnologueoComponent } from '@shared/components/vnologueo/vnologueo.component';
-import { AuthGuard } from './guards/auth/auth.guard';
-import { Auth2Guard } from './guards/auth2/auth2.guard';
-import { VistanlComponent } from '@shared/components/vnologueo/vista/vistanl/vistanl.component';
+import {VnologueoComponent} from '@shared/components/vnologueo/vnologueo.component';
+import {AuthGuard} from './guards/auth/auth.guard';
+import {Auth2Guard} from './guards/auth2/auth2.guard';
+import {VistanlComponent} from '@shared/components/vnologueo/vista/vistanl/vistanl.component';
+import {SendVerifyComponent} from "@products/pages/send-verify/send-verify.component";
+import {VerifyEmailComponent} from "@products/pages/verify-email/verify-email.component";
 
 
 // Admin
 //Super Admin
-import { ReservesComponent } from './reserves/reserves.component';
-import { CancelReserveComponent } from './reserves/cancel-reserve/cancel-reserve.component';
-import { AdministratorsOfParkingsComponent } from './domains/admin/administrators-of-parkings/administrators-of-parkings.component';
-import { StatsSuperAdminComponent } from './domains/admin/stats-super-admin/stats-super-admin.component';
+import {ReservesComponent} from './reserves/reserves.component';
+import {CancelReserveComponent} from './reserves/cancel-reserve/cancel-reserve.component';
+import {
+  AdministratorsOfParkingsComponent
+} from './domains/admin/administrators-of-parkings/administrators-of-parkings.component';
+import {StatsSuperAdminComponent} from './domains/admin/stats-super-admin/stats-super-admin.component';
 
 //Admin parking
-import { StatsComponent } from './admin_parking/stats/stats.component';
-import { VisualizarReservaComponent } from '@products/pages/visualizar-reserva/visualizar-reserva.component';
-import { PasarelaComponent } from '@products/pages/pasarela/pasarela.component';
-import {CompletadoComponent} from '@products/pages/pasarela/proceso/completado/completado.component'
-import { RechazadoComponent } from '@products/pages/pasarela/proceso/rechazado/rechazado.component';
-import { ActualizarTarjetaComponent } from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
+import {StatsComponent} from './admin_parking/stats/stats.component';
+import {PasarelaComponent} from '@products/pages/pasarela/pasarela.component';
+import {ActualizarTarjetaComponent} from '@products/pages/pasarela/actualizarTarjeta/actualizar-tarjeta/actualizar-tarjeta.component';
+import {VisualizarReservaComponent} from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 
 // Admin
 import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
@@ -35,10 +37,8 @@ import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.com
 import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
 import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
 import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
-import { RMethodPointsComponent } from './reserves/r-method-points/r-method-points.component';
 import { MapsComponent } from './domains/info/pages/maps/maps.component';
 import { LogsComponent } from './domains/admin/logs-component/logs.component';
-
 
 export const routes: Routes = [
   {
@@ -133,8 +133,16 @@ export const routes: Routes = [
     component: RestorePasswordComponent
   },
   {
+    path: 'send-verify',
+    component: SendVerifyComponent
+  },
+  {
+    path: 'verify-email',
+    component: VerifyEmailComponent
+  },
+  {
     path: 'pasarela',
-    component: PasarelaComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
+    component: PasarelaComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
   },
   {
     path: 'cancel-reserve',
@@ -145,19 +153,12 @@ export const routes: Routes = [
     component: RMethodPointsComponent
   },
   {
-    path: 'procesoc',
-    component: CompletadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
+    path: 'adminParkings',
+    component: StatsComponent, canActivate: [AuthGuard], data: {role: 'Administrador'}
   },
   {
-    path: 'procesor',
-    component: RechazadoComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
-  },
-  {
-    path : 'adminParkings',
-    component :  StatsComponent, canActivate: [AuthGuard], data: { role: 'Administrador' }},
-  {
-    path:'actualizartc',
-    component: ActualizarTarjetaComponent, canActivate: [AuthGuard], data: { role: 'Cliente' }
+    path: 'actualizartc',
+    component: ActualizarTarjetaComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
   },
   {
     path: 'vreservas',
@@ -171,7 +172,4 @@ export const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   }
-
-
-
 ];
