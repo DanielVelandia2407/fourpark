@@ -17,6 +17,10 @@ export interface UserEdit {
   user_name: string;
   identification_card: string;
   id_user : string;
+  loyalties : {
+    loyalty_points : string 
+  },
+  loyalty_points : number
 }
 
 
@@ -44,12 +48,14 @@ export class EditUserAdminComponent {
     const first_nameInput = document.getElementById('first_name') as HTMLInputElement;
     const last_nameInput = document.getElementById('last_name') as HTMLInputElement;
     const identification_cardInput = document.getElementById('identification_card') as HTMLInputElement;
+    const loyalty_points = document.getElementById('loyalty_points') as HTMLInputElement;
 
     const updatedUser: Partial<UserEdit> = {
         user_name: user_nameInput.value,
         first_name: first_nameInput.value,
         last_name: last_nameInput.value,
-        identification_card: identification_cardInput.value
+        identification_card: identification_cardInput.value,
+        loyalty_points : parseInt(loyalty_points.value) ,
     };
 
     this.updateUserAPI(id, updatedUser).subscribe(

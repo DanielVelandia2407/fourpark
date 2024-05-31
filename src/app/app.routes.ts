@@ -32,14 +32,14 @@ import {ActualizarTarjetaComponent} from '@products/pages/pasarela/actualizarTar
 import {VisualizarReservaComponent} from '@products/pages/visualizar-reserva/visualizar-reserva.component';
 
 // Admin
-import {AdminPageComponent} from './domains/admin/admin-parking/admin-page.component';
-import {AdminUsersComponent} from './domains/admin/admin-users/admin-users.component';
-import {MainAdminPageComponent} from './domains/admin/main-admin-page/main-admin-page.component';
-import {AdminParkingsComponent, AdminParkingsEditComponent} from './domains/admin/admin-parkings/admin-parkings.component';
-import {EditUserAdminComponent} from './domains/admin/admin-users/admin-users.component';
+import { AdminPageComponent } from './domains/admin/admin-parking/admin-page.component';
+import { AdminUsersComponent } from './domains/admin/admin-users/admin-users.component';
+import { MainAdminPageComponent } from './domains/admin/main-admin-page/main-admin-page.component';
+import { AdminParkingsComponent, AdminParkingsEditComponent } from './domains/admin/admin-parkings/admin-parkings.component';
+import { EditUserAdminComponent } from './domains/admin/admin-users/admin-users.component';
 import {RMethodPointsComponent} from './reserves/acceptPayment/r-method-points.component';
-import {MapsComponent} from './domains/info/pages/maps/maps.component';
-
+import { MapsComponent } from './domains/info/pages/maps/maps.component';
+import { LogsComponent } from './domains/admin/logs-component/logs.component';
 
 export const routes: Routes = [
   {
@@ -105,6 +105,10 @@ export const routes: Routes = [
       {
         path :  'stats',
         component : StatsSuperAdminComponent
+      },
+      {
+        path :  'logs',
+        component : LogsComponent
       }
 
     ]

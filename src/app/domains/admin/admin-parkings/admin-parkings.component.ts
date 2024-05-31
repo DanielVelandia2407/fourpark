@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DataService, Parking, City, Schedule,User  } from '../../../services/admin/data.service';
 import { NgFor } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEdit, faTrash  } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faTimes  } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
@@ -10,6 +10,7 @@ import { RouterModule ,Router, ActivatedRoute} from '@angular/router';
 import { HeaderComponent } from '@shared/components/header/header.component';
 import { GoogleMapsModule, MapMarker, GoogleMap  } from '@angular/google-maps'
 import { FormsModule }   from '@angular/forms';
+
 
 
 @Component({
@@ -20,6 +21,13 @@ import { FormsModule }   from '@angular/forms';
   styleUrl: './edit-admin-parkings.component.css'
 })
 export class AdminParkingsEditComponent {
+
+  faTimes = faTimes;
+
+  redirect(){
+    document.location.href = "/admin/parkings/"
+  }
+
 
   typeParkings: { id_type_parking: number, name: string }[] = [];
   users : User[]=[];
@@ -144,11 +152,11 @@ export class AdminParkingsEditComponent {
       .subscribe(
         (response) => {
           console.log('Respuesta del servidor:', response);
-          alert('¡Formulario enviado exitosamente!');
+          Swal.fire("El parqueadero fue creado correctamente");
         },
         (error) => {
           console.log('Error al enviar formulario:', error);
-          alert('Error al enviar formulario. Por favor, inténtalo de nuevo.');
+          Swal.fire("Error al actualizar parqueadero. Por favor, inténtalo de nuevo.");
         }
       );
 }
