@@ -1,7 +1,33 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Eliminar el scrollbar */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px; /* Margen alrededor del mapa */
+  box-sizing: border-box;
+}
+
 .map-container {
   position: relative;
-  width: 100%;
-  height: 98%;
+  width: 90%; /* Ajusta este valor según el margen deseado */
+  height: 90%; /* Ajusta este valor según el margen deseado */
+  max-width: 1200px; /* Máximo ancho para el mapa */
+  max-height: 800px; /* Máxima altura para el mapa */
+  border: 2px solid black; /* Agrega un borde negro de 2px */
+  border-radius: 20px; /* Hace que las esquinas sean redondeadas */
+  overflow: hidden; /* Oculta cualquier contenido que se salga del contenedor */
 }
 
 .info-window {

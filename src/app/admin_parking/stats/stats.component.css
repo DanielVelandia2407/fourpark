@@ -1,61 +1,71 @@
-.chart-line-container{
+.chart-line-container,
+.chart-pie-container {
     width: 47%;
-    min-width: 40%;
-    /* border: 1px solid black; */
+    min-width: 300px; /* Ajuste para asegurar mínimo espacio */
     padding: 16px;
     margin: 8px;
     border-radius: 16px;
     -webkit-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
+    background-color: #fff; /* Añadido para mayor visibilidad */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.chart-pie-container{
-    width: 47%;
-    min-width: 40%;
-    /* border: 1px solid black; */
-    padding: 16px;
-    margin: 8px;
-    border-radius: 16px;
-    -webkit-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
-box-shadow: 0px 3px 41px -17px rgba(0,0,0,0.75);
-}
-
-.charts_containers{
+.charts_containers {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding: auto;
-
+    padding: 16px; /* Ajuste para asegurar espacio alrededor */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filters_container{
+.filters_container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap; /* Permite que los filtros se adapten mejor en pantallas pequeñas */
     padding: 16px;
     align-items: center;
     width: 100%;
     justify-content: center;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filter_control{
+.filter_control {
     display: flex;
     flex-direction: column;
     padding: 8px;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filters_container button{
+.filters_container button {
     background-color: #5cb85c;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px;
     color: white;
+    border: none; /* Elimina bordes por defecto */
     border-radius: 16px;
-    align-self: flex-end;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 }
 
 select {
     margin-top: 25px;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+/* Media Queries para hacer el diseño más responsivo */
+@media (max-width: 768px) {
+    .chart-line-container,
+    .chart-pie-container {
+        width: 100%; /* Toma todo el ancho en pantallas pequeñas */
+        margin: 8px 0; /* Margen vertical para separación */
+    }
+
+    .filters_container {
+        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+        align-items: flex-start; /* Alinea los items al inicio */
+    }
+
+    .filters_container button {
+        align-self: center; /* Centra el botón */
+    }
 }

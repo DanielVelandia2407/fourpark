@@ -1,44 +1,78 @@
-
-button{
+button {
     background-color: #5cb85c;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px;
     color: white;
+    border: none; /* Elimina bordes por defecto */
     border-radius: 16px;
-    align-self: flex-end;
     margin: 16px;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filters_container{
+.filters_container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap; /* Permite que los filtros se adapten mejor en pantallas pequeñas */
     padding: 16px;
     align-items: center;
     width: 100%;
     justify-content: center;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filter_control{
+.filter_control {
     display: flex;
     flex-direction: column;
     padding: 8px;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.filters_container button{
+.filters_container button {
     background-color: #5cb85c;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px;
     color: white;
+    border: none; /* Elimina bordes por defecto */
     border-radius: 16px;
     align-self: flex-end;
+    margin: 8px;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 }
 
-.pdf_view{
+.pdf_view {
     display: flex;
     justify-content: center;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
-
 
 select {
     margin-top: 25px;
     margin-left: 5px;
     margin-right: 5px;
+    padding: 8px; /* Añadido padding para mejor usabilidad */
+    border-radius: 8px; /* Añadido borde redondeado para consistencia */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+/* Media Queries para hacer el diseño más responsivo */
+@media (max-width: 768px) {
+    .filters_container {
+        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+        align-items: center; /* Centra los items */
+    }
+
+    .filter_control {
+        width: 100%; /* Asegura que los controles ocupen todo el ancho disponible */
+        padding: 8px 0; /* Ajusta el padding para pantallas pequeñas */
+    }
+
+    .filters_container button {
+        align-self: center; /* Centra el botón */
+        width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+        margin: 8px 0; /* Ajusta el margen para separación vertical */
+    }
+
+    select {
+        width: 100%; /* Hace que el select ocupe todo el ancho disponible */
+        margin: 8px 0; /* Ajusta el margen para separación vertical */
+    }
 }
