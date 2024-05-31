@@ -1,4 +1,6 @@
-<div *ngIf="is_active"  class="card">
+
+
+<div class="card">
     <a  href="#" aria-label="Product Image" class="card-image">
         <img [src]="image_path" alt="Product image" />
     </a>
@@ -7,13 +9,17 @@
             <h5 class="card-title">{{ name }}</h5>
         </a>
         <div class="card-status" >
-            <span class="status-badge">Disponible</span>
+            <span *ngIf="is_active" class="status-badge">Disponible</span>
+            <span *ngIf="is_active === false" class="status-badge">No disponible</span>
         </div>
         <div class="card-address">
             <p>{{ address }}</p>
         </div>
         <div class="card-action">
-            <a href="reserves/{{ id_parking }}" class="reserve-button">
+            <a *ngIf="is_active" href="reserves/{{ id_parking }}" class="reserve-button">
+                Reservar
+            </a>
+            <a *ngIf="is_active === false" href="" class="reserve-button">
                 Reservar
             </a>
         </div>
