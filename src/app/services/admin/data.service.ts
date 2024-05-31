@@ -10,6 +10,18 @@ interface TypeParking {
   // Otros campos de la tabla `types_parking`
 }
 
+export interface LogRecord {
+  id_record: number;
+  action: string;
+  date: string;
+  time: string;
+  ip_user: string;
+  id_user_fk: number;
+  users: {
+    user_name: string;
+  };
+}
+
 export interface UserControler {
   is_account_blocked: Boolean
 }
