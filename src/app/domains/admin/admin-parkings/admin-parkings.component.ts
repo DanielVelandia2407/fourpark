@@ -203,7 +203,7 @@ export class AdminParkingsEditComponent {
 
     this.dataService.getOptionsUsers().subscribe(
       (options: User[] ) => {
-        this.users = options;
+        this.users = options.filter(user => user.id_role_fk === 2);;
         // console.log(this.typeParkings)
       },
       (error) => {
