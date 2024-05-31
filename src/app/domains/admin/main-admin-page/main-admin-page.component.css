@@ -1,9 +1,6 @@
-.container{
+ul {
     display: flex;
     gap: 20px;
-    flex-direction: row;
-    align-items: center;
-    vertical-align: middle;
 }
 
 ul li{
@@ -15,8 +12,6 @@ ul li{
     border-radius: 15px;
     color: white;
     background-color: rgb(80, 80, 80);
-    min-width: 200px;
-    text-align: center;
 }
 
 

@@ -36,8 +36,8 @@ export class StatsSuperAdminComponent implements OnInit {
 
     this.startDate = fecha_inicio.value
     this.endDate = fecha_final.value
-    this.city_id = city.value
-    this.parking_id = parking.value
+    // this.city_id = city.value
+    // this.parking_id = parking.value
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
 
@@ -46,8 +46,8 @@ export class StatsSuperAdminComponent implements OnInit {
       responseType: 'blob', 
       startDate: this.startDate, 
       endDate: this.endDate, 
-      id_parkig_fk : parseInt(this.parking_id) ,
-      id_city_fk : parseInt(this.city_id),
+      id_parkig_fk : this.parking_id,
+      id_city_fk : this.city_id,
       type: "inline" };
 
       const options = { headers : headers, responseType: 'blob' as 'json'};
