@@ -1,12 +1,12 @@
-<div class="card">
-    <a href="#" aria-label="Product Image" class="card-image">
+<div *ngIf="is_active"  class="card">
+    <a  href="#" aria-label="Product Image" class="card-image">
         <img [src]="image_path" alt="Product image" />
     </a>
     <div class="card-content">
         <a href="#" aria-label="Product Name">
             <h5 class="card-title">{{ name }}</h5>
         </a>
-        <div class="card-status">
+        <div class="card-status" >
             <span class="status-badge">Disponible</span>
         </div>
         <div class="card-address">

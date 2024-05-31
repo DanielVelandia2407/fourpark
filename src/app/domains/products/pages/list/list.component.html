@@ -1,9 +1,10 @@
   <div class="grid grid-cols-4 gap-8 mt-5">
-    <app-product
+    <app-product 
       *ngFor="let product of products()"
       [id_parking]="product.id_parking"
       [name]="product.name"
       [address]="product.address"
       [image_path]="product.image_path"
+      [is_active]="product.is_active"
       (addToCart)="fromChild($event)" />
   </div>

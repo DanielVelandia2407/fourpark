@@ -233,7 +233,7 @@ export class ReservesComponent implements OnInit {
         .subscribe(
           (response: any) => {
             console.log('Reserva exitosa', response);
-            this.router.navigate(['/points-reserve']);
+            this.router.navigate(['/accept-reserve']);
           },
           (error) => {
             console.error('Error al realizar la reserva', error);

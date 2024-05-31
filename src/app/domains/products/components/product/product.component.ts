@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit{
   @Input() name: string = '';
   @Input() address: string = '';
   @Input() image_path: string = '';
+  @Input() is_active: boolean = false;
 
   @Output() addToCart = new EventEmitter();
 

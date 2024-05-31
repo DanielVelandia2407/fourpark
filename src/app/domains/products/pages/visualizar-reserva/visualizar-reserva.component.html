@@ -28,6 +28,8 @@
             <p>Id: {{ reservation.id }}</p>
             <p *ngIf="rol === 'Administrador'">Usuario: {{reservation.user_name}}</p>
             <p>Fecha de reserva: {{ reservation.reservationDate }}</p>
+            <p>Ingreso reservado: {{reservation.hEntry}}</p>
+            <p>Salida reservada: {{reservation.hDeparture}}</p>
             <p>Placa: {{ reservation.vehicleCode }}</p>
             <p>Vehículo: {{ reservation.vehicle }}</p>
             <p>Estado: {{ reservation.state }}</p>

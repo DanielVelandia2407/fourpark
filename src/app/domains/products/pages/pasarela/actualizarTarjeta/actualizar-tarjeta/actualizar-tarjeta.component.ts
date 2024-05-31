@@ -4,6 +4,7 @@ import { HeaderComponent } from '@shared/components/header/header.component';
 import { RouterLinkWithHref, RouterLinkActive, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CardService } from '@shared/card/card.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-actualizar-tarjeta',
@@ -49,7 +50,12 @@ export class ActualizarTarjetaComponent implements OnInit {
           this.closeModal();
         },
         error => {
-          alert('Error al actualizar la tarjeta. Tarjeta no valida, intenta nuevamente');
+          Swal.fire({
+            title: 'Error',
+            text: 'Error al actualizar la tarjeta. Tarjeta no valida, intenta nuevamente',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       );
     }

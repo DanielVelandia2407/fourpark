@@ -116,7 +116,7 @@ export const routes: Routes = [
   },
   {
     path: 'reserves/:id',
-    component: ReservesComponent, canActivate: [Auth2Guard]
+    component: ReservesComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
   },
   {
     path: 'register',
@@ -148,11 +148,11 @@ export const routes: Routes = [
   },
   {
     path: 'cancel-reserve',
-    component: CancelReserveComponent
+    component: CancelReserveComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
   },
   {
-    path: 'points-reserve',
-    component: RMethodPointsComponent
+    path: 'accept-reserve',
+    component: RMethodPointsComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
   },
   {
     path: 'adminParkings',

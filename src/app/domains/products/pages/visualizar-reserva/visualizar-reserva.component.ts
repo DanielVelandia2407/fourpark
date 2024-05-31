@@ -76,9 +76,11 @@ export class VisualizarReservaComponent implements OnInit {
     this.api.getOptionsReservation().subscribe((data: any[]) => {
       this.reservations = data.map((reservation: any) => ({
         id: reservation.id_reservation,
-        reservationDate: datePipe.transform(reservation.reservation_date, 'dd/MM/yyyy HH:mm'),
-        entryDate: datePipe.transform(reservation.check_in, 'dd/MM/yyyy HH:mm'),
-        departureDate: datePipe.transform(reservation.check_out, 'dd/MM/yyyy HH:mm'),
+        reservationDate: this.addHoursAndFormat(datePipe, reservation.reservation_date, 5),
+        entryDate: this.addHoursAndFormat(datePipe, reservation.check_in, 5),
+        departureDate: this.addHoursAndFormat(datePipe, reservation.check_out, 5),
+        hEntry : this.addHoursAndFormat(datePipe, reservation.entry_reservation_date,5),
+        hDeparture: this.addHoursAndFormat(datePipe, reservation.departure_reservation_date,5),
         vehicle: reservation.vehicles?.name,
         state: reservation.state,
         parkingName: reservation.parkings?.name,
@@ -95,6 +97,15 @@ export class VisualizarReservaComponent implements OnInit {
       }));
       this.filteredReservations = this.reservations;
     });
+  }
+
+  // Función para sumar horas a una fecha y formatearla
+  addHoursAndFormat(datePipe: DatePipe, dateString: string, hours: number): string {
+    if (!dateString) return ''; // Retornar cadena vacía si dateString es null o undefined
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + hours);
+    const formattedDate = datePipe.transform(date, 'dd/MM/yyyy HH:mm');
+    return formattedDate ? formattedDate : ''; // Asegurar que siempre se retorne un string
   }
 
   // Método para aplicar el filtro de estado a las reservas
