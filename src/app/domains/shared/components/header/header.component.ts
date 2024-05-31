@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   iat: number;
   exp: number;
   name: string;
+  loyalty: number;
 
   constructor(private router: Router, private jwtService: TokenService) { }
 
@@ -44,6 +45,7 @@ export class HeaderComponent implements OnInit {
           this.iat = decodedToken.iat;
           this.exp = decodedToken.exp;
           this.name = decodedToken.user_name;
+          this.loyalty = decodedToken.loyalty;
         } else {
           console.log('No token found in local storage');
         }
