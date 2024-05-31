@@ -2,35 +2,58 @@
     padding: 10%;
     padding-top: 8px;
     padding-bottom: 32px;
-    }
-
-.edit_user_container h1{
-    font-size: larger;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
-.form_container{
+
+.edit_user_container h1 {
+    font-size: larger;
+    text-align: center; /* Centra el título */
+    margin-bottom: 16px; /* Añade espacio debajo del título */
+}
+
+.form_container {
     background-color: rgb(197, 197, 197);
     max-width: 50%;
-
+    margin: auto; /* Centra el contenedor en la página */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.edit_user_container .form_container{
+.edit_user_container .form_container {
     display: flex;
     flex-direction: column;
     padding: 16px;
-    border: 1px rgb(107, 107, 107) solid;
+    border: 1px solid rgb(107, 107, 107);
     border-radius: 16px;
     -webkit-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
-.edit_user_container button{
+.edit_user_container button {
     background-color: #5cb85c;
     margin-top: 15px;
     color: white;
     width: 50%;
-    align-self: flex-end;
+    align-self: center; /* Centra el botón */
+    border: none; /* Elimina bordes por defecto */
     border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 0;
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+/* Media Queries para hacer el diseño más responsivo */
+@media (max-width: 768px) {
+    .edit_user_container {
+        padding: 5%;
+    }
+
+    .form_container {
+        max-width: 90%; /* Asegura que el contenedor ocupe la mayor parte del ancho disponible */
+    }
+
+    .edit_user_container button {
+        width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    }
 }
