@@ -57,9 +57,7 @@ export class StatsComponent implements OnInit {
     if (this.LineChart){
       this.LineChart.destroy()
       this.PieChart.destroy()
-      this.chart.destroy()
-
-      
+      this.chart.destroy() 
     }
   
     //Bar Chart

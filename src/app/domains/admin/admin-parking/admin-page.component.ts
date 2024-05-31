@@ -106,8 +106,8 @@ export class AdminPageComponent {
     formData.append('address', addressElement.value);
     formData.append('longitude', longitudeElement.value);
     formData.append('latitude', latitudeElement.value);
-    formData.append('has_loyalty_service', "1");
-    formData.append('is_active', "1");
+    formData.append('has_loyalty_service', data.has_loyalty_service);
+    formData.append('is_active', data.is_active);
     formData.append('id_type_parking_fk', data.id_type_parking);
     formData.append('id_user_fk', data.id_user_fk);
     formData.append('id_schedule_fk', data.id_schedule_fk);
