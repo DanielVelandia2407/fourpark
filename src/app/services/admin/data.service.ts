@@ -181,4 +181,7 @@ export class DataService {
   createReservation(reservationData: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/reservations`, reservationData);
   }
+  getRecordsLogs(q :string, startDate: string, endDate: string): Observable<LogRecord []>{
+    return this.http.get<LogRecord[]>(environment.apiUrl + `/records?q=${q}&startDate=${startDate}&endDate=${endDate}`  );
+  }
 }
