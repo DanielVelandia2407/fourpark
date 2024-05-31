@@ -40,7 +40,7 @@ import {EditUserAdminComponent} from './domains/admin/admin-users/admin-users.co
 import {RMethodPointsComponent} from './reserves/acceptPayment/r-method-points.component';
 import {MapsComponent} from './domains/info/pages/maps/maps.component';
 import { LogsComponent } from './domains/admin/logs-component/logs.component';
-
+import { EditUserComponent } from './users/edit-user/edit-user.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +52,10 @@ export const routes: Routes = [
         component: ListComponent, canActivate: [Auth2Guard]
       }
     ]
+  },
+  {
+    path:  "edit/profile",
+    component: EditUserComponent
   },
   {
     path: 'maps',
