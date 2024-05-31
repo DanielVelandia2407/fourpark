@@ -8,15 +8,11 @@ import { environment } from '../../../../environments/environment';
 import { FormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '@shared/components/header/header.component';
-import { faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [HeaderComponent,NgFor, FontAwesomeModule,GoogleMapsModule, FormsModule, RouterModule],
+  imports: [HeaderComponent,NgFor, GoogleMapsModule, FormsModule, RouterModule],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })
@@ -30,14 +26,8 @@ export class AdminPageComponent {
   zoom = 4;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
-  faTimes = faTimes
 
   formData: any = {};
-
-
-  redirect(){
-    document.location.href = "/admin/parkings/"
-  }
 
   addMarker(event: google.maps.MapMouseEvent) {
     
@@ -114,18 +104,18 @@ export class AdminPageComponent {
     formData.append('id_city_fk', data.id_city_fk);
 
 
-    Swal.fire('Form submitted successfully!');
+    alert('Form submitted successfully!');
 
 
     this.http.post(environment.apiUrl +"/parkings", formData)
       .subscribe(
         (response) => {
           console.log('Respuesta del servidor:', response);
-          Swal.fire('¡Formulario enviado exitosamente!');
+          alert('¡Formulario enviado exitosamente!');
         },
         (error) => {
           console.log('Error al enviar formulario:', error);
-          Swal.fire('Error al enviar formulario. Por favor, inténtalo de nuevo.');
+          alert('Error al enviar formulario. Por favor, inténtalo de nuevo.');
         }
       );
 }

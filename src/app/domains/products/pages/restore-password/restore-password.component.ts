@@ -61,7 +61,7 @@ export class RestorePasswordComponent implements OnInit {
 
     try {
       const formValue = {password: this.formulario.value.password};
-      const endpoint = `https://fourparkscolombia.onrender.com/api/recover-password${this.token}`;
+      const endpoint = `https://fourparkscolombia.onrender.com/api/recover-password/${this.token}`;
       const response = await this.resetPasswordService.postRecoverPassword(endpoint, formValue);
       console.log(response);
       this.router.navigateByUrl('/login');
