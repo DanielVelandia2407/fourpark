@@ -1,6 +1,6 @@
 <div class="table_user_container">
     <router-outlet></router-outlet>
-    <button>Crear usuario administrador</button>
+    <button (click)="GoToCreate()">Crear usuario administrador</button>
     <table>
         <thead>
           <tr>
@@ -16,12 +16,6 @@
             <td>{{ item.first_name }}</td>
             <td>{{ item.last_name }}</td>
             <td class="actions">
-                <fa-icon (click)="Delete()" [icon]="faTrash"> </fa-icon>
-                <fa-icon *ngIf="item.user_controllers.is_account_blocked; else elseblock" [icon]="faUnlock"></fa-icon>
-                <ng-template #elseblock>
-                    <fa-icon (click)="Block()" [icon]="faLock"> </fa-icon>
-                </ng-template>
-
                 <fa-icon (click)="Edit(item.id_user)" [icon]="faEdit"> </fa-icon>
             </td>
           </tr>

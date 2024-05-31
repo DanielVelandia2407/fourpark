@@ -41,6 +41,7 @@ import {RMethodPointsComponent} from './reserves/acceptPayment/r-method-points.c
 import {MapsComponent} from './domains/info/pages/maps/maps.component';
 import { LogsComponent } from './domains/admin/logs-component/logs.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
+import { RegisterAdministratorComponent } from './domains/admin/register-administrator/register-administrator.component';
 
 export const routes: Routes = [
   {
@@ -105,6 +106,10 @@ export const routes: Routes = [
           {
             path : 'edit/:id',
             component : EditUserAdminComponent
+          },
+          {
+            path: 'create',
+            component : RegisterAdministratorComponent
           }
         ]
       },

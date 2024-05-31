@@ -36,6 +36,11 @@ export class AdministratorsOfParkingsComponent {
   faEdit  = faEdit;
   faUnlock = faUnlock; 
 
+
+  GoToCreate(){
+    document.location.href = "/admin/admins/create"
+  }
+
   Delete(){
     console.log("Eleminiar")
   }
