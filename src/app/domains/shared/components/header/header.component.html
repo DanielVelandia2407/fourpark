@@ -47,6 +47,9 @@
           <span class="block text-sm text-gray-500 truncate dark:text-gray-400">
             {{ rol }}</span
           >
+          <span class="block text-sm text-gray-500 truncate dark:text-gray-400" *ngIf="rol === 'Cliente'">
+            {{ loyalty }} Puntos</span
+          >
         </div>
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
