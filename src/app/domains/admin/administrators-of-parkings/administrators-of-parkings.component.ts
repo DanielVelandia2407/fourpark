@@ -65,7 +65,7 @@ export class AdministratorsOfParkingsComponent {
     this.dataService.getOptionsUsers().subscribe(
       (options: User[]) => {
           this.users = options
-              .filter(user => user.id_role_fk === 2) // Filtrar por id_role_fk igual a 2
+              .filter(user =>[2, 3].includes(user.id_role_fk)) // Filtrar por id_role_fk igual a 2
               .sort((a, b) => a.id_user - b.id_user); // Ordenar por id_user
       },
       (error) => {
