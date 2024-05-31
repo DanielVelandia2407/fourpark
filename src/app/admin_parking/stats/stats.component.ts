@@ -37,14 +37,10 @@ export class StatsComponent implements OnInit {
 
     this.startDate = fecha_inicio.value
     this.endDate = fecha_final.value
-    this.city_id = city.value
-    this.parking_id = parking.value
 
     const body = { 
             startDate: this.startDate,
-            endDate: this.endDate,
-            id_parkig_fk : this.parking_id,
-            id_city_fk : this.city_id
+            endDate: this.endDate
       };
 
       
@@ -56,6 +52,15 @@ export class StatsComponent implements OnInit {
   }
 
   createChart(data:any){
+
+
+    if (this.LineChart){
+      this.LineChart.destroy()
+      this.PieChart.destroy()
+      this.chart.destroy()
+
+      
+    }
   
     //Bar Chart
     let days = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo']
@@ -138,6 +143,14 @@ export class StatsComponent implements OnInit {
       }
       
     });
+
+    
+    
+    // this.LineChart.update()
+    // this.PieChart.update()
+    // this.chart.update()
+
+    
   }
 
   ngOnInit(): void {
