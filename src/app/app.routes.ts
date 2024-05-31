@@ -55,7 +55,8 @@ export const routes: Routes = [
   },
   {
     path:  "edit/profile",
-    component: EditUserComponent
+    component: EditUserComponent, 
+    canActivate: [Auth2Guard]
   },
   {
     path: 'maps',
