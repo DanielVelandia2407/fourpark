@@ -122,6 +122,7 @@ export class AdminPageComponent {
         (response) => {
           console.log('Respuesta del servidor:', response);
           Swal.fire('¡Formulario enviado exitosamente!');
+          document.location.href = "admin/parkings"
         },
         (error) => {
           console.log('Error al enviar formulario:', error);
