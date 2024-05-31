@@ -231,7 +231,10 @@ export class AdminUsersComponent {
   ngOnInit(): void {
     this.dataService.getOptionsUsers().subscribe(
       (options: User[] ) => {
-        this.users = options.sort((a, b) => a.id_user - b.id_user);
+        
+        this.users = options
+        .filter(user => user.id_role_fk === 1)
+        .sort((a, b) => a.id_user - b.id_user);
       },
       (error) => {
         console.error('Error al obtener opciones:', error);
