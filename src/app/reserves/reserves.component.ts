@@ -8,6 +8,7 @@ import {
 } from '../services/admin/data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap } from '@angular/google-maps';
+import { HeaderComponent } from '@shared/components/header/header.component';
 import Swal from 'sweetalert2';
 
 interface VehicleInfo {
@@ -20,7 +21,7 @@ interface VehicleInfo {
 @Component({
   selector: 'app-reserves',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, HeaderComponent],
   templateUrl: './reserves.component.html',
   styleUrls: ['./reserves.component.css'],
 })
