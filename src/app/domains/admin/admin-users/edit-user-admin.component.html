@@ -15,8 +15,10 @@
         <input type="number" id="identification_card" [value]="user.identification_card">
         
 
-        <label for="loyalty_points">Puntos de fidelidad</label>
-        <input type="number" id="loyalty_points" [value]="user.loyalties.loyalty_points">
+        <div *ngIf="user.role === 1">
+            <label for="loyalty_points">Puntos de fidelidad</label>
+            <input type="number" id="loyalty_points" [value]="user.loyalties.loyalty_points">
+        </div>
         
 
         <button (click)='updateUser(user.id_user)'>Actualizar</button>

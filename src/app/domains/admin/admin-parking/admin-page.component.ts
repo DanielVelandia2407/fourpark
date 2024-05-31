@@ -113,8 +113,27 @@ export class AdminPageComponent {
     formData.append('id_schedule_fk', data.id_schedule_fk);
     formData.append('id_city_fk', data.id_city_fk);
 
+    const car_capacity = document.getElementById('capacity_2') as HTMLInputElement; 
+    const car_fee = document.getElementById('fee_2') as HTMLInputElement;
 
-    Swal.fire('Form submitted successfully!');
+    const motorbike_capacity = document.getElementById('capacity_1') as HTMLInputElement; 
+    const motorbike_fee = document.getElementById('fee_1') as HTMLInputElement;
+
+    const bicycle_capacity = document.getElementById('capacity_3') as HTMLInputElement; 
+    const bicycle_fee = document.getElementById('fee_3') as HTMLInputElement;
+
+    // Para el carro
+    formData.append('car_capacity', car_capacity.value);
+    formData.append('car_fee', car_fee.value);
+
+    // Para la moto
+    formData.append('motorbike_capacity', motorbike_capacity.value);
+    formData.append('motorbike_fee', motorbike_fee.value);
+
+    // Para la bicicleta
+    formData.append('bicycle_capacity', bicycle_capacity.value);
+    formData.append('bicycle_fee', bicycle_fee.value);
+
 
 
     this.http.post(environment.apiUrl +"/parkings", formData)

@@ -20,7 +20,8 @@ export interface UserEdit {
   loyalties : {
     loyalty_points : string 
   },
-  loyalty_points : number
+  loyalty_points : number,
+  role: number
 }
 
 
@@ -28,7 +29,7 @@ export interface UserEdit {
 @Component({
   selector: 'edit-user-admin',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, NgIf],
   templateUrl: './edit-user-admin.component.html',
   styleUrl: './edit-user-admin.component.css'
 })
