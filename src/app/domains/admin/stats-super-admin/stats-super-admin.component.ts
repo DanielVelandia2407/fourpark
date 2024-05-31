@@ -41,14 +41,15 @@ export class StatsSuperAdminComponent implements OnInit {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
 
-    const body = { 
-      headers  : headers,
-      responseType: 'blob', 
-      startDate: this.startDate, 
-      endDate: this.endDate, 
-      id_parkig_fk : parseInt(this.parking_id) ,
-      id_city_fk : parseInt(this.city_id),
-      type: "inline" };
+    const body = {
+      headers: headers,
+      responseType: 'blob',
+      startDate: this.startDate,
+      endDate: this.endDate,
+      type: "inline",
+      ...(this.parking_id && { id_parkig_fk: parseInt(this.parking_id) }),
+      ...(this.city_id && { id_city_fk: parseInt(this.city_id) })
+    };
 
       const options = { headers : headers, responseType: 'blob' as 'json'};
 
