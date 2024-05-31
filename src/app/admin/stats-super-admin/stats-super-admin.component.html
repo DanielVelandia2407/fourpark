@@ -1,0 +1,29 @@
+<div class="filters_container">
+    <div class="filter_control">
+        <label for="fecha_inicio">Desde:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio">
+    </div>
+    <div class="filter_control">
+        <label for="fecha_final">Hasta:</label>
+        <input type="date" id="fecha_final" name="fecha_final">
+    </div>
+    <select name="id_city" id="id_city" ngModel>
+        <option value="" disabled selected>Ciudad</option>
+        <option *ngFor="let city of cities" [value]="city.id_city">{{ city.name }}</option>
+    </select>
+
+    <select name="id_parking" id="id_parking" ngModel>
+        <option value="" disabled selected>Parking</option>
+        <option *ngFor="let parking of parkings" [value]="parking.id_parking">{{ parking.name }}</option>
+    </select>
+    <button (click) = "viewPDF()" >Buscar</button>
+    
+</div>
+
+<button (click)="fetchData()">Descargar <fa-icon [icon]="faFilePdf"> </fa-icon></button>
+<button (click)="fetchDataExcel()">Descargar <fa-icon [icon]="faFileExcel"> </fa-icon></button>
+
+<div class="pdf_view">
+    <iframe id="pdfFrame" width="90%" height="700px"></iframe>
+</div>
+

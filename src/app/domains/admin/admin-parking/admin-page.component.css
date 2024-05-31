@@ -1,3 +1,17 @@
+body {
+    backdrop-filter: blur(10px) !important; 
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+}
+.header .close {
+    margin-left: auto;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
 .body{
     padding: 16px;
     max-width: 90%;  
@@ -7,7 +21,22 @@
     -webkit-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 28px -15px rgba(0,0,0,0.75);
-}
+
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    /* max-width: 600px; */
+    position: absolute;
+    align-items: center;
+    align-self: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    -webkit-box-shadow: 1px 1px 256px 200px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 256px 200px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 256px 200px rgba(0,0,0,0.75);
+    }
 
 .body button{
     background-color: #5cb85c;
