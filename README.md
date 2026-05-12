@@ -1,70 +1,161 @@
-# FourPark
+# FourPark 🚗
 
-Sistema de reservas de parqueaderos con gestión de roles, pagos y reportes.
+[![Build Status](https://img.shields.io/badge/build-pending-yellow)](https://github.com/danielvelandia/fourpark)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/danielvelandia/fourpark/blob/main/LICENSE)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18-blue)](https://nodejs.org/)
+[![Angular Version](https://img.shields.io/badge/angular-%3E%3D17.3.0-blue)](https://angular.io/)
+[![Project Status](https://img.shields.io/badge/status-development-blue)](https://github.com/danielvelandia/fourpark)
 
 ## Descripción
 
-FourPark es una plataforma para la gestión de parqueaderos en Colombia, desarrollada como proyecto universitario. Permite a los usuarios buscar, reservar y pagar por espacios de estacionamiento. Los administradores gestionan sus parqueaderos y ven estadísticas. El SuperAdministrador gestiona todo el sistema. El flujo principal es: buscar parqueaderos, hacer reservas, check-in y check-out. Está desarrollado como fullstack con Angular para el frontend y Node.js + Express para el backend.
+Sistema de reservas de parqueaderos en Colombia desarrollado como proyecto universitario fullstack. Permite a los usuarios buscar, reservar y pagar por espacios de estacionamiento, mientras los administradores gestionan sus parqueaderos y visualizan estadísticas. Implementado con tecnologías modernas para una experiencia de usuario eficiente y robusta.
 
-## Stack tecnológico
+## Tabla de Contenidos
+
+- [Sobre el Proyecto](#sobre-el-proyecto)
+- [Características Principales](#características-principales)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Arquitectura](#arquitectura)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [Roles del Sistema](#roles-del-sistema)
+- [API Endpoints](#api-endpoints)
+- [Scripts Disponibles](#scripts-disponibles)
+- [Testing](#testing)
+- [Roadmap](#roadmap)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
+- [Autores](#autores)
+- [Agradecimientos](#agradecimientos)
+
+## Sobre el Proyecto
+
+FourPark es una plataforma de gestión de parqueaderos desarrollada como proyecto académico de la Universidad Distrital Francisco José de Caldas. El sistema resuelve el problema de la falta de organización en la reserva de espacios de estacionamiento en ciudades colombianas, ofreciendo una solución digital que mejora la experiencia del usuario y optimiza la gestión de parqueaderos.
+
+### Objetivos
+
+- Facilitar la reserva y gestión de espacios de estacionamiento
+- Implementar un sistema de pagos seguro y eficiente
+- Proporcionar herramientas de análisis y estadísticas para administradores
+- Crear una experiencia de usuario intuitiva y accesible
+
+## Características Principales
+
+- 🎯 **Sistema de Reservas Inteligentes** - Permite a los usuarios buscar y reservar parqueaderos disponibles
+- 💳 **Pago Seguro por Tarjeta** - Integración con métodos de pago digitales
+- 📊 **Dashboard Administrativo** - Estadísticas y reportes detallados para administradores
+- 📍 **Geolocalización** - Sistema de ubicación precisa de parqueaderos
+- 🔐 **Gestión de Usuarios y Roles** - Control de acceso basado en permisos
+- 📈 **Reportes y Estadísticas** - Generación de informes en PDF y Excel
+
+## Stack Tecnológico
 
 ### Backend
 
 | Tecnología | Versión |
 |------------|---------|
-| express | 4.19.2 |
-| pg | 8.11.5 |
-| jsonwebtoken | 9.0.2 |
-| bcryptjs | 2.4.3 |
-| nodemailer | 6.9.13 |
-| multer | 1.4.5-lts.1 |
-| joi | 17.13.1 |
-| helmet | 7.1.0 |
-| morgan | 1.10.0 |
-| express-rate-limit | 7.3.1 |
-| cors | 2.8.5 |
-| dotenv | 16.4.5 |
-| pdfkit | 0.15.0 |
-| exceljs | 4.4.0 |
+| Node.js    | 18+     |
+| Express    | 4.19.2  |
+| PostgreSQL | 14+     |
+| JWT        | 9.0.2   |
+| Bcrypt     | 2.4.3   |
+| Nodemailer | 6.9.13  |
 
 ### Frontend
 
 | Tecnología | Versión |
 |------------|---------|
-| @angular/core | 17.3.0 |
-| @angular/router | 17.3.0 |
-| rxjs | 7.8.0 |
-| tailwindcss | 3.4.3 |
-| flowbite | 2.3.0 |
-| chart.js | 4.4.3 |
-| apexcharts | 3.49.1 |
-| sweetalert2 | 11.11.0 |
-| @angular/google-maps | 17.3.8 |
-| jwt-decode | 4.0.0 |
-| @fortawesome/fontawesome-free | 6.5.2 |
+| Angular    | 17.3.0  |
+| RxJS       | 7.8.0   |
+| TailwindCSS| 3.4.3   |
+| SweetAlert2| 11.11.0 |
 
-## Requisitos
+### Base de Datos
 
-- Node.js 18 o superior
-- PostgreSQL 14 o superior
+| Tecnología | Versión |
+|------------|---------|
+| PostgreSQL | 14+     |
+
+### Herramientas de Desarrollo
+
+| Tecnología | Versión |
+|------------|---------|
+| Nodemon    | 3.0.1   |
+| TypeScript | 5.4.2   |
+| ESLint     | 8.56.0  |
+| Jest       | 29.7.0  |
+
+## Arquitectura
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   Base de Datos │
+│   (Angular)     │    │   (Node.js)     │    │   (PostgreSQL)  │
+│                 │    │                 │    │                 │
+│  ┌───────────┐  │    │  ┌───────────┐  │    │  ┌───────────┐  │
+│  │   UI      │  │    │  │   API     │  │    │  │   Tablas  │  │
+│  │  Component│  │    │  │  Routes   │  │    │  │  Datos    │  │
+│  │  Services │  │    │  │  Middlewares│  │    │  │  Indices  │  │
+│  └───────────┘  │    │  └───────────┘  │    │  └───────────┘  │
+│                 │    │                 │    │                 │
+│  ┌───────────┐  │    │  ┌───────────┐  │    │  ┌───────────┐  │
+│  │  HTTP     │  │    │  │   DB      │  │    │  │   Queries │  │
+│  │  Requests │  │    │  │  Pool     │  │    │  │  Triggers │  │
+│  └───────────┘  │    │  └───────────┘  │    │  └───────────┘  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+## Estructura del Proyecto
+
+```
+fourpark/
+├── src/                        ← Frontend Angular
+├── backend/                    ← Backend Node.js + Express + PostgreSQL
+│   └── src/
+│       ├── controllers/        ← Lógica de negocio por dominio
+│       ├── routes/             ← Definición de endpoints
+│       ├── middlewares/        ← JWT auth, upload (multer)
+│       ├── services/           ← Email, geocoding, PDF, Excel
+│       ├── config/database.js  ← Pool PostgreSQL (pg)
+│       └── database/           ← schema.sql, seed.sql, init-admin.js
+└── CLAUDE.md
+```
+
+## Requisitos Previos
+
+- Node.js versión 18 o superior
+- PostgreSQL versión 14 o superior
 - Cuenta SMTP de Gmail con App Password
+- Git
 
 ## Instalación
 
-1. Clonar el repositorio
-2. Instalar dependencias del frontend (raíz del proyecto):
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/danielvelandia/fourpark.git
+   cd fourpark
+   ```
+
+2. Instalar dependencias del frontend:
    ```bash
    npm install
    ```
+
 3. Instalar dependencias del backend:
    ```bash
    cd backend && npm install
    ```
-4. Copiar el archivo de variables de entorno y completarlo:
+
+4. Copiar y configurar el archivo de variables de entorno:
    ```bash
    cp backend/.env.example backend/.env
    ```
+
 5. Crear la base de datos PostgreSQL con el nombre `fourpark`
+
 6. Inicializar el esquema y los datos:
    ```bash
    cd backend
@@ -73,18 +164,7 @@ FourPark es una plataforma para la gestión de parqueaderos en Colombia, desarro
    npm run db:init-admin
    ```
 
-Para correr el backend:
-```bash
-cd backend
-npm run dev
-```
-
-Para correr el frontend:
-```bash
-npm start
-```
-
-## Variables de entorno
+## Configuración
 
 | Variable | Descripción | Ejemplo |
 |----------|-------------|---------|
@@ -105,68 +185,45 @@ npm start
 | EMAIL_FROM | Remitente de los correos | "FourPark <tu_correo@gmail.com>" |
 | FRONTEND_URL | URL del frontend para CORS | http://localhost:5173 |
 
-## Estructura del proyecto
+## Uso
 
-```
-fourpark/
-├── src/                        ← Frontend Angular
-├── backend/                    ← Backend Node.js + Express + PostgreSQL
-│   └── src/
-│       ├── controllers/        ← Lógica de negocio por dominio
-│       ├── routes/             ← Definición de endpoints
-│       ├── middlewares/        ← JWT auth, upload (multer)
-│       ├── services/           ← Email, geocoding, PDF, Excel
-│       ├── config/database.js  ← Pool PostgreSQL (pg)
-│       └── database/           ← schema.sql, seed.sql, init-admin.js
-└── CLAUDE.md
+### Levantar el Backend
+
+```bash
+cd backend
+npm run dev
 ```
 
-## Roles del sistema
+### Levantar el Frontend
+
+```bash
+npm start
+```
+
+## Roles del Sistema
 
 | Rol | Permisos |
 |-----|--------|
-| SuperAdministrador | Todo el sistema |
-| Administrador | Sus propios parqueaderos y reservas asociadas |
-| Usuario | Sus reservas y perfil |
+| **SuperAdministrador** | Todo el sistema |
+| **Administrador** | Sus propios parqueaderos y reservas asociadas |
+| **Usuario** | Sus reservas y perfil |
 
-## Modelo de datos
+## API Endpoints
 
-- **users**: Usuarios del sistema con datos personales y rol
-- **user_controllers**: Control de cuentas (bloqueos, intentos fallidos)
-- **cards**: Tarjetas de pago asociadas a usuarios
-- **tokens**: Tokens temporales para recuperación de contraseña y verificación de correo
-- **parkings**: Parqueaderos con ubicación, capacidad y horario
-- **parking_controllers**: Configuración de capacidad y tarifas por tipo de vehículo
-- **reservations**: Reservas de parqueaderos con fechas y estado
-- **invoices**: Facturas con montos calculados por reserva
-- **records**: Registros de auditoría de acciones del sistema
+| Método | Ruta | Descripción | Autenticación |
+|--------|------|-------------|-----|
+| POST | `/api/login` | Iniciar sesión | No |
+| POST | `/api/register` | Registrar nuevo usuario | No |
+| POST | `/api/request-token` | Solicitar token para recuperación/verificación | No |
+| GET | `/api/parkings` | Listar parqueaderos disponibles | No |
+| GET | `/api/user` | Obtener información del usuario autenticado | JWT |
+| POST | `/api/reservations` | Crear nueva reserva | JWT |
+| PUT | `/api/check-in/:id` | Registrar check-in de reserva | JWT + Admin |
+| PUT | `/api/check-out/:id` | Registrar check-out de reserva | JWT + Admin |
+| POST | `/api/statistics-admin` | Generar estadísticas para administradores | JWT + Admin |
+| POST | `/api/statistics-pdf` | Generar reporte PDF de estadísticas | JWT + SuperAdmin |
 
-## Endpoints principales
-
-| Método | Ruta | Autenticación |
-|--------|------|-------------|
-| POST | /api/login | No |
-| POST | /api/register | No |
-| POST | /api/request-token | No |
-| GET  | /api/parkings | No |
-| GET  | /api/user | JWT |
-| POST | /api/reservations | JWT |
-| PUT  | /api/check-in/:id | JWT + Admin |
-| PUT  | /api/check-out/:id | JWT + Admin |
-| POST | /api/statistics-admin | JWT + Admin |
-| POST | /api/statistics-pdf | JWT + SuperAdmin |
-
-## Flujo de estados de reserva
-
-```
-Pendiente → (check-in)  → En curso
-          → (cancelar)  → Cancelada
-En curso  → (check-out) → Finalizada
-```
-
-El checkout calcula automáticamente el tiempo extra consumido y aplica un reembolso del 50% por el tiempo reservado no utilizado.
-
-## Scripts disponibles
+## Scripts Disponibles
 
 ### Backend
 
@@ -187,7 +244,34 @@ El checkout calcula automáticamente el tiempo extra consumido y aplica un reemb
 | watch | Compilar en modo watch |
 | test | Ejecutar tests unitarios |
 
+## Testing
+
+<!-- TODO: completar -->
+
+## Roadmap
+
+- [ ] Implementar sistema de recompensas y fidelización
+- [ ] Agregar integración con mapas interactivos
+- [ ] Desarrollar aplicación móvil híbrida
+- [ ] Implementar sistema de comentarios y calificaciones
+- [ ] Agregar funcionalidad de búsqueda avanzada por filtros
+
+## Contribuciones
+
+Este proyecto es desarrollado como parte del trabajo académico de la Universidad Distrital. Aunque es un proyecto universitario, se aceptan contribuciones y feedback para mejorar la calidad del código y funcionalidades. Si deseas contribuir, por favor abre un issue o pull request.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más información.
+
 ## Autores
 
 Daniel Felipe Velandia Jerez
+
+- GitHub: [@danielvelandia](https://github.com/danielvelandia)
+- LinkedIn: [LinkedIn Profile](https://linkedin.com/in/daniel-velandia)
+
+## Agradecimientos
+
+Agradecemos a la Universidad Distrital Francisco José de Caldas por proporcionar el marco académico para el desarrollo de este proyecto. También agradecemos a los profesores y tutores que han guiado el desarrollo del sistema.
 ```
