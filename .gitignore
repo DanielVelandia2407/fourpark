@@ -51,3 +51,4 @@ backend/logs/
 backend/*.log
 backend/dist/
 backend/coverage/
+.aider*
