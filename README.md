@@ -42,12 +42,17 @@ Sistema fullstack de reservas de parqueaderos en Colombia. Los usuarios buscan p
 
 ```
 fourpark/
-├── src/                        ← Frontend Angular
-│   └── app/
-│       ├── auth/               ← Interceptor JWT
-│       ├── components/         ← Componentes standalone
-│       └── environments/       ← environment.ts (URL del API)
-└── backend/
+├── frontend/                   ← Frontend Angular
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── auth/           ← Interceptor JWT
+│   │   │   ├── domains/        ← Páginas y componentes por dominio
+│   │   │   └── guards/         ← Guards de rutas
+│   │   └── environments/       ← environment.ts (URL del API)
+│   ├── angular.json
+│   ├── package.json
+│   └── tsconfig.json
+└── backend/                    ← Backend Node.js + Express
     └── src/
         ├── controllers/        ← Lógica de negocio por dominio
         ├── routes/             ← Definición de endpoints
@@ -84,7 +89,7 @@ cd fourpark
 
 ```bash
 # Frontend
-npm install
+cd frontend && npm install
 
 # Backend
 cd backend && npm install
@@ -158,7 +163,7 @@ npm run dev   # Desarrollo con Nodemon — http://localhost:3000
 npm start     # Producción
 ```
 
-**Frontend** (desde la raíz):
+**Frontend** (desde `/frontend`):
 
 ```bash
 npm start     # http://localhost:5173
@@ -166,7 +171,7 @@ npm start     # http://localhost:5173
 
 ### Desarrollo local vs. producción
 
-El frontend apunta por defecto al backend desplegado en Render. Para desarrollar localmente, cambiar la URL en `src/environments/environment.ts`:
+El frontend apunta por defecto al backend desplegado en Render. Para desarrollar localmente, cambiar la URL en `frontend/src/environments/environment.ts`:
 
 ```ts
 // Producción (por defecto)
@@ -230,7 +235,7 @@ npm run db:seed        # Insertar datos de ejemplo
 npm run db:init-admin  # Crear usuario SuperAdmin
 ```
 
-### Frontend (raíz)
+### Frontend (`/frontend`)
 
 ```bash
 npm start        # Servidor de desarrollo
