@@ -6,7 +6,14 @@ Sistema de reservas de parqueaderos en Colombia. Usuarios buscan parqueaderos, h
 
 ```
 fourpark/
-├── src/                        ← Frontend Angular
+├── frontend/                   ← Frontend Angular
+│   ├── src/
+│   │   ├── app/                ← Componentes, páginas, guards, interceptors
+│   │   ├── assets/
+│   │   └── environments/
+│   ├── angular.json
+│   ├── package.json
+│   └── tsconfig.json
 ├── backend/                    ← Backend Node.js + Express + PostgreSQL
 │   └── src/
 │       ├── controllers/        ← Lógica de negocio por dominio
@@ -18,9 +25,10 @@ fourpark/
 └── CLAUDE.md
 ```
 
-## Comandos del frontend (Angular)
+## Comandos del frontend (Angular, desde /frontend)
 
 ```bash
+npm install         # Instalar dependencias (primera vez)
 npm start           # Levanta en http://localhost:5173
 npm run build       # Build de producción
 npm test            # Tests unitarios con Karma
@@ -51,7 +59,7 @@ Copiar `backend/.env.example` → `backend/.env` y completar:
 
 - Frontend apunta a: `https://fourparkscolombia.onrender.com/api`
 - Backend local corre en: `http://localhost:3000/api`
-- Para desarrollo local, cambiar en `src/environments/environment.ts`
+- Para desarrollo local, cambiar en `frontend/src/environments/environment.ts`
 
 ## Roles de usuario
 
@@ -86,7 +94,7 @@ Copiar `backend/.env.example` → `backend/.env` y completar:
 ## Convenciones de código
 
 - **Backend:** CommonJS (`require`), async/await, validaciones con Joi en cada controller
-- **Frontend:** Angular standalone components, `HttpClient` con interceptor JWT en `src/app/auth/interceptor.ts`
+- **Frontend:** Angular standalone components, `HttpClient` con interceptor JWT en `frontend/src/app/auth/interceptor.ts`
 - **Imágenes:** subidas a `backend/uploads/parkings/`, servidas en `/uploads/`
 - **Contraseñas:** hasheadas con bcryptjs salt rounds 12
 - **Errores:** siempre `{ error: "mensaje en español" }` con HTTP status apropiado
