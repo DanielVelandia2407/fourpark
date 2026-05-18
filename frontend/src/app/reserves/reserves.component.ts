@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap } from '@angular/google-maps';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '@shared/components/header/header.component';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 interface VehicleInfo {
   id: number;
