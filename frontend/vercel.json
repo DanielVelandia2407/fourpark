@@ -1,6 +1,9 @@
 {
   "buildCommand": "npx ng build --configuration production",
-  "outputDirectory": "dist/parqueadero",
+  "outputDirectory": "dist/parqueadero/browser",
   "installCommand": "npm install",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
