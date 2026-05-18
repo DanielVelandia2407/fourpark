@@ -4,9 +4,15 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM = 'FourPark <onboarding@resend.dev>';
 
+const send = async (payload) => {
+  const { data, error } = await resend.emails.send(payload);
+  if (error) throw new Error(`Resend error: ${JSON.stringify(error)}`);
+  return data;
+};
+
 // ── Recuperación de contraseña ────────────────────────────────────────────────
 exports.sendPasswordRecovery = async (to, firstName, link) => {
-  await resend.emails.send({
+  await send({
     from: FROM,
     to,
     subject: 'Restablece tu contraseña — FourPark',
@@ -30,7 +36,7 @@ exports.sendPasswordRecovery = async (to, firstName, link) => {
 
 // ── Verificación de correo (bienvenida) ───────────────────────────────────────
 exports.sendWelcomeVerification = async (to, firstName, link) => {
-  await resend.emails.send({
+  await send({
     from: FROM,
     to,
     subject: '¡Bienvenido a FourPark! Verifica tu correo',
@@ -55,7 +61,7 @@ exports.sendInvoice = async (invoice) => {
   const fmt = (n) => `$${parseFloat(n ?? 0).toLocaleString('es-CO')}`;
   const fmtDate = (d) => d ? new Date(d).toLocaleString('es-CO') : '—';
 
-  await resend.emails.send({
+  await send({
     from: FROM,
     to: invoice.mail,
     subject: `Factura de tu reserva #${invoice.id_invoice} — FourPark`,
