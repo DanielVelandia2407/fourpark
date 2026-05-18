@@ -1,7 +1,5 @@
-const Joi  = require('joi');
-const path = require('path');
-const fs   = require('fs');
-const db   = require('../config/database');
+const Joi = require('joi');
+const db  = require('../config/database');
 const geocodingService = require('../services/geocoding.service');
 
 const validate = (schema, data) => {
@@ -111,23 +109,24 @@ const upsertControllers = async (client, parkingId, body) => {
 };
 
 const parkingSchema = Joi.object({
-  name:               Joi.string().min(3).max(150).required(),
-  description:        Joi.string().max(500).allow('', null),
-  address:            Joi.string().min(5).max(255).required(),
-  longitude:          Joi.number().required(),
-  latitude:           Joi.number().required(),
-  has_loyalty_service:Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
-  is_active:          Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
-  id_type_parking_fk: Joi.number().integer().required(),
-  id_user_fk:         Joi.number().integer().allow(null, ''),
-  id_schedule_fk:     Joi.number().integer().required(),
-  id_city_fk:         Joi.number().integer().required(),
-  car_capacity:       Joi.number().integer().min(0).default(0),
-  car_fee:            Joi.number().min(0).default(0),
-  motorbike_capacity: Joi.number().integer().min(0).default(0),
-  motorbike_fee:      Joi.number().min(0).default(0),
-  bicycle_capacity:   Joi.number().integer().min(0).default(0),
-  bicycle_fee:        Joi.number().min(0).default(0),
+  name:                Joi.string().min(3).max(150).required(),
+  description:         Joi.string().max(500).allow('', null),
+  address:             Joi.string().min(5).max(255).required(),
+  longitude:           Joi.number().required(),
+  latitude:            Joi.number().required(),
+  image_path:          Joi.string().uri().allow('', null).optional(),
+  has_loyalty_service: Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
+  is_active:           Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
+  id_type_parking_fk:  Joi.number().integer().required(),
+  id_user_fk:          Joi.number().integer().allow(null, ''),
+  id_schedule_fk:      Joi.number().integer().required(),
+  id_city_fk:          Joi.number().integer().required(),
+  car_capacity:        Joi.number().integer().min(0).default(0),
+  car_fee:             Joi.number().min(0).default(0),
+  motorbike_capacity:  Joi.number().integer().min(0).default(0),
+  motorbike_fee:       Joi.number().min(0).default(0),
+  bicycle_capacity:    Joi.number().integer().min(0).default(0),
+  bicycle_fee:         Joi.number().min(0).default(0),
 });
 
 // ── POST /parkings ────────────────────────────────────────────────────────────
@@ -135,7 +134,6 @@ exports.createParking = async (req, res, next) => {
   const client = await db.pool.connect();
   try {
     const value = validate(parkingSchema, req.body);
-    const imagePath = req.file ? `/uploads/parkings/${req.file.filename}` : null;
 
     await client.query('BEGIN');
     const result = await client.query(
@@ -144,7 +142,7 @@ exports.createParking = async (req, res, next) => {
           id_city_fk,id_type_parking_fk,id_schedule_fk,id_user_fk)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING id_parking`,
       [value.name, value.description, value.address, value.longitude, value.latitude,
-       imagePath,
+       value.image_path || null,
        value.has_loyalty_service === 'true' || value.has_loyalty_service === true,
        value.is_active !== 'false' && value.is_active !== false,
        value.id_city_fk, value.id_type_parking_fk, value.id_schedule_fk,
@@ -156,59 +154,23 @@ exports.createParking = async (req, res, next) => {
     res.status(201).json({ message: 'Parqueadero creado exitosamente', id_parking: result.rows[0].id_parking });
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {});
-    if (req.file) fs.unlink(req.file.path, () => {});
     next(err);
   } finally { client.release(); }
 };
 
-// ── PUT /parkings-with-image/:id ──────────────────────────────────────────────
-exports.updateParkingWithImage = async (req, res, next) => {
+// ── PUT /parkings/:id ─────────────────────────────────────────────────────────
+exports.updateParking = async (req, res, next) => {
   const client = await db.pool.connect();
   try {
-    if (!req.file) return res.status(400).json({ error: 'Se requiere una imagen' });
     const value = validate(parkingSchema, req.body);
 
-    // Eliminar imagen anterior
-    const old = await client.query('SELECT image_path FROM parkings WHERE id_parking=$1', [req.params.id]);
-    if (old.rows[0]?.image_path) {
-      const oldPath = path.join(__dirname, '../../', old.rows[0].image_path);
-      fs.unlink(oldPath, () => {});
-    }
-
-    const imagePath = `/uploads/parkings/${req.file.filename}`;
     await client.query('BEGIN');
     await client.query(
       `UPDATE parkings SET name=$1,description=$2,address=$3,longitude=$4,latitude=$5,image_path=$6,
        has_loyalty_service=$7,is_active=$8,id_city_fk=$9,id_type_parking_fk=$10,id_schedule_fk=$11,id_user_fk=$12
        WHERE id_parking=$13`,
-      [value.name, value.description, value.address, value.longitude, value.latitude, imagePath,
-       value.has_loyalty_service === 'true' || value.has_loyalty_service === true,
-       value.is_active !== 'false' && value.is_active !== false,
-       value.id_city_fk, value.id_type_parking_fk, value.id_schedule_fk,
-       value.id_user_fk || null, req.params.id]
-    );
-    await upsertControllers(client, req.params.id, value);
-    await client.query('COMMIT');
-
-    res.json({ message: 'Parqueadero actualizado exitosamente' });
-  } catch (err) {
-    await client.query('ROLLBACK').catch(() => {});
-    if (req.file) fs.unlink(req.file.path, () => {});
-    next(err);
-  } finally { client.release(); }
-};
-
-// ── PUT /parkings-without-image/:id ──────────────────────────────────────────
-exports.updateParkingWithoutImage = async (req, res, next) => {
-  const client = await db.pool.connect();
-  try {
-    const value = validate(parkingSchema, req.body);
-    await client.query('BEGIN');
-    await client.query(
-      `UPDATE parkings SET name=$1,description=$2,address=$3,longitude=$4,latitude=$5,
-       has_loyalty_service=$6,is_active=$7,id_city_fk=$8,id_type_parking_fk=$9,id_schedule_fk=$10,id_user_fk=$11
-       WHERE id_parking=$12`,
       [value.name, value.description, value.address, value.longitude, value.latitude,
+       value.image_path || null,
        value.has_loyalty_service === 'true' || value.has_loyalty_service === true,
        value.is_active !== 'false' && value.is_active !== false,
        value.id_city_fk, value.id_type_parking_fk, value.id_schedule_fk,
@@ -227,15 +189,9 @@ exports.updateParkingWithoutImage = async (req, res, next) => {
 // ── DELETE /parkings/:id ──────────────────────────────────────────────────────
 exports.deleteParking = async (req, res, next) => {
   try {
-    const old = await db.query('SELECT image_path FROM parkings WHERE id_parking=$1', [req.params.id]);
-    if (!old.rows.length) return res.status(404).json({ error: 'Parqueadero no encontrado' });
-
+    const { rows } = await db.query('SELECT id_parking FROM parkings WHERE id_parking=$1', [req.params.id]);
+    if (!rows.length) return res.status(404).json({ error: 'Parqueadero no encontrado' });
     await db.query('DELETE FROM parkings WHERE id_parking=$1', [req.params.id]);
-
-    if (old.rows[0]?.image_path) {
-      const imgPath = path.join(__dirname, '../../', old.rows[0].image_path);
-      fs.unlink(imgPath, () => {});
-    }
     res.json({ message: 'Parqueadero eliminado exitosamente' });
   } catch (err) { next(err); }
 };
