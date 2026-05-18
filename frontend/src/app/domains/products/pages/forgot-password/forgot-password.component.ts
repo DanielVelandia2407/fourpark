@@ -29,7 +29,7 @@ export class ForgotPasswordComponent {
       const formValueWithAdditionalParams = {
         ...this.formulario.value,
         type: 'Recovery',
-        url: 'http://fourpark.vercel.app/restore-password?token='
+        url: window.location.origin + '/restore-password?token='
       };
       const response = await this.forgotPasswordService.postForgotPassword(formValueWithAdditionalParams);
       console.log(response);
