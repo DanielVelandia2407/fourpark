@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); proj=list\\(d['projects'].keys\\(\\)\\)[0]; p=d['projects'][proj]; print\\('sourceRoot:', p.get\\('sourceRoot'\\)\\); print\\('root:', p.get\\('root'\\)\\); arch=p['architect']; print\\('build outputPath:', arch['build']['options'].get\\('outputPath'\\)\\); print\\('assets:', arch['build']['options'].get\\('assets'\\)\\)\")",
+      "Bash(git mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
