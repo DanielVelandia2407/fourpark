@@ -86,69 +86,43 @@ export class AdminPageComponent {
 
 
   onSubmit(data: any) {
-    
-    // Process form data (e.g., send to server)
-    console.log('Form data:', data);
-    const formData = new FormData();
-
-    const fileInputElement =  document.getElementById('image_path') as HTMLInputElement;
-    if (fileInputElement.files && fileInputElement.files.length > 0) {
-      const selectedFile = fileInputElement.files[0];
-      formData.append('image_path', selectedFile);
-    }
-
     const longitudeElement = document.getElementById('longitude') as HTMLInputElement;
-    const latitudeElement = document.getElementById('latitude') as HTMLInputElement;    
-    const addressElement = document.getElementById('address') as HTMLInputElement;
+    const latitudeElement  = document.getElementById('latitude')  as HTMLInputElement;
+    const addressElement   = document.getElementById('address')   as HTMLInputElement;
 
-    formData.append('name', data.name);
-    formData.append('description', data.description);
-    formData.append('address', addressElement.value);
-    formData.append('longitude', longitudeElement.value);
-    formData.append('latitude', latitudeElement.value);
-    formData.append('has_loyalty_service', data.has_loyalty_service);
-    formData.append('is_active', data.is_active);
-    formData.append('id_type_parking_fk', data.id_type_parking);
-    formData.append('id_user_fk', data.id_user_fk);
-    formData.append('id_schedule_fk', data.id_schedule_fk);
-    formData.append('id_city_fk', data.id_city_fk);
+    const payload = {
+      name:                data.name,
+      description:         data.description,
+      address:             addressElement.value,
+      longitude:           parseFloat(longitudeElement.value),
+      latitude:            parseFloat(latitudeElement.value),
+      image_path:          data.image_path || null,
+      has_loyalty_service: data.has_loyalty_service,
+      is_active:           data.is_active,
+      id_type_parking_fk:  data.id_type_parking,
+      id_user_fk:          data.id_user_fk,
+      id_schedule_fk:      data.id_schedule_fk,
+      id_city_fk:          data.id_city_fk,
+      car_capacity:        parseFloat((document.getElementById('capacity_2') as HTMLInputElement).value) || 0,
+      car_fee:             parseFloat((document.getElementById('fee_2')      as HTMLInputElement).value) || 0,
+      motorbike_capacity:  parseFloat((document.getElementById('capacity_1') as HTMLInputElement).value) || 0,
+      motorbike_fee:       parseFloat((document.getElementById('fee_1')      as HTMLInputElement).value) || 0,
+      bicycle_capacity:    parseFloat((document.getElementById('capacity_3') as HTMLInputElement).value) || 0,
+      bicycle_fee:         parseFloat((document.getElementById('fee_3')      as HTMLInputElement).value) || 0,
+    };
 
-    const car_capacity = document.getElementById('capacity_2') as HTMLInputElement; 
-    const car_fee = document.getElementById('fee_2') as HTMLInputElement;
-
-    const motorbike_capacity = document.getElementById('capacity_1') as HTMLInputElement; 
-    const motorbike_fee = document.getElementById('fee_1') as HTMLInputElement;
-
-    const bicycle_capacity = document.getElementById('capacity_3') as HTMLInputElement; 
-    const bicycle_fee = document.getElementById('fee_3') as HTMLInputElement;
-
-    // Para el carro
-    formData.append('car_capacity', car_capacity.value);
-    formData.append('car_fee', car_fee.value);
-
-    // Para la moto
-    formData.append('motorbike_capacity', motorbike_capacity.value);
-    formData.append('motorbike_fee', motorbike_fee.value);
-
-    // Para la bicicleta
-    formData.append('bicycle_capacity', bicycle_capacity.value);
-    formData.append('bicycle_fee', bicycle_fee.value);
-
-
-
-    this.http.post(environment.apiUrl +"/parkings", formData)
+    this.http.post(environment.apiUrl + '/parkings', payload)
       .subscribe(
         (response) => {
-          console.log('Respuesta del servidor:', response);
-          Swal.fire('¡Formulario enviado exitosamente!');
-          document.location.href = "admin/parkings"
+          Swal.fire('¡Parqueadero creado exitosamente!');
+          document.location.href = 'admin/parkings';
         },
         (error) => {
-          console.log('Error al enviar formulario:', error);
-          Swal.fire('Error al enviar formulario. Por favor, inténtalo de nuevo.');
+          console.error('Error al enviar formulario:', error);
+          Swal.fire('Error al crear parqueadero. Por favor, inténtalo de nuevo.');
         }
       );
-}
+  }
 
   constructor(
     private dataService: DataService , 
