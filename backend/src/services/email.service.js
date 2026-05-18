@@ -1,28 +1,13 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
-let transporter;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const getTransporter = () => {
-  if (!transporter) {
-    transporter = nodemailer.createTransport({
-      host:   process.env.SMTP_HOST  || 'smtp.gmail.com',
-      port:   parseInt(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-  }
-  return transporter;
-};
-
-const FROM = () => process.env.EMAIL_FROM || 'FourPark <noreply@fourpark.com>';
+const FROM = 'FourPark <onboarding@resend.dev>';
 
 // ── Recuperación de contraseña ────────────────────────────────────────────────
 exports.sendPasswordRecovery = async (to, firstName, link) => {
-  await getTransporter().sendMail({
-    from:    FROM(),
+  await resend.emails.send({
+    from: FROM,
     to,
     subject: 'Restablece tu contraseña — FourPark',
     html: `
@@ -45,8 +30,8 @@ exports.sendPasswordRecovery = async (to, firstName, link) => {
 
 // ── Verificación de correo (bienvenida) ───────────────────────────────────────
 exports.sendWelcomeVerification = async (to, firstName, link) => {
-  await getTransporter().sendMail({
-    from:    FROM(),
+  await resend.emails.send({
+    from: FROM,
     to,
     subject: '¡Bienvenido a FourPark! Verifica tu correo',
     html: `
@@ -70,9 +55,9 @@ exports.sendInvoice = async (invoice) => {
   const fmt = (n) => `$${parseFloat(n ?? 0).toLocaleString('es-CO')}`;
   const fmtDate = (d) => d ? new Date(d).toLocaleString('es-CO') : '—';
 
-  await getTransporter().sendMail({
-    from:    FROM(),
-    to:      invoice.mail,
+  await resend.emails.send({
+    from: FROM,
+    to: invoice.mail,
     subject: `Factura de tu reserva #${invoice.id_invoice} — FourPark`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto">
