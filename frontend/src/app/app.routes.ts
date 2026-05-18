@@ -73,7 +73,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: MainAdminPageComponent, canActivate: [AuthGuard], data: { role: 'Gerente' },
+    component: MainAdminPageComponent, canActivate: [AuthGuard], data: { role: 'SuperAdministrador' },
     children: [
       {
         path: 'users',
@@ -126,7 +126,7 @@ export const routes: Routes = [
   },
   {
     path: 'reserves/:id',
-    component: ReservesComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: ReservesComponent, canActivate: [AuthGuard], data: {role: 'Usuario'}
   },
   {
     path: 'register',
@@ -154,15 +154,15 @@ export const routes: Routes = [
   },
   {
     path: 'pasarela',
-    component: PasarelaComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: PasarelaComponent, canActivate: [AuthGuard], data: {role: 'Usuario'}
   },
   {
     path: 'cancel-reserve',
-    component: CancelReserveComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: CancelReserveComponent, canActivate: [AuthGuard], data: {role: 'Usuario'}
   },
   {
     path: 'accept-reserve',
-    component: RMethodPointsComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: RMethodPointsComponent, canActivate: [AuthGuard], data: {role: 'Usuario'}
   },
   {
     path: 'adminParkings',
@@ -170,7 +170,7 @@ export const routes: Routes = [
   },
   {
     path: 'actualizartc',
-    component: ActualizarTarjetaComponent, canActivate: [AuthGuard], data: {role: 'Cliente'}
+    component: ActualizarTarjetaComponent, canActivate: [AuthGuard], data: {role: 'Usuario'}
   },
   {
     path: 'vreservas',
