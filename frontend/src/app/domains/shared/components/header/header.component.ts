@@ -30,8 +30,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.jwtService.handleLogoutOnInactivity();
-
     initFlowbite();
 
         // Recuperación del token del localStorage
