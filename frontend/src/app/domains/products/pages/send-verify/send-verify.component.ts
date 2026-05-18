@@ -30,7 +30,7 @@ export class SendVerifyComponent {
       const formValueWithAdditionalParams = {
         ...this.formulario.value,
         type: 'Welcome',
-        url: 'http://fourpark.vercel.app/verify-email?token='
+        url: window.location.origin + '/verify-email?token='
       };
       const response = await this.sendVerifyService.postSendVerify(formValueWithAdditionalParams);
       console.log(response);
