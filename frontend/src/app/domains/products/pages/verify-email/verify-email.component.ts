@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VerifyEmailService } from '@shared/verifyEmail/verify-email.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-verify-email',
@@ -43,7 +44,7 @@ export class VerifyEmailComponent implements OnInit {
     }
 
     try {
-      const endpoint = `https://fourparkscolombia.onrender.com/api/verify-mail/${this.token}`;
+      const endpoint = `${environment.apiUrl}/verify-email/${this.token}`;
       const response = await this.verifyEmailService.postVerifyEmail(endpoint);
       console.log(response);
       Swal.fire({
