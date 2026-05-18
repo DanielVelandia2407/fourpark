@@ -41,8 +41,6 @@ export class AboutComponent {
 
   ngOnInit() {
 
-    this.jwtService.handleLogoutOnInactivity();
-
     initFlowbite();
 
         // Recuperación del token del localStorage

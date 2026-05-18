@@ -1,42 +1,130 @@
-    <app-header *ngIf="rol === 'Administrador' || rol === 'Cliente' || rol === 'Gerente'" ></app-header>
-    <app-vnologueo *ngIf="rol != 'Administrador' && rol != 'Cliente' && rol != 'Gerente'"></app-vnologueo>
+<app-header *ngIf="rol === 'Administrador' || rol === 'SuperAdministrador' || rol === 'Usuario'"></app-header>
+<app-vnologueo *ngIf="rol != 'Administrador' && rol != 'SuperAdministrador' && rol != 'Usuario'"></app-vnologueo>
 
-    <main class="container mx-auto my-10 p-5 bg-white shadow-md rounded-lg">
-        <h2 class="text-3xl font-bold mb-5">Conócenos</h2>
-        <div class="space-y-5">
-            <p>
-                FourParks es una plataforma dedicada a facilitar la reserva de parqueaderos en varias ciudades de Colombia.
-                Nuestro objetivo es ofrecer una solución práctica y eficiente para que encuentres y reserves el espacio perfecto para tu vehículo en la ciudad.
-            </p>
-            <p>
-                Desde nuestra fundación en [año de fundación], hemos trabajado arduamente para construir una red de parqueaderos confiables y accesibles en diferentes zonas de Bogotá.
-                Nuestra misión es hacer que la búsqueda de parqueaderos sea lo más sencilla y rápida posible, ahorrando tiempo y esfuerzo a nuestros usuarios.
-            </p>
-            <h3 class="text-2xl font-semibold">Nuestra Historia</h3>
-            <p>
-                La idea de FourParks surgió de la necesidad de encontrar soluciones de estacionamiento en una ciudad tan concurrida como Bogotá.
-                Nuestro equipo, conformado por expertos en tecnología y movilidad urbana, se unió con la visión de transformar la manera en que las personas encuentran y reservan parqueaderos.
-            </p>
-            <h3 class="text-2xl font-semibold">Nuestro Equipo</h3>
-            <p>
-                Estamos formados por un equipo diverso y talentoso, apasionado por la innovación y el servicio al cliente.
-                Creemos en el poder de la tecnología para mejorar la calidad de vida y estamos comprometidos en brindar una experiencia de usuario excepcional.
-            </p>
-            <h3 class="text-2xl font-semibold">Nuestros Valores</h3>
-            <ul class="list-disc list-inside space-y-2">
-                <li><strong>Innovación:</strong> Constantemente buscamos nuevas maneras de mejorar nuestros servicios.</li>
-                <li><strong>Calidad:</strong> Nos esforzamos por ofrecer la mejor experiencia a nuestros usuarios.</li>
-                <li><strong>Confiabilidad:</strong> Garantizamos la seguridad y disponibilidad de nuestros parqueaderos.</li>
-                <li><strong>Sostenibilidad:</strong> Promovemos prácticas amigables con el medio ambiente.</li>
-            </ul>
+<div class="flex flex-col min-h-screen bg-gray-50">
+
+  <!-- Hero -->
+  <section class="bg-blue-600 text-white py-20 px-6 text-center">
+    <img src="https://res.cloudinary.com/dm3elzg4i/image/upload/v1779147665/Logo_FP_gnaqqe.png"
+         alt="FourParks Logo" class="w-20 h-20 mx-auto mb-4 rounded-full bg-white p-2 shadow-lg">
+    <h1 class="text-4xl font-bold mb-3">Conócenos</h1>
+    <p class="text-xl text-blue-100 max-w-2xl mx-auto">
+      La plataforma que transforma la forma en que Colombia reserva parqueaderos.
+    </p>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-white py-12 px-6 shadow-sm">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="text-4xl font-bold text-blue-600">10+</p>
+        <p class="text-gray-500 mt-1">Parqueaderos</p>
+      </div>
+      <div>
+        <p class="text-4xl font-bold text-blue-600">7</p>
+        <p class="text-gray-500 mt-1">Ciudades</p>
+      </div>
+      <div>
+        <p class="text-4xl font-bold text-blue-600">24/7</p>
+        <p class="text-gray-500 mt-1">Disponibilidad</p>
+      </div>
+      <div>
+        <p class="text-4xl font-bold text-blue-600">100%</p>
+        <p class="text-gray-500 mt-1">Digital</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Misión y Visión -->
+  <section class="py-16 px-6">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl shadow p-8 border-t-4 border-blue-600">
+        <div class="text-blue-600 text-4xl mb-4">🎯</div>
+        <h2 class="text-2xl font-bold mb-3 text-gray-800">Nuestra Misión</h2>
+        <p class="text-gray-600 leading-relaxed">
+          Facilitar la reserva de parqueaderos en Colombia mediante tecnología accesible,
+          ahorrando tiempo y esfuerzo a conductores en cualquier ciudad del país.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-8 border-t-4 border-blue-600">
+        <div class="text-blue-600 text-4xl mb-4">🔭</div>
+        <h2 class="text-2xl font-bold mb-3 text-gray-800">Nuestra Visión</h2>
+        <p class="text-gray-600 leading-relaxed">
+          Ser la plataforma líder de gestión de parqueaderos en Latinoamérica,
+          conectando conductores con espacios disponibles de forma inteligente y eficiente.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia -->
+  <section class="bg-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestra Historia</h2>
+      <p class="text-gray-600 leading-relaxed text-lg">
+        FourParks nació de la necesidad de encontrar soluciones de estacionamiento
+        en ciudades cada vez más congestionadas. Un equipo universitario apasionado
+        por la tecnología y la movilidad urbana se unió con la visión de transformar
+        la manera en que las personas encuentran y reservan parqueaderos en Colombia.
+      </p>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="py-16 px-6 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-10">Nuestros Valores</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl shadow p-6 text-center hover:shadow-md transition">
+          <div class="text-4xl mb-3">💡</div>
+          <h3 class="font-bold text-gray-800 mb-2">Innovación</h3>
+          <p class="text-gray-500 text-sm">Buscamos constantemente nuevas formas de mejorar.</p>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-blue-600 text-white p-4 mt-10">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 FourParks. Todos los derechos reservados.</p>
+        <div class="bg-white rounded-2xl shadow p-6 text-center hover:shadow-md transition">
+          <div class="text-4xl mb-3">⭐</div>
+          <h3 class="font-bold text-gray-800 mb-2">Calidad</h3>
+          <p class="text-gray-500 text-sm">La mejor experiencia para nuestros usuarios.</p>
         </div>
-    </footer>
-    
+        <div class="bg-white rounded-2xl shadow p-6 text-center hover:shadow-md transition">
+          <div class="text-4xl mb-3">🔒</div>
+          <h3 class="font-bold text-gray-800 mb-2">Confiabilidad</h3>
+          <p class="text-gray-500 text-sm">Seguridad y disponibilidad garantizadas.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-6 text-center hover:shadow-md transition">
+          <div class="text-4xl mb-3">🌿</div>
+          <h3 class="font-bold text-gray-800 mb-2">Sostenibilidad</h3>
+          <p class="text-gray-500 text-sm">Prácticas amigables con el medio ambiente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Equipo -->
+  <section class="bg-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestro Equipo</h2>
+      <p class="text-gray-600 text-lg leading-relaxed">
+        Somos un equipo universitario diverso y talentoso, apasionado por la innovación
+        y el servicio al cliente. Creemos en el poder de la tecnología para mejorar
+        la calidad de vida y estamos comprometidos en brindar una experiencia excepcional.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-blue-600 text-white py-6 px-4">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="https://res.cloudinary.com/dm3elzg4i/image/upload/v1779147665/Logo_FP_gnaqqe.png"
+             alt="FourParks" class="h-8 w-8 rounded-full bg-white p-1">
+        <span class="font-semibold text-lg">FourParks</span>
+      </div>
+      <p class="text-blue-100 text-sm">&copy; 2024 FourParks. Todos los derechos reservados.</p>
+      <div class="flex gap-4 text-sm text-blue-100">
+        <a href="/tyc" class="hover:text-white transition">Términos y Condiciones</a>
+        <a href="/about" class="hover:text-white transition">Conócenos</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
