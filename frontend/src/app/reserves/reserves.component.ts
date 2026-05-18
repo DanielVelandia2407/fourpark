@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule, MapMarker, GoogleMap } from '@angular/google-maps';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '@shared/components/header/header.component';
+import { environment } from '../../../../environments/environment';
 
 interface VehicleInfo {
   id: number;
@@ -227,7 +228,7 @@ export class ReservesComponent implements OnInit {
     } else if (idPaymentMethodFk === 2) {
       this.http
         .post(
-          'https://fourparkscolombia.onrender.com/api/reservations',
+          `${environment.apiUrl}/reservations`,
           reservationData
         )
         .subscribe(
@@ -243,7 +244,7 @@ export class ReservesComponent implements OnInit {
     } else if (idPaymentMethodFk === 3) {
       this.http
         .post(
-          'https://fourparkscolombia.onrender.com/api/reservations',
+          `${environment.apiUrl}/reservations`,
           reservationData
         )
         .subscribe(

@@ -9,6 +9,7 @@ import { ReservaService } from '@shared/reserva/reserva.service';
 import { CheckinService } from '@shared/reserva/checkin/checkin.service';
 import { CheckoutService } from '@shared/reserva/checkout/checkout.service';
 import Swal from 'sweetalert2';
+import { environment } from '../../../../../environments/environment';
 
 // Definición del componente y metadatos asociados
 @Component({
@@ -21,7 +22,7 @@ import Swal from 'sweetalert2';
 export class VisualizarReservaComponent implements OnInit {
 
   // URL de la API para enviar correos de facturas
-  private apiUrl = 'https://fourparkscolombia.onrender.com/api/invoice-mail';
+  private apiUrl = environment.apiUrl + '/invoice-mail';
   
   // Listas para almacenar reservas
   reservations: any[] = [];

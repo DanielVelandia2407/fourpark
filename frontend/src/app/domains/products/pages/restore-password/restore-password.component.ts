@@ -5,6 +5,7 @@ import {ResetPasswordService} from '@shared/resetPassword/reset-password.service
 import Swal from 'sweetalert2';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-restore-password',
@@ -61,7 +62,7 @@ export class RestorePasswordComponent implements OnInit {
 
     try {
       const formValue = {password: this.formulario.value.password};
-      const endpoint = `https://fourparkscolombia.onrender.com/api/recover-password/${this.token}`;
+      const endpoint = `${environment.apiUrl}/recover-password/${this.token}`;
       const response = await this.resetPasswordService.postRecoverPassword(endpoint, formValue);
       console.log(response);
       this.router.navigateByUrl('/login');
