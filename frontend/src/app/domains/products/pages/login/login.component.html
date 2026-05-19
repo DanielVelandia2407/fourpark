@@ -1,7 +1,7 @@
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-      <img class="w-8 h-8 mr-2" src="https://res.cloudinary.com/dm3elzg4i/image/upload/v1779147665/Logo_FP_gnaqqe.png"
+      <img class="w-8 h-8 mr-2" src="https://res.cloudinary.com/dm3elzg4i/image/upload/q_auto/f_auto/v1779149383/ChatGPT_Image_18_may_2026_19_09_11_r4u4bg.png"
            alt="logo">
       FourParks
     </a>
@@ -11,9 +11,7 @@
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Iniciar Sesión
         </h1>
-        <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6" action="#">
-          <script
-            src="https://www.google.com/recaptcha/enterprise.js?render=6Legy-wpAAAAAACIdsBm8IB1TcfXb-EjOUGzG6dS"></script>
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de
               usuario</label>
@@ -39,25 +37,19 @@
                 <label for="remember" class="text-gray-500 dark:text-gray-300">Recuerdame</label>
               </div>
             </div>
-            <a href="forgot-password"
-               class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">¿Olvidaste tu
-              contraseña?</a>
+            <a routerLink="/forgot-password"
+               class="text-sm font-medium text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
           </div>
-          <button
-            class="g-recaptcha w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center !dark:bg-primary-600 !dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            data-sitekey="6Legy-wpAAAAAACIdsBm8IB1TcfXb-EjOUGzG6dS"
-            data-callback='onSubmit'
-            data-action='submit'>Iniciar Sesión
+          <button type="submit" [disabled]="loading"
+            class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-60">
+            <span *ngIf="!loading">Iniciar Sesión</span>
+            <span *ngIf="loading">Cargando...</span>
           </button>
-          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            ¿No tienes una cuenta? <a href="/register"
-                                      class="font-medium text-primary-600 hover:underline dark:text-primary-500">Crear
-            una cuenta</a>
+          <p class="text-sm font-light text-gray-500">
+            ¿No tienes una cuenta? <a routerLink="/register" class="font-medium text-blue-600 hover:underline">Crear una cuenta</a>
           </p>
-          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Verifica tu cuenta <a href="/send-verify"
-                                  class="font-medium text-primary-600 hover:underline dark:text-primary-500">Verificar
-            Cuenta</a>
+          <p class="text-sm font-light text-gray-500">
+            ¿No verificaste tu cuenta? <a routerLink="/send-verify" class="font-medium text-blue-600 hover:underline">Verificar cuenta</a>
           </p>
         </form>
       </div>

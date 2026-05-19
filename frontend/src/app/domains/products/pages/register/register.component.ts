@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {RegisterService, RegisterResponse} from "./../../../shared/register/register.service";
-import {inject} from "@angular/core";
-import {HttpErrorResponse} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {CommonModule} from "@angular/common";
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { RegisterService, RegisterResponse } from "./../../../shared/register/register.service";
+import { Router } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +15,8 @@ import {CommonModule} from "@angular/common";
 export class RegisterComponent {
 
   formulario: FormGroup;
+  loading = false;
+  errorMessage: string | null = null;
 
   registerService = inject(RegisterService);
 
@@ -33,19 +34,21 @@ export class RegisterComponent {
     });
   }
 
-  loading = false;
-  errorMessage: string | null = null;
-  isModalOpen = false;
-
   async onSubmit() {
     this.loading = true;
     this.errorMessage = null;
     try {
-      const response = await this.registerService.postRegister(this.formulario.value);
-      console.log(response);
-      this.isModalOpen = true; // Abre el modal
+      await this.registerService.postRegister(this.formulario.value);
+      await Swal.fire({
+        title: '¡Registro exitoso!',
+        text: 'Tu cuenta fue creada. Ahora debes verificar tu correo electrónico para activarla.',
+        icon: 'success',
+        confirmButtonText: 'Verificar correo',
+        confirmButtonColor: '#2563eb'
+      });
+      this.router.navigateByUrl('/send-verify');
     } catch (error) {
-      this.errorMessage = (error as Error).message || 'Error al registrar';
+      this.errorMessage = (error as Error).message || 'Error al registrar. Intenta de nuevo.';
     } finally {
       this.loading = false;
     }

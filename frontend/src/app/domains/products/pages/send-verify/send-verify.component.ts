@@ -32,8 +32,14 @@ export class SendVerifyComponent {
         type: 'Welcome',
         url: window.location.origin + '/verify-email?token='
       };
-      const response = await this.sendVerifyService.postSendVerify(formValueWithAdditionalParams);
-      console.log(response);
+      await this.sendVerifyService.postSendVerify(formValueWithAdditionalParams);
+      await Swal.fire({
+        title: '¡Correo enviado!',
+        text: 'Revisa tu bandeja de entrada y haz clic en el enlace de verificación.',
+        icon: 'success',
+        confirmButtonText: 'Ir al login',
+        confirmButtonColor: '#2563eb'
+      });
       this.router.navigateByUrl('/login');
     } catch (error) {
       Swal.fire({
