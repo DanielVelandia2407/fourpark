@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from "flowbite";
 import { TokenService } from './domains/shared/token/token.service';
+import { inject as injectAnalytics } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -18,5 +19,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     initFlowbite();
     this.tokenService.handleLogoutOnInactivity();
+    injectAnalytics();
   }
 }
