@@ -26,6 +26,7 @@
     "@sweetalert2/ngx-sweetalert2": "^12.3.0",
     "@syncfusion/ej2-ng-charts": "^16.2.50",
     "@types/jwt-decode": "^3.1.0",
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^1.0.10",
     "apexcharts": "^3.49.1",
     "chart.js": "^4.4.3",
